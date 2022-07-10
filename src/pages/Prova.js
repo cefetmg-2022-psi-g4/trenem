@@ -44,7 +44,7 @@ export default function Prova({route, navigation}) {
             <View style={styles.timer}>
                 <CountdownCircleTimer
                   isPlaying={true}
-                  duration={5}
+                  duration={30}
                   size={35}
                   strokeWidth={0}
                   colors={["#004777", "#F7B801", "#A30000", "#A30000"]}
