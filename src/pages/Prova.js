@@ -29,7 +29,7 @@ export default function Prova({route, navigation}) {
     if(loading){
         return(
             <div className="loading">
-              <h2>Carregando...</h2>
+              <Text>Carregando..</Text>
             </div>
         )
     }
@@ -38,8 +38,8 @@ export default function Prova({route, navigation}) {
         <View style={styles.container}>
             <Text style={styles.nome}>{nomeModo}</Text>
             <View style={styles.caixaEnunciado}>
-                <Text><span dangerouslySetInnerHTML={{ __html: questao.enunciado }}></span></Text>
-                <Text><ol type='A'><span dangerouslySetInnerHTML={{ __html: questao.alternativas }}></span></ol></Text>
+                <Text style={styles.enunciado}><span dangerouslySetInnerHTML={{ __html: questao.enunciado }}></span></Text>
+                <Text style={styles.enunciado}><ol type='A'><span dangerouslySetInnerHTML={{ __html: questao.alternativas }}></span></ol></Text>
             </View>
             <View style={styles.timer}>
                 <CountdownCircleTimer
@@ -162,7 +162,6 @@ const styles = StyleSheet.create({
   grupo: {
     maxWidth: '90%'
   }
-
 
 
 /*

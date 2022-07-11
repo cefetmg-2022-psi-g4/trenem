@@ -4,7 +4,7 @@ import { Feather } from '@expo/vector-icons';
 import { useFonts, K2D_400Regular } from '@expo-google-fonts/k2d';
 
 export default function Resultado({route, navigation}) {
-    const { modo, opcao, questao } = route.params;
+    const { nomeModo, opcao, questao } = route.params;
     const [percentual, setPercentual] = useState("");
 
   useFonts({
@@ -22,10 +22,10 @@ export default function Resultado({route, navigation}) {
 
   return (
     <View style={styles.container}>
-        <Text style={styles.nome}>{modo}</Text>
+        <Text style={styles.nome}>{nomeModo}</Text>
         <View style={styles.caixaEnunciado}>
-            <Text><span dangerouslySetInnerHTML={{ __html: questao.enunciado }}></span></Text>
-            <Text><ol type='A'><span dangerouslySetInnerHTML={{ __html: questao.alternativas }}></span></ol></Text>
+            <Text style={styles.enunciado}><span dangerouslySetInnerHTML={{ __html: questao.enunciado }}></span></Text>
+            <Text style={styles.enunciado}><ol type='A'><span dangerouslySetInnerHTML={{ __html: questao.alternativas }}></span></ol></Text>
         </View>
 
         <View style={styles.grupo}>
@@ -145,7 +145,8 @@ const styles = StyleSheet.create({
     },
     branco: {
         color: '#FFFFFF'
-    }
+    },
+    
   
   
   

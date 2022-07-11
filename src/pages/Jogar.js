@@ -32,9 +32,9 @@ export default function Jogar({route, navigation}) {
 
   if(loading){
     return(
-        <div className="loading">
-          <h2>Carregando...</h2>
-        </div>
+        <View className="loading">
+          <Text>Carregando...</Text>
+        </View>
     )
   }
 
@@ -89,12 +89,12 @@ const styles = StyleSheet.create({
   nome:{
     position:'absolute',
     top:75,
-    fontSize: 50,
+    fontSize: 40,
     fontFamily: 'K2D_400Regular'
   },
   descricaoCaixa:{
     backgroundColor: 'white',
-    width: '55%',
+    width: '60%',
     padding: 5,
     position: 'absolute',
     top: 150,
@@ -104,11 +104,11 @@ const styles = StyleSheet.create({
     minHeight: '25%'
   },
   descricaoTitulo:{
-    fontSize: 40,
+    fontSize: 30,
     fontFamily: 'K2D_400Regular',
   },
   descricao: {
-    fontSize: 30,
+    fontSize: 20,
     textAlign: 'auto'
   }
 
