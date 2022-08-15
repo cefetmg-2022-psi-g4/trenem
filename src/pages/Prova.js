@@ -2,7 +2,6 @@ import React, {useState, useEffect}  from 'react'
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 import { RadioButton } from 'react-native-paper';
-import api from '../services/api';
 import { CountdownCircleTimer } from 'react-native-countdown-circle-timer';
 
 export default function Prova({route, navigation}) {
@@ -13,33 +12,12 @@ export default function Prova({route, navigation}) {
 
     const { nomeModo } = route.params;
 
-    useEffect(()=>{
-
-      async function loadQuestao(){
-          const response = await api.get('questoes');
-          const result = response.data;
-
-          setQuestao(result);
-          setLoading(false);
-      }
-  
-      loadQuestao();
-    }, [])
-
-    if(loading){
-        return(
-            <div className="loading">
-              <Text>Carregando..</Text>
-            </div>
-        )
-    }
-
     return (
         <View style={styles.container}>
             <Text style={styles.nome}>{nomeModo}</Text>
             <View style={styles.caixaEnunciado}>
-                <Text style={styles.enunciado}><span dangerouslySetInnerHTML={{ __html: questao.enunciado }}></span></Text>
-                <Text style={styles.enunciado}><ol type='A'><span dangerouslySetInnerHTML={{ __html: questao.alternativas }}></span></ol></Text>
+                <Text style={styles.enunciado}></Text>
+                <Text style={styles.enunciado}></Text>
             </View>
             <View style={styles.timer}>
                 <CountdownCircleTimer
@@ -129,15 +107,6 @@ const styles = StyleSheet.create({
     width: 100,
     justifyContent: 'center',
     alignItems: 'center'
-  },
-  botao:{
-    borderRadius: 20,
-    padding: 10,
-    backgroundColor:'#FFFFFF',
-    margin: 15,
-    width: '70%',
-    justifyConten: 'center',
-    alignItems: 'center',
   },
   comandos:{
     backgroundColor: '#2B4C52',

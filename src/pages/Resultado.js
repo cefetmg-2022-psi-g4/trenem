@@ -56,13 +56,11 @@ export default function Resultado({route, navigation}) {
 
         <View style={styles.comandos}>
             <TouchableOpacity>
-                {/*<Feather name="chevron-left" size={24} color="white" />*/}
             </TouchableOpacity>
             <TouchableOpacity onPress={() => navigation.navigate('Principal')}>
                 <Feather name="check-circle" size={24} color="white" />
             </TouchableOpacity>
             <TouchableOpacity>
-                {/*<Feather name="chevron-right" size={24} color="white" />*/}
             </TouchableOpacity>
         </View>
     </View> 
@@ -88,23 +86,6 @@ const styles = StyleSheet.create({
       width: '90%',
       height: '40%',
       marginTop: 20,
-    },
-    timer:{
-      backgroundColor: 'white',
-      marginTop: 5,
-      borderRadius: 50,
-      flexDirection: 'row',
-      paddingVertical: 2,
-      paddingHorizontal: 5
-    },
-    botao:{
-      borderRadius: 20,
-      padding: 10,
-      backgroundColor:'#FFFFFF',
-      margin: 15,
-      width: '70%',
-      justifyConten: 'center',
-      alignItems: 'center',
     },
     comandos:{
       backgroundColor: '#2B4C52',

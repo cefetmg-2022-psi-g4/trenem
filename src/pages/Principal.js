@@ -2,7 +2,7 @@ import * as React from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 import { useFonts, K2D_400Regular } from '@expo-google-fonts/k2d';
-
+  
 export default function Principal({ navigation }) {
   
   useFonts({
@@ -12,9 +12,9 @@ export default function Principal({ navigation }) {
   return (
     <View style={styles.container}>
       <Image style={styles.logo} source={require('../imgs/Trenem.png')} />
-      {/*<TouchableOpacity style={styles.menu} onPress={() => navigation.toggleDrawer()}>
+      <TouchableOpacity style={styles.menu} onPress={() => navigation.toggleDrawer()}>
         <Feather name="menu" size={48} color="black" />
-      </TouchableOpacity>*/}
+      </TouchableOpacity>
       <TouchableOpacity style={styles.botao} onPress={() => navigation.navigate('Jogar', { id: '0' })}>
         <Text style={styles.textoBotao}> Corrida Contra o Tempo</Text>
       </TouchableOpacity>
@@ -29,8 +29,7 @@ export default function Principal({ navigation }) {
       </TouchableOpacity>
     </View>
   );
-}
-
+  }
 const styles = StyleSheet.create({
   container: {
     paddingVertical: 15,
@@ -52,19 +51,18 @@ const styles = StyleSheet.create({
     backgroundColor: '#FFFFFF',
     margin: 20,
     width: '70%',
-    justifyConten: 'center',
+    justifyContent: 'center',
     alignItems: 'center',
+  },
+  menu: {
+    bottom: 220,
+    paddingLeft: 320,
   },
   textoBotao: {
     fontFamily: 'K2D_400Regular',
     fontSize: 20,
   },
-  menu: {
-    position: 'absolute',
-    right: 15,
-    top: 15
-  }
-
+  
 
   /*
   CORES:

@@ -3,9 +3,9 @@ import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 import { useFonts, K2D_400Regular } from '@expo-google-fonts/k2d';
 import { useEffect, useState } from 'react';
-import api from '../services/api';
 
-export default function Jogar({route, navigation}) {
+
+export default function Jogar({ route, navigation }) {
   const [modo, setModo] = useState({});
   const [loading, setLoading] = useState(true);
 
@@ -15,40 +15,17 @@ export default function Jogar({route, navigation}) {
 
   const { id } = route.params;
 
-  useEffect(()=>{
-
-    async function loadModo(){
-        
-        const response = await api.get('modoDeJogo/' + id);
-
-        const result = response.data;
-
-        setModo(result);
-        setLoading(false);
-    }
-
-    loadModo();
-  }, [])
-
-  if(loading){
-    return(
-        <View className="loading">
-          <Text>Carregando...</Text>
-        </View>
-    )
-  }
-
   return (
     <View style={styles.container}>
-      <TouchableOpacity style={styles.voltar} onPress={ () => navigation.goBack()}>
+      <TouchableOpacity style={styles.voltar} onPress={() => navigation.goBack()}>
         <Feather name="arrow-left" size={48} color="black" />
       </TouchableOpacity>
-      <Text style={styles.nome}>{modo.nome}</Text>
+      <Text style={styles.nome}></Text>
       <View style={styles.descricaoCaixa}>
         <Text style={styles.descricaoTitulo}>Descrição</Text>
-        <Text style={styles.descricao}>{modo.descricao}</Text>
+        <Text style={styles.descricao}></Text>
       </View>
-      <TouchableOpacity style={styles.botaoJogar} onPress={ () => navigation.navigate('Prova', {nomeModo: modo.nome})}>
+      <TouchableOpacity style={styles.botaoJogar} onPress={() => navigation.navigate('Prova', { nomeModo: modo.nome })}>
         <Text style={styles.textoBotaoJogar}>JOGAR</Text>
       </TouchableOpacity>
     </View>
@@ -70,29 +47,26 @@ const styles = StyleSheet.create({
     bottom: 20,
     backgroundColor: 'white',
     alignItems: 'center',
-    justifyConten: 'center',
+    justifyContent: 'center',
     borderRadius: 5,
     width: '55%',
   },
-  textoBotaoJogar:{
+  textoBotaoJogar: {
     fontFamily: 'K2D_400Regular',
     fontSize: 48,
   },
-  voltar:{
-    position:'absolute',
-    top:15,
-    left:15,
+  voltar: {
+    position: 'absolute',
+    top: 15,
+    left: 15,
   },
-  configuracoes: {
-      
-  },
-  nome:{
-    position:'absolute',
-    top:75,
+  nome: {
+    position: 'absolute',
+    top: 75,
     fontSize: 40,
     fontFamily: 'K2D_400Regular'
   },
-  descricaoCaixa:{
+  descricaoCaixa: {
     backgroundColor: 'white',
     width: '60%',
     padding: 5,
@@ -103,7 +77,7 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     minHeight: '25%'
   },
-  descricaoTitulo:{
+  descricaoTitulo: {
     fontSize: 30,
     fontFamily: 'K2D_400Regular',
   },
@@ -113,14 +87,14 @@ const styles = StyleSheet.create({
   }
 
 
-/*
-CORES:
-branco = "#FFFFFF"
-preto = "#000000"
-background = "#308B9D"
-botoes = "#2B4C52"
-vermelho ="#FF0000"
-verde = "#53E220"
-*/
+  /*
+  CORES:
+  branco = "#FFFFFF"
+  preto = "#000000"
+  background = "#308B9D"
+  botoes = "#2B4C52"
+  vermelho ="#FF0000"
+  verde = "#53E220"
+  */
 
 });
