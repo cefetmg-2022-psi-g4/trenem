@@ -12,7 +12,7 @@ export default function Principal({ navigation }) {
         K2D_400Regular,
     });
 
-    return (    
+    return (
         <View style={styles.container}>
             <TouchableOpacity style={styles.voltar} onPress={() => navigation.goBack()}>
                 <Feather name="arrow-left" size={48} color="black" />
@@ -81,7 +81,7 @@ const styles = StyleSheet.create({
         width: '50%',
         resizeMode: 'contain',
     },
-    textoCriaPedidos:{
+    textoCriaPedidos: {
         position: 'relative',
         color: 'black',
         fontFamily: 'K2D_400Regular',
@@ -90,7 +90,7 @@ const styles = StyleSheet.create({
         textAlignVertical: 'center',
         bottom: 200,
     },
-    textoCriaAmizades:{
+    textoCriaAmizades: {
         position: 'relative',
         color: 'black',
         fontFamily: 'K2D_400Regular',

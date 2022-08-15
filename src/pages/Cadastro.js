@@ -25,7 +25,7 @@ export default function Principal({ navigation }) {
             <TextInput style={styles.campoDeUsuario} />
             <Text style={styles.textoCampos}>Senha: </Text>
             <TextInput secureTextEntry={true} style={styles.campoDeSenha} />
-            <TouchableOpacity style={styles.botaoCriar}  onPress={() => navigation.navigate('Principal', { id: '0' })}>
+            <TouchableOpacity style={styles.botaoCriar} onPress={() => navigation.navigate('Principal', { id: '0' })}>
                 <Text style={styles.textoBotaoCriar}>Criar</Text>
             </TouchableOpacity>
         </View>
