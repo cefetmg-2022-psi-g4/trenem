@@ -3,16 +3,33 @@ import { StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 import { useFonts, K2D_400Regular } from '@expo-google-fonts/k2d';
 import { TextInput } from 'react-native-paper';
+import api from '../services/api';
 
+async function acessarConta(email, senha){
+  console.log(`Email: ${email} / Senha: ${senha}`);
 
-export default function Principal({ navigation }) {
-  
+  await api.post('conta/acessarConta', {
+    email: email,
+    senha: senha
+  }).then(function (response) {
+    console.log(response);
+  })
+  .catch(function (error) {
+    console.error(error);
+  });
+
+  // navigation.navigate('Principal');
+}
+
+export default function Login({ navigation }) {
+  const textoInicial = '';
+  const [email, onChangeEmail] = React.useState(textoInicial);
+  const [senha, onChangeSenha] = React.useState(textoInicial);
 
   useFonts({
     K2D_400Regular,
   });
 
-  
   return (
     <View style={styles.container}>
       <TouchableOpacity style={styles.voltar} onPress={ () => navigation.goBack()}>
@@ -20,10 +37,10 @@ export default function Principal({ navigation }) {
       </TouchableOpacity>
         <Text style={styles.login}>LOGIN</Text>
         <Text style={styles.textoCampos}>E-mail:</Text>
-        <TextInput style={styles.camposDeLogin} />
+        <TextInput style={styles.camposDeLogin} value={email} onChangeText={onChangeEmail}/>
         <Text style={styles.textoCampos}>Senha: </Text>
-        <TextInput secureTextEntry={true} style={styles.camposDeLogin}/>
-      <TouchableOpacity style={styles.botaoEntrar} onPress={() => navigation.navigate('Principal', { id: '0' })}>
+        <TextInput secureTextEntry={true} style={styles.camposDeLogin} value={senha} onChangeText={onChangeSenha}/>
+      <TouchableOpacity style={styles.botaoEntrar} onPress={() => acessarConta(email, senha)}>
         <Text style={styles.textoBotaoEntrar}>ENTRAR</Text>
       </TouchableOpacity>
  

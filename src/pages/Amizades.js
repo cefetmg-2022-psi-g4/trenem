@@ -6,7 +6,7 @@ import { TextInput } from 'react-native-paper';
 import Icon from 'react-native-vector-icons/Entypo'
 
 
-export default function Principal({ navigation }) {
+export default function Amizades({ navigation }) {
 
     useFonts({
         K2D_400Regular,

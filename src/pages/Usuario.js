@@ -4,7 +4,7 @@ import { Feather } from '@expo/vector-icons';
 import { useFonts, K2D_400Regular } from '@expo-google-fonts/k2d';
 import { TextInput } from 'react-native-paper';
 
-export default function Principal({ navigation }) {
+export default function Usuario({ navigation }) {
 
 
     useFonts({

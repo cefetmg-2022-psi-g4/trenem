@@ -3,10 +3,30 @@ import { StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 import { useFonts, K2D_400Regular } from '@expo-google-fonts/k2d';
 import { TextInput } from 'react-native-paper';
+import api from '../services/api';
 
+async function criarConta(nome, email, senha){
+    console.log(`Nome: ${nome} / Email: ${email} / Senha: ${senha}`);
 
-export default function Principal({ navigation }) {
+    await api.post('conta/criarConta', {
+        nome: nome,
+        email: email,
+        senha: senha
+    }).then(function (response) {
+        console.log(response);
+    })
+    .catch(function (error) {
+        console.error(error);
+    });
 
+    // navigation.navigate('Principal');
+}
+
+export default function Cadastro({ navigation }) {
+    const textoInicial = '';
+    const [nome, onChangeNome] = React.useState(textoInicial);
+    const [email, onChangeEmail] = React.useState(textoInicial);
+    const [senha, onChangeSenha] = React.useState(textoInicial);
 
     useFonts({
         K2D_400Regular,
@@ -20,12 +40,12 @@ export default function Principal({ navigation }) {
             <Text style={styles.textoCriaPerfil}>CRIE SEU PERFIL</Text>
             <Image style={styles.imagemUsuario} source={require('../imgs/userPhoto.png')} />
             <Text style={styles.textoCampos}>E-mail:</Text>
-            <TextInput style={styles.campoDeEmail} />
+            <TextInput style={styles.campoDeEmail} value={email} onChangeText={onChangeEmail}/>
             <Text style={styles.textoCampos}>Nome de usuário:</Text>
-            <TextInput style={styles.campoDeUsuario} />
+            <TextInput style={styles.campoDeUsuario} value={nome} onChangeText={onChangeNome}/>
             <Text style={styles.textoCampos}>Senha: </Text>
-            <TextInput secureTextEntry={true} style={styles.campoDeSenha} />
-            <TouchableOpacity style={styles.botaoCriar} onPress={() => navigation.navigate('Principal', { id: '0' })}>
+            <TextInput secureTextEntry={true} style={styles.campoDeSenha} value={senha} onChangeText={onChangeSenha}/>
+            <TouchableOpacity style={styles.botaoCriar} onPress={() => criarConta(nome,email,senha)}>
                 <Text style={styles.textoBotaoCriar}>Criar</Text>
             </TouchableOpacity>
         </View>
