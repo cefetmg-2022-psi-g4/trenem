@@ -2,7 +2,6 @@ import React, {useState, useEffect}  from 'react'
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 import { RadioButton } from 'react-native-paper';
-import api from '../services/api';
 import { CountdownCircleTimer } from 'react-native-countdown-circle-timer';
 
 export default function Prova({route, navigation}) {

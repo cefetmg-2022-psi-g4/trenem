@@ -3,24 +3,7 @@ import { StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 import { useFonts, K2D_400Regular } from '@expo-google-fonts/k2d';
 import { TextInput } from 'react-native-paper';
-import api from '../services/api';
-
-async function criarConta(nome, email, senha){
-    console.log(`Nome: ${nome} / Email: ${email} / Senha: ${senha}`);
-
-    await api.post('conta/criarConta', {
-        nome: nome,
-        email: email,
-        senha: senha
-    }).then(function (response) {
-        console.log(response);
-    })
-    .catch(function (error) {
-        console.error(error);
-    });
-
-    // navigation.navigate('Principal');
-}
+import { criarConta } from '../controllers/AppController';
 
 export default function Cadastro({ navigation }) {
     const textoInicial = '';
@@ -45,7 +28,8 @@ export default function Cadastro({ navigation }) {
             <TextInput style={styles.campoDeUsuario} value={nome} onChangeText={onChangeNome}/>
             <Text style={styles.textoCampos}>Senha: </Text>
             <TextInput secureTextEntry={true} style={styles.campoDeSenha} value={senha} onChangeText={onChangeSenha}/>
-            <TouchableOpacity style={styles.botaoCriar} onPress={() => criarConta(nome,email,senha)}>
+            <TouchableOpacity style={styles.botaoCriar} onPress={() => {criarConta(nome,email,senha)
+                                                                        navigation.navigate('Principal')}}>
                 <Text style={styles.textoBotaoCriar}>Criar</Text>
             </TouchableOpacity>
         </View>

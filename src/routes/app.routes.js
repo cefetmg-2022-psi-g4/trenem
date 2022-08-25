@@ -18,24 +18,6 @@ function AppRoutes() {
     return (
         <Stack.Navigator initialRouteName='telaInicial'>
             <Stack.Screen
-                name="telaInicial"
-                component={telaInicial}
-                options={{ headerShown: false }}
-            />
-
-            <Stack.Screen
-                name="Cadastro"
-                component={Cadastro}
-                options={{ headerShown: false }}
-            />
-
-            <Stack.Screen
-                name="Login"
-                component={Login}
-                options={{ headerShown: false }}
-            />
-
-            <Stack.Screen
                 name="Usuario"
                 component={Usuario}
                 options={{ headerShown: false }}
