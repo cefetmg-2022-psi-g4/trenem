@@ -1,39 +1,40 @@
 import React, {useState, createContext, ReactNode, useEffect } from 'react';
+import apiEstudante from '../services/api';
 
 import AsyncStorage from '@react-native-async-storage/async-storage';
 
 type AuthContextData = {
-    user: UserProps;
-    isAuthenticated: boolean;
-    signIn: (credentials: SignInProps) => Promise<void>;
-    loadingAuth: boolean;
-    loading: boolean;
-    signOut: () => Promise<void>;
+  user: UserProps;
+  isAuthenticated: boolean;
+  signIn: (credentials: SignInProps) => Promise<void>;
+  loadingAuth: boolean;
+  loading: boolean;
+  signOut: () => Promise<void>;
 }
 
 type UserProps = {
-    id: string;
-    name: string;
-    email: string;
-    token: string
+  cod: string;
+  nome: string;
+  email: string;
+  token: string;
 }
 
 
 type AuthProviderProps = {
-    children: ReactNode;
+  children: ReactNode;
 }
 
 type SignInProps = {
-    email: string;
-    senha: string;
+  email: string;
+  senha: string;
 }
   
 export const AuthContext = createContext({} as AuthContextData);
 
 export function AuthProvider({children}: AuthProviderProps){
     const [user, setUser] = useState<UserProps>({
-        id: '',
-        name: '',
+        cod: '',
+        nome: '',
         email: '',
         token: ''
       })
@@ -41,7 +42,7 @@ export function AuthProvider({children}: AuthProviderProps){
       const [loadingAuth, setLoadingAuth] = useState(false)
       const [loading, setLoading] = useState(true);
     
-      const isAuthenticated = !!user.name; 
+      const isAuthenticated = !!user.nome; 
     
       useEffect(() => {
     
@@ -51,14 +52,12 @@ export function AuthProvider({children}: AuthProviderProps){
           let hasUser: UserProps = JSON.parse(userInfo || '{}')
     
           // Verificar se recebemos as informaçoes dele.
-          if(Object.keys(hasUser).length > 0){
-            api.defaults.headers.common['Authorization'] = `Bearer ${hasUser.token}`
-    
+          if(Object.keys(hasUser).length > 0){    
             setUser({
-              id: hasUser.id,
-              name: hasUser.name,
+              cod: hasUser.cod,
+              nome: hasUser.nome,
               email: hasUser.email,
-              token: hasUser.token
+              token: ''
             })
     
           }
@@ -77,18 +76,31 @@ export function AuthProvider({children}: AuthProviderProps){
         setLoadingAuth(true);
     
         try{
-          const data = {
-            email, senha
-          };
-    
-          await AsyncStorage.setItem('@estudante', JSON.stringify(data));
-    
-    
-          setUser({
-            id,
-            name,
+          const [response, setResponse] = useState({
+            cod: '',
+            nome: '',
+            senha: '',
+            email: ''
+          });
+          await apiEstudante.post('/conta/acessarConta',{
             email,
-            token,
+            senha
+          }).then(function (response) {
+              setResponse(response);
+          })
+          .catch(function (error) {
+            console.error(error);
+          });
+          
+          const { email, senha, cod, nome } = response;
+    
+          await AsyncStorage.setItem('@estudante', JSON.stringify(response));
+
+          setUser({
+            cod,
+            nome,
+            email,
+            token: '',
           })
     
           setLoadingAuth(false);
@@ -106,8 +118,8 @@ export function AuthProvider({children}: AuthProviderProps){
         await AsyncStorage.clear()
         .then( () => {
           setUser({
-            id: '',
-            name: '',
+            cod: '',
+            nome: '',
             email: '',
             token: ''
           })

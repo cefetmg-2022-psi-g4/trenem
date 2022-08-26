@@ -11,6 +11,13 @@ export default function Cadastro({ navigation }) {
     const [email, onChangeEmail] = React.useState(textoInicial);
     const [senha, onChangeSenha] = React.useState(textoInicial);
 
+
+    async function handleLogin(){
+        await criarConta(nome,email,senha);
+        await signIn({ email, senha });
+        navigation.navigate('Principal');
+    }
+
     useFonts({
         K2D_400Regular,
     });
@@ -28,8 +35,7 @@ export default function Cadastro({ navigation }) {
             <TextInput style={styles.campoDeUsuario} value={nome} onChangeText={onChangeNome}/>
             <Text style={styles.textoCampos}>Senha: </Text>
             <TextInput secureTextEntry={true} style={styles.campoDeSenha} value={senha} onChangeText={onChangeSenha}/>
-            <TouchableOpacity style={styles.botaoCriar} onPress={() => {criarConta(nome,email,senha)
-                                                                        navigation.navigate('Principal')}}>
+            <TouchableOpacity style={styles.botaoCriar} onPress={handleLogin}>
                 <Text style={styles.textoBotaoCriar}>Criar</Text>
             </TouchableOpacity>
         </View>

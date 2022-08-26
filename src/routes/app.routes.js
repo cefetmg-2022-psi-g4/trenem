@@ -2,13 +2,10 @@ import React, { useState } from 'react';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 
 import Amizades from '../pages/Amizades';
-import Cadastro from '../pages/Cadastro';
 import Principal from '../pages/Principal';
-import Login from '../pages/Login';
 import Prova from '../pages/Prova';
 import Jogar from '../pages/Jogar';
 import Resultado from '../pages/Resultado';
-import telaInicial from '../pages/telaInicial';
 import Usuario from '../pages/Usuario';
 
 const Stack = createNativeStackNavigator();
@@ -16,7 +13,7 @@ const Stack = createNativeStackNavigator();
 function AppRoutes() {
 
     return (
-        <Stack.Navigator initialRouteName='telaInicial'>
+        <Stack.Navigator initialRouteName='Principal'>
             <Stack.Screen
                 name="Usuario"
                 component={Usuario}

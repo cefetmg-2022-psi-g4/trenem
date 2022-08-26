@@ -15,11 +15,12 @@ export default function Login({ navigation }) {
   const [senha, onChangeSenha] = React.useState(textoInicial);
 
   async function handleLogin(){
-    if(email === '' || password === ''){
+    if(email === '' || senha === ''){
       return;
     }
 
-    await signIn({ email, password });
+    await signIn({ email, senha });
+    navigation.navigate('Principal');
   }
 
   useFonts({
@@ -36,9 +37,12 @@ export default function Login({ navigation }) {
         <TextInput style={styles.camposDeLogin} value={email} onChangeText={onChangeEmail}/>
         <Text style={styles.textoCampos}>Senha: </Text>
         <TextInput secureTextEntry={true} style={styles.camposDeLogin} value={senha} onChangeText={onChangeSenha}/>
-      <TouchableOpacity style={styles.botaoEntrar} onPress={() => {acessarConta(email, senha)
-                                                                  navigation.navigate('Principal')}}>
-        <Text style={styles.textoBotaoEntrar}>ENTRAR</Text>
+      <TouchableOpacity style={styles.botaoEntrar} onPress={handleLogin}>
+        { loadingAuth ? (
+          <ActivityIndicator size={25} color="#FFF"/>
+        ) : (
+          <Text style={styles.textoBotaoEntrar}>ENTRAR</Text>
+        )}
       </TouchableOpacity>
  
     </View>
