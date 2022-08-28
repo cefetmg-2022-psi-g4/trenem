@@ -32,4 +32,4 @@ function AuthRoutes() {
     )
 }
 
-export default AppRoutes;
+export default AuthRoutes;

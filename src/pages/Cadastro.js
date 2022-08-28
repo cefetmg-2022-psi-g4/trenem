@@ -13,6 +13,7 @@ export default function Cadastro({ navigation }) {
 
 
     async function handleLogin(){
+        console.log(`${nome} / ${email} / ${senha}`);
         await criarConta(nome,email,senha);
         await signIn({ email, senha });
         navigation.navigate('Principal');

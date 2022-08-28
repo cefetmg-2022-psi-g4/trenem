@@ -1,6 +1,6 @@
 import * as React from 'react';
 import Estudante from '../models/Estudante';
-import apiEstudante from '../services/api';
+import {apiEstudante} from '../services/api';
 
 export async function criarConta(nome, email, senha){
     await apiEstudante.post('conta/criarConta', {
