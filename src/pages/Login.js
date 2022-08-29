@@ -8,7 +8,7 @@ import { acessarConta } from '../controllers/AppController';
 import { AuthContext } from '../contexts/AuthContext';
 
 export default function Login({ navigation }) {
-  const { signIn, loadingAuth} = useContext(AuthContext);
+  const {signIn, loadingAuth} = React.useContext(AuthContext);
 
   const textoInicial = '';
   const [email, onChangeEmail] = React.useState(textoInicial);

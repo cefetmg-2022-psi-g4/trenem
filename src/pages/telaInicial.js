@@ -5,7 +5,7 @@ import { useFonts, K2D_400Regular } from '@expo-google-fonts/k2d';
 import { TextInput } from 'react-native-paper';
 //import { black } from 'react-native-paper/lib/typescript/styles/colors';
 
-export default function telaInicial({ navigation }) {
+export default function TelaInicial({ navigation }) {
   
 
   useFonts({
