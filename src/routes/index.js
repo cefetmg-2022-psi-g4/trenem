@@ -1,14 +1,23 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 
 import {View, ActivityIndicator} from 'react-native';
 
 import AppRoutes from './app.routes';
 import AuthRoutes from './auth.routes';
 
-import { AuthContext } from '../contexts/AuthContext'
+import {getToken} from '../controllers/AuthController';
 
 function Routes(){
-  const { isAuthenticated, loading } = useContext(AuthContext);
+  const [isAuth, setIsAuth] = useState(false);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(()=>{
+    const token = getToken();
+    
+    if(token != null){
+      setIsAuth(true);
+    }
+  }, [])
 
   if(loading){
     return(
@@ -26,7 +35,7 @@ function Routes(){
   }
 
   return(
-    isAuthenticated ? <AppRoutes/> : <AuthRoutes/>
+    isAuth ? <AppRoutes/> : <AuthRoutes/>
   )
 }
 

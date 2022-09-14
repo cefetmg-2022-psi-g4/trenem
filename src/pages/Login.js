@@ -19,8 +19,7 @@ export default function Login({ navigation }) {
       return;
     }
 
-    await signIn({ email, senha });
-    navigation.navigate('Principal');
+    await acessarConta(email,senha);
   }
 
   useFonts({

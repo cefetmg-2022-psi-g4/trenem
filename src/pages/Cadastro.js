@@ -4,6 +4,8 @@ import { Feather } from '@expo/vector-icons';
 import { useFonts, K2D_400Regular } from '@expo-google-fonts/k2d';
 import { TextInput } from 'react-native-paper';
 import { criarConta } from '../controllers/AppController';
+import {setToken} from '../controllers/AuthController';
+
 
 export default function Cadastro({ navigation }) {
     const textoInicial = '';
@@ -15,8 +17,6 @@ export default function Cadastro({ navigation }) {
     async function handleLogin(){
         console.log(`${nome} / ${email} / ${senha}`);
         await criarConta(nome,email,senha);
-        await signIn({ email, senha });
-        navigation.navigate('Principal');
     }
 
     useFonts({
