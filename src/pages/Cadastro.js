@@ -4,7 +4,8 @@ import { Feather } from '@expo/vector-icons';
 import { useFonts, K2D_400Regular } from '@expo-google-fonts/k2d';
 import { TextInput } from 'react-native-paper';
 import { criarConta } from '../controllers/AppController';
-import {setToken} from '../controllers/AuthController';
+import { getToken } from '../controllers/AuthController';
+import { apiEstudante } from '../services/api';
 
 
 export default function Cadastro({ navigation }) {
@@ -17,6 +18,7 @@ export default function Cadastro({ navigation }) {
     async function handleLogin(){
         console.log(`${nome} / ${email} / ${senha}`);
         await criarConta(nome,email,senha);
+        navigator.navigate("TelaInicial");
     }
 
     useFonts({

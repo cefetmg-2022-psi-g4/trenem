@@ -12,19 +12,13 @@ export default function Principal({ navigation }) {
   return (
     <View style={styles.container}>
       <Image style={styles.logo} source={require('../imgs/Trenem.png')} />
-      <TouchableOpacity style={styles.menu} onPress={() => navigation.toggleDrawer()}>
-        <Feather name="menu" size={48} color="black" />
-      </TouchableOpacity>
       <TouchableOpacity style={styles.botao} onPress={() => navigation.navigate('Jogar', { id: '0' })}>
-        <Text style={styles.textoBotao}> Corrida Contra o Tempo</Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.botao} onPress={() => navigation.navigate('Jogar', { id: '1' })}>
         <Text style={styles.textoBotao}>Provão</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.botao} onPress={() => navigation.navigate('Jogar', { id: '2' })}>
+      <TouchableOpacity style={styles.botao} onPress={() => navigation.navigate('Jogar', { id: '1' })}>
         <Text style={styles.textoBotao}>Matérias</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.botao} onPress={() => navigation.navigate('Jogar', { id: '3' })}>
+      <TouchableOpacity style={styles.botao} onPress={() => navigation.navigate('Jogar', { id: '2' })}>
         <Text style={styles.textoBotao} >Versus</Text>
       </TouchableOpacity>
     </View>

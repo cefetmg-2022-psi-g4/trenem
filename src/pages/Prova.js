@@ -1,101 +1,109 @@
-import React, {useState, useEffect}  from 'react'
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import React, { useState, useEffect } from 'react'
+import { StyleSheet, Text, View, TouchableOpacity, ActivityIndicator } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 import { RadioButton } from 'react-native-paper';
 import { CountdownCircleTimer } from 'react-native-countdown-circle-timer';
+import { criarProva } from '../controllers/AppController';
+import Resultado from './Resultado';
 
-export default function Prova({route, navigation}) {
-    const [opcao, setOpcao] = React.useState('F');
-    const [questao, setQuestao] = useState([]);
-    const [loading, setLoading] = useState(true);
-    const [respostasCorretas, setRespostasCorretas] = useState([]);
+export default function Prova({ route, navigation }) {
+  const [loading, setLoading] = useState(true);
+  const [respostasCorretas, setRespostasCorretas] = useState([]);
+  const [questoes, setQuestoes] = useState([]);
 
-    const { nomeModo } = route.params;
+  const { nomeModo, id, tempo, opcao } = route.params;
 
-    useEffect(()=>{
+  useEffect(async () => {
+    const response = await criarProva();
 
-      async function loadQuestao(){
-          const response = await api.get('questoes');
-          const result = response.data;
+    console.log(response);
 
-          setQuestao(result);
-          setLoading(false);
-      }
-  
-      loadQuestao();
-    }, [])
+    response.data.map(questao=>{
+      console.log(questao);
+      setQuestoes(questoes => [...questoes,questao]);
+    });
+    
+    console.log(questoes);
+  }, [])
 
-    if(loading){
-        return(
-            <div className="loading">
-              <Text>Carregando..</Text>
-            </div>
-        )
-    }
-
+  if (loading) {
     return (
-        <View style={styles.container}>
-            <Text style={styles.nome}>{nomeModo}</Text>
-            <View style={styles.caixaEnunciado}>
-                <Text style={styles.enunciado}><span dangerouslySetInnerHTML={{ __html: questao.enunciado }}></span></Text>
-                <Text style={styles.enunciado}><ol type='A'><span dangerouslySetInnerHTML={{ __html: questao.alternativas }}></span></ol></Text>
-            </View>
-            <View style={styles.timer}>
-                <CountdownCircleTimer
-                  isPlaying={true}
-                  duration={30}
-                  size={35}
-                  strokeWidth={0}
-                  colors={["#004777", "#F7B801", "#A30000", "#A30000"]}
-                  colorsTime={[10, 6, 3, 0]}
-                  onComplete={() => navigation.navigate('Resultado', {nomeModo: nomeModo, opcao: opcao,questao: questao})}
-                >
-                  {({ remainingTime, color }) => (
-                    <Text style={{ color, fontSize: 15 }}>
-                      {remainingTime}
-                    </Text>
-                  )}
-                </CountdownCircleTimer>
-            </View>
+      <View
+        style={{
+          flex: 1,
+          backgroundColor: '#308B9D',
+          justifyContent: 'center',
+          alignItems: 'center'
+        }}
+      >
+        <ActivityIndicator size={60} color="#FFF" />
+      </View>
+    )
+  }
 
-            <View style={styles.grupo}>
-            <RadioButton.Group onValueChange={novaOpcao => setOpcao(novaOpcao)} value={opcao} >
-              <View style={styles.opcoes}>
-                <RadioButton value='A'/>
-                <Text>A</Text>
-              </View>
-              <View style={styles.opcoes}>
-                <RadioButton value='B' />
-                <Text>B</Text>
-              </View>
-              <View style={styles.opcoes}>
-                <RadioButton value='C' />
-                <Text>C</Text>
-              </View>
-              <View style={styles.opcoes}>
-                <RadioButton value='D' />
-                <Text>D</Text>
-              </View>
-              <View style={styles.opcoes}>
-                <RadioButton value='E' />
-                <Text>E</Text>
-              </View>
-                          
-            </RadioButton.Group>
-            </View>
-            <View style={styles.comandos}>
-                <TouchableOpacity>
-                  {/*<Feather name="chevron-left" size={24} color="white" />*/}
-                </TouchableOpacity>
-                <TouchableOpacity onPress={() => navigation.navigate('Resultado', {nomeModo: nomeModo, opcao: opcao,questao: questao})}>
-                    <Feather name="check-circle" size={24} color="white" />
-                </TouchableOpacity>
-                <TouchableOpacity>
-                    {/*<Feather name="chevron-right" size={24} color="white" />*/}
-                </TouchableOpacity>
-            </View>
-        </View> 
-    );
+  return (
+    <View style={styles.container}>
+      <Text style={styles.nome}>{nomeModo}</Text>
+      <View style={styles.caixaEnunciado}>
+        <Text style={styles.enunciado}><span dangerouslySetInnerHTML={{ __html: questao.enunciado }}></span></Text>
+        <Text style={styles.enunciado}><ol type='A'><span dangerouslySetInnerHTML={{ __html: questao.alternativas }}></span></ol></Text>
+      </View>
+      <View style={styles.timer}>
+        <CountdownCircleTimer
+          isPlaying={true}
+          duration={30}
+          size={35}
+          strokeWidth={0}
+          colors={["#004777", "#F7B801", "#A30000", "#A30000"]}
+          colorsTime={[10, 6, 3, 0]}
+          onComplete={() => navigation.navigate('Resultado', { nomeModo: nomeModo, resposta: resposta, questao: questao })}
+        >
+          {({ remainingTime, color }) => (
+            <Text style={{ color, fontSize: 15 }}>
+              {remainingTime}
+            </Text>
+          )}
+        </CountdownCircleTimer>
+      </View>
+
+      <View style={styles.grupo}>
+        <RadioButton.Group onValueChange={novaresposta => setresposta(novaresposta)} value={resposta} >
+          <View style={styles.opcoes}>
+            <RadioButton value='A' />
+            <Text>A</Text>
+          </View>
+          <View style={styles.opcoes}>
+            <RadioButton value='B' />
+            <Text>B</Text>
+          </View>
+          <View style={styles.opcoes}>
+            <RadioButton value='C' />
+            <Text>C</Text>
+          </View>
+          <View style={styles.opcoes}>
+            <RadioButton value='D' />
+            <Text>D</Text>
+          </View>
+          <View style={styles.opcoes}>
+            <RadioButton value='E' />
+            <Text>E</Text>
+          </View>
+
+        </RadioButton.Group>
+      </View>
+      <View style={styles.comandos}>
+        <TouchableOpacity>
+          {/*<Feather name="chevron-left" size={24} color="white" />*/}
+        </TouchableOpacity>
+        <TouchableOpacity onPress={() => navigation.navigate('Resultado', { nomeModo: nomeModo, resposta: resposta, questao: questao })}>
+          <Feather name="check-circle" size={24} color="white" />
+        </TouchableOpacity>
+        <TouchableOpacity>
+          {/*<Feather name="chevron-right" size={24} color="white" />*/}
+        </TouchableOpacity>
+      </View>
+    </View>
+  );
 }
 
 const styles = StyleSheet.create({
@@ -103,7 +111,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#308B9D',
     alignItems: 'center',
-    
+
   },
   nome: {
     color: 'white',
@@ -118,7 +126,7 @@ const styles = StyleSheet.create({
     height: '40%',
     marginTop: 20,
   },
-  timer:{
+  timer: {
     backgroundColor: 'white',
     marginTop: 5,
     borderRadius: 50,
@@ -129,7 +137,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center'
   },
-  comandos:{
+  comandos: {
     backgroundColor: '#2B4C52',
     position: 'absolute',
     width: '100%',
@@ -139,11 +147,11 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
     alignItems: 'center'
   },
-  opcoes:{
+  opcoes: {
     flexDirection: 'row',
     borderRadius: 20,
     padding: 3,
-    backgroundColor:'#FFFFFF',
+    backgroundColor: '#FFFFFF',
     justifyConten: 'center',
     alignItems: 'center',
     marginTop: 5,
@@ -154,14 +162,14 @@ const styles = StyleSheet.create({
   }
 
 
-/*
-CORES:
-branco = "#FFFFFF"
-preto = "#000000"
-background = "#308B9D"
-botoes = "#2B4C52"
-vermelho ="#FF0000"
-verde = "#53E220"
-*/
+  /*
+  CORES:
+  branco = "#FFFFFF"
+  preto = "#000000"
+  background = "#308B9D"
+  botoes = "#2B4C52"
+  vermelho ="#FF0000"
+  verde = "#53E220"
+  */
 
 });

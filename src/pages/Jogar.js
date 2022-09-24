@@ -1,13 +1,16 @@
 
-import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, ActivityIndicator } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 import { useFonts, K2D_400Regular } from '@expo-google-fonts/k2d';
 import { useEffect, useState } from 'react';
-
+import { loadModoJogo } from '../controllers/AppController';
+import Dropdown from '../components/Dropdown';
 
 export default function Jogar({ route, navigation }) {
   const [modo, setModo] = useState({});
   const [loading, setLoading] = useState(true);
+  const [tempo, setTempo] = useState(null);
+  const [opcao, setOpcao] = useState(null);
 
   useFonts({
     K2D_400Regular,
@@ -15,17 +18,57 @@ export default function Jogar({ route, navigation }) {
 
   const { id } = route.params;
 
+  useEffect(() => {
+    if(loading){
+      setModo(loadModoJogo(id));
+      setLoading(false);
+    }
+  });
+
+  async function handleJogar(){
+    if(id == 0){
+      if(tempo == null) return;
+      navigation.navigate('Prova', {nomeModo: modo.nome, id: id, tempo: tempo, opcao: opcao});
+    } else if (id == 1) {
+      if(tempo == null || opcao == null) return;
+      navigation.navigate('Prova', {nomeModo: modo.nome, id: id, tempo: tempo, opcao: opcao});
+    } else if (id == 2) {
+      navigation.navigate('Prova', {nomeModo: modo.nome, id: id, tempo: tempo, opcao: opcao});
+    }
+  }
+
+  if(loading){
+    return(
+      <View 
+        style={{ 
+          flex:1, 
+          backgroundColor: '#308B9D', 
+          justifyContent: 'center', 
+          alignItems:'center' 
+        }}
+      >
+        <ActivityIndicator size={60} color="#FFF" />
+      </View>
+    )
+  }
+
   return (
     <View style={styles.container}>
       <TouchableOpacity style={styles.voltar} onPress={() => navigation.goBack()}>
         <Feather name="arrow-left" size={48} color="black" />
       </TouchableOpacity>
-      <Text style={styles.nome}></Text>
+      <Text style={styles.nome}>{modo.nome}</Text>
       <View style={styles.descricaoCaixa}>
         <Text style={styles.descricaoTitulo}>Descrição</Text>
-        <Text style={styles.descricao}></Text>
+        <Text style={styles.descricao}>{modo.descricao}</Text>
       </View>
-      <TouchableOpacity style={styles.botaoJogar} onPress={() => navigation.navigate('Prova', { nomeModo: modo.nome })}>
+      {modo.tempo != null ? (
+        <Dropdown label="Select Item" data={modo.tempo} onSelect={setTempo} /> ) : (null)
+      }
+      {modo.opcoes != null ? (
+        <Dropdown label="Select Item" data={modo.opcoes} onSelect={setOpcao} /> ) : (null)
+      }
+      <TouchableOpacity style={styles.botaoJogar} onPress={handleJogar}>
         <Text style={styles.textoBotaoJogar}>JOGAR</Text>
       </TouchableOpacity>
     </View>
@@ -68,7 +111,7 @@ const styles = StyleSheet.create({
   },
   descricaoCaixa: {
     backgroundColor: 'white',
-    width: '60%',
+    width: '65%',
     padding: 5,
     position: 'absolute',
     top: 150,
@@ -83,7 +126,7 @@ const styles = StyleSheet.create({
   },
   descricao: {
     fontSize: 20,
-    textAlign: 'auto'
+    textAlign: 'justify',
   }
 
 

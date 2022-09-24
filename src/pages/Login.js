@@ -4,11 +4,10 @@ import { Feather } from '@expo/vector-icons';
 import { useFonts, K2D_400Regular } from '@expo-google-fonts/k2d';
 import { TextInput } from 'react-native-paper';
 import { acessarConta } from '../controllers/AppController';
-
-import { AuthContext } from '../contexts/AuthContext';
+import { getToken } from '../controllers/AuthController';
+import { apiEstudante } from '../services/api';
 
 export default function Login({ navigation }) {
-  const {signIn, loadingAuth} = React.useContext(AuthContext);
 
   const textoInicial = '';
   const [email, onChangeEmail] = React.useState(textoInicial);
@@ -20,6 +19,7 @@ export default function Login({ navigation }) {
     }
 
     await acessarConta(email,senha);
+    navigation.navigate("TelaInicial");
   }
 
   useFonts({
@@ -37,11 +37,7 @@ export default function Login({ navigation }) {
         <Text style={styles.textoCampos}>Senha: </Text>
         <TextInput secureTextEntry={true} style={styles.camposDeLogin} value={senha} onChangeText={onChangeSenha}/>
       <TouchableOpacity style={styles.botaoEntrar} onPress={handleLogin}>
-        { loadingAuth ? (
-          <ActivityIndicator size={25} color="#FFF"/>
-        ) : (
-          <Text style={styles.textoBotaoEntrar}>ENTRAR</Text>
-        )}
+        <Text style={styles.textoBotaoEntrar}>ENTRAR</Text>
       </TouchableOpacity>
  
     </View>

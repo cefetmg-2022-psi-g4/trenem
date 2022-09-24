@@ -1,41 +1,48 @@
-import React, { useContext, useEffect, useState } from 'react';
-
-import {View, ActivityIndicator} from 'react-native';
+import React, { useEffect, useState } from 'react';
+import { getToken } from '../controllers/AuthController';
+import { apiEstudante } from '../services/api';
 
 import AppRoutes from './app.routes';
 import AuthRoutes from './auth.routes';
 
-import {getToken} from '../controllers/AuthController';
-
-function Routes(){
-  const [isAuth, setIsAuth] = useState(false);
+function Routes() {
   const [loading, setLoading] = useState(true);
 
-  useEffect(()=>{
-    const token = getToken();
-    
-    if(token != null){
-      setIsAuth(true);
+  useEffect(async () => {
+    try {
+      const token = await getToken();
+  
+      if(token !== null) {
+        await apiEstudante.post('conta/autenticar', { }, {
+          headers: {
+            'Authorization' : `Bearer ${token}`
+          }
+        }).then(function (response) {
+          console.log(
+            'Token carregado com sucesso = ' + token
+          );
+          console.log(response);
+          setLoading(false);
+  
+        }).catch(function (error) {
+          console.error(error);
+          setLoading(true);
+        });
+      }
+    } catch (error) {
+      console.log("Não foi possível autenticar!", error);
     }
   }, [])
 
-  if(loading){
-    return(
-      <View 
-        style={{ 
-          flex:1, 
-          backgroundColor: '#1D1D2E', 
-          justifyContent: 'center', 
-          alignItems:'center' 
-        }}
-      >
-        <ActivityIndicator size={60} color="#FFF" />
-      </View>
+
+  if (loading) {
+    return (
+      <AuthRoutes />
     )
   }
 
-  return(
-    isAuth ? <AppRoutes/> : <AuthRoutes/>
+  return (
+    <AppRoutes />
   )
 }
 
