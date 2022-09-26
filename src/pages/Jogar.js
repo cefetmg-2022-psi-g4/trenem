@@ -5,6 +5,7 @@ import { useFonts, K2D_400Regular } from '@expo-google-fonts/k2d';
 import { useEffect, useState } from 'react';
 import { loadModoJogo } from '../controllers/AppController';
 import Dropdown from '../components/Dropdown';
+import { criarProva } from '../controllers/AppController';
 
 export default function Jogar({ route, navigation }) {
   const [modo, setModo] = useState({});
@@ -28,7 +29,8 @@ export default function Jogar({ route, navigation }) {
   async function handleJogar(){
     if(id == 0){
       if(tempo == null) return;
-      navigation.navigate('Prova', {nomeModo: modo.nome, id: id, tempo: tempo, opcao: opcao});
+      const response = await criarProva();
+      navigation.navigate('Prova', {nomeModo: modo.nome, questoes: response.data});
     } else if (id == 1) {
       if(tempo == null || opcao == null) return;
       navigation.navigate('Prova', {nomeModo: modo.nome, id: id, tempo: tempo, opcao: opcao});
@@ -63,7 +65,13 @@ export default function Jogar({ route, navigation }) {
         <Text style={styles.descricao}>{modo.descricao}</Text>
       </View>
       {modo.tempo != null ? (
+        <Text style={styles.descricaoTitulo}>Tempo</Text> ) : (null)
+      }
+      {modo.tempo != null ? (
         <Dropdown label="Select Item" data={modo.tempo} onSelect={setTempo} /> ) : (null)
+      }
+      {modo.opcoes != null ? (
+        <Text style={styles.descricaoTitulo}>Opção</Text> ) : (null)
       }
       {modo.opcoes != null ? (
         <Dropdown label="Select Item" data={modo.opcoes} onSelect={setOpcao} /> ) : (null)

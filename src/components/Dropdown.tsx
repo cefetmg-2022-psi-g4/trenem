@@ -85,6 +85,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#efefef',
     height: 50,
     zIndex: 1,
+    width: '55%'
   },
   buttonText: {
     flex: 1,
@@ -96,7 +97,7 @@ const styles = StyleSheet.create({
   dropdown: {
     position: 'absolute',
     backgroundColor: '#fff',
-    width: '100%',
+    width: '65%',
     shadowColor: '#000000',
     shadowRadius: 4,
     shadowOffset: { height: 4, width: 0 },
@@ -105,6 +106,8 @@ const styles = StyleSheet.create({
   overlay: {
     width: '100%',
     height: '100%',
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   item: {
     paddingHorizontal: 10,

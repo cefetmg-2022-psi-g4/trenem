@@ -19,7 +19,7 @@ export default function Login({ navigation }) {
     }
 
     await acessarConta(email,senha);
-    navigation.navigate("TelaInicial");
+    navigation.navigate("auth");
   }
 
   useFonts({

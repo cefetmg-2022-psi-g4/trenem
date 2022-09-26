@@ -9,7 +9,6 @@ export async function criarConta(nome, email, senha){
         email: email,
         senha: senha
     }).then(function (response) {
-        console.log(response);
         setToken(response.data);
     })
     .catch(function (error) {
@@ -22,7 +21,6 @@ export async function acessarConta(email, senha){
         email: email,
         senha: senha
     }).then(function (response) {
-        console.log(response);
         setToken(response.data);
     })
     .catch(function (error) {
@@ -62,9 +60,8 @@ export async function criarProva(modo, tempo, opcao){
           'Authorization' : `Bearer ${token}`
         }
     }).then(async function (response) {
-        console.log(response);
         await apiQuestoes.post('questoes/provao', {
-            cod: response
+            cod: response.data
         }).then(function(response){
             res = response;
         }).catch(function(error){

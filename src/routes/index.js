@@ -18,10 +18,6 @@ function Routes() {
             'Authorization' : `Bearer ${token}`
           }
         }).then(function (response) {
-          console.log(
-            'Token carregado com sucesso = ' + token
-          );
-          console.log(response);
           setLoading(false);
   
         }).catch(function (error) {
