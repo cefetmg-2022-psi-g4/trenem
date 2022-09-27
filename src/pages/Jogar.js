@@ -30,12 +30,13 @@ export default function Jogar({ route, navigation }) {
     if(id == 0){
       if(tempo == null) return;
       const response = await criarProva();
-      navigation.navigate('Prova', {nomeModo: modo.nome, questoes: response.data});
+      console.log(response.data);
+      navigation.navigate('Prova', {nomeModo: modo.nome, tempo: tempo.value, questoes: response.data});
     } else if (id == 1) {
       if(tempo == null || opcao == null) return;
-      navigation.navigate('Prova', {nomeModo: modo.nome, id: id, tempo: tempo, opcao: opcao});
+      
     } else if (id == 2) {
-      navigation.navigate('Prova', {nomeModo: modo.nome, id: id, tempo: tempo, opcao: opcao});
+      
     }
   }
 

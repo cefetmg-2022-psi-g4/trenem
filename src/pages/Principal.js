@@ -15,10 +15,10 @@ export default function Principal({ navigation }) {
       <TouchableOpacity style={styles.botao} onPress={() => navigation.navigate('Jogar', { id: '0' })}>
         <Text style={styles.textoBotao}>Provão</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.botao} onPress={() => navigation.navigate('Jogar', { id: '1' })}>
+      <TouchableOpacity style={styles.botao} >
         <Text style={styles.textoBotao}>Matérias</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.botao} onPress={() => navigation.navigate('Jogar', { id: '2' })}>
+      <TouchableOpacity style={styles.botao} >
         <Text style={styles.textoBotao} >Versus</Text>
       </TouchableOpacity>
     </View>
