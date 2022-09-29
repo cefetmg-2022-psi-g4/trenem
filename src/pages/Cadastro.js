@@ -18,7 +18,7 @@ export default function Cadastro({ navigation }) {
     async function handleLogin(){
         console.log(`${nome} / ${email} / ${senha}`);
         await criarConta(nome,email,senha);
-        navigator.navigate("auth");
+        navigation.navigate("auth");
     }
 
     useFonts({
