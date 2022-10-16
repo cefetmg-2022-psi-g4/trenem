@@ -40,7 +40,6 @@ export function loadModoJogo(id){
             "descricao" : "Modo de jogo onde você (o jogador) escolhe qual matéria deseja fazer as questões, quantas questões e em quanto tempo.",
             "tempo" : [{label: "Normal", value: 1},{label: "Corrida Contra o Tempo", value:2}],
             "opcoes" : [{label: "Matemática", value: "matematica"},{label: "Linguagens", value: "linguagens"},{label: "História", value: "historia"},{label: "Geografia, Sociologia e Filosofia", value: "geografia-sociologia-e-filosofia"}, {label: "Biologia", value: "biologia"}, {label: "Quimica", value: "quimica"}, {label: "Física",value:"fisica"}],
-            
         },
         {
             "nome": "Versus",
@@ -51,7 +50,7 @@ export function loadModoJogo(id){
     return modos[id];
 }
 
-export async function criarProva(modo, tempo, opcao){
+export async function criarProva(tipo, opts){
     const token = await getToken();
 
     let res = null;
@@ -60,13 +59,25 @@ export async function criarProva(modo, tempo, opcao){
           'Authorization' : `Bearer ${token}`
         }
     }).then(async function (response) {
-        await apiQuestoes.post('questoes/provao', {
-            cod: response.data
-        }).then(function(response){
-            res = response;
-        }).catch(function(error){
-            console.error(error);
-        });
+        if(tipo == 0){
+            await apiQuestoes.post('questoes/provao', {
+                cod: response.data,
+            }).then(function(response){
+                res = response;
+            }).catch(function(error){
+                console.error(error);
+            });
+        } else if(tipo == 1){
+            await apiQuestoes.post('questoes/materias', {
+                cod: response.data,
+                qtd: opts['qtd'],
+                materia: opts['materia'],
+            }).then(function(response){
+                res = response;
+            }).catch(function(error){
+                console.error(error);
+            });
+        }
     })
     .catch(function (error) {
         console.error(error);

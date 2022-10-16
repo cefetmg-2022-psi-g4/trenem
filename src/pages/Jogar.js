@@ -6,12 +6,14 @@ import { useEffect, useState } from 'react';
 import { loadModoJogo } from '../controllers/AppController';
 import Dropdown from '../components/Dropdown';
 import { criarProva } from '../controllers/AppController';
+import NumericInput from 'react-native-numeric-input';
 
 export default function Jogar({ route, navigation }) {
   const [modo, setModo] = useState({});
   const [loading, setLoading] = useState(true);
   const [tempo, setTempo] = useState(null);
   const [opcao, setOpcao] = useState(null);
+  const [qntQuest, setQntQuest] = useState(null);
 
   useFonts({
     K2D_400Regular,
@@ -29,14 +31,17 @@ export default function Jogar({ route, navigation }) {
   async function handleJogar(){
     if(id == 0){
       if(tempo == null) return;
-      const response = await criarProva();
+      const response = await criarProva(0);
+      console.log(response.data);
+      //navigation.navigate('Prova', {nomeModo: modo.nome, tempo: tempo.value, questoes: response.data});
+    } else if (id == 1) {
+      if(tempo == null || opcao == null || qntQuest == null) return;
+      const response = await criarProva(1, {"qtd": qntQuest, "materia": opcao});
       console.log(response.data);
       navigation.navigate('Prova', {nomeModo: modo.nome, tempo: tempo.value, questoes: response.data});
-    } else if (id == 1) {
-      if(tempo == null || opcao == null) return;
-      
     } else if (id == 2) {
-      
+      if(tempo == null || opcao == null || qntQuest == null) return;
+
     }
   }
 
@@ -76,6 +81,12 @@ export default function Jogar({ route, navigation }) {
       }
       {modo.opcoes != null ? (
         <Dropdown label="Select Item" data={modo.opcoes} onSelect={setOpcao} /> ) : (null)
+      }
+      {modo.nome != "Provão" ? (
+        <Text style={styles.descricaoTitulo}>Quantidade de Questões</Text> ) : (null)
+      }
+      {modo.nome != "Provão" ? (
+        <NumericInput onChange={setQntQuest} /> ) : (null)
       }
       <TouchableOpacity style={styles.botaoJogar} onPress={handleJogar}>
         <Text style={styles.textoBotaoJogar}>JOGAR</Text>

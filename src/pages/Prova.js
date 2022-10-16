@@ -11,7 +11,6 @@ export default function Prova({ route, navigation }) {
   const { width } = useWindowDimensions();
   const [loading, setLoading] = useState(true);
   const [respostasCorretas, setRespostasCorretas] = useState([]);
-  const [alternativasMarcadas, setAlternativasMarcadas] = useState([]);
   const [q0, setQ0] = useState('X');
   const [q1, setQ1] = useState('X');
   const [q2, setQ2] = useState('X');
@@ -23,24 +22,11 @@ export default function Prova({ route, navigation }) {
   const [q8, setQ8] = useState('X');
   const [q9, setQ9] = useState('X');
 
-  useEffect(() => {
-    if (alternativasMarcadas.length <= 0) {
-      for (let i = 0; i < questoes.length; i++) {
-        setAlternativasMarcadas(marcadas => [...marcadas, 'A']);
-      }
-    }
-  });
-
-  function marcarAlternativa(value, index) {
-    const a = alternativasMarcadas;
-    a[index] = value;
-    console.log(index);
-    console.log(a);
-    setAlternativasMarcadas(a);
-    console.log(alternativasMarcadas);
-    console.log(alternativasMarcadas[index]);
-
-    console.log(prova);
+  const children = ({ remainingTime }) => {
+    const minutes = Math.floor(remainingTime / 60)
+    const seconds = remainingTime % 60
+  
+    return `${minutes}:${seconds}`
   }
 
   if (loading) {
@@ -71,6 +57,7 @@ export default function Prova({ route, navigation }) {
             strokeWidth={0}
             colors={["#004777", "#F7B801", "#A30000", "#A30000"]}
             colorsTime={[10, 6, 3, 0]}
+            children={children}
             onComplete={() => navigation.navigate('Resultado', { nomeModo: nomeModo, q0: q0, q1: q1, q2: q2, q3: q3, q4: q4, q5: q5, q6: q6, q7: q7, q8: q8, q9: q9, questoes: questoes })}
           >
             {({ remainingTime, color }) => (
@@ -84,316 +71,336 @@ export default function Prova({ route, navigation }) {
 
       <ScrollView>
         <View style={styles.questoes}>
-          <View style={styles.questao}>
-            <View style={styles.caixaEnunciado}>
-              <Text style={styles.enunciado}><RenderHtml contentWidth={width} source={{ html: `${questoes[0].enunciado.trim().replace(/[\r\n]+/gm, '<br>')}` }} /></Text>
-              <Text style={styles.enunciado}><RenderHtml contentWidth={width} source={{ html: `<ol type="A"> ${questoes[0].alternativas.includes('<math>') ? questoes[0].alternativas.trim().replace(/[\r\n]+/gm, ' ') : questoes[0].alternativas.trim().replace(/[\r\n]+/gm, '<br>')}</ol>` }} /></Text>
-            </View>
-            <View style={styles.grupo}>
-              <RadioButton.Group onValueChange={novaresposta => setQ0(novaresposta)} value={q0} >
-                <View style={styles.opcoes}>
-                  <RadioButton value='A' />
-                  <Text>A</Text>
-                </View>
-                <View style={styles.opcoes}>
-                  <RadioButton value='B' />
-                  <Text>B</Text>
-                </View>
-                <View style={styles.opcoes}>
-                  <RadioButton value='C' />
-                  <Text>C</Text>
-                </View>
-                <View style={styles.opcoes}>
-                  <RadioButton value='D' />
-                  <Text>D</Text>
-                </View>
-                <View style={styles.opcoes}>
-                  <RadioButton value='E' />
-                  <Text>E</Text>
-                </View>
+          {questoes[0] != null ? (
+            <View style={styles.questao}>
+              <View style={styles.caixaEnunciado}>
+                <Text style={styles.enunciado}><RenderHtml contentWidth={width} source={{ html: `${questoes[0].enunciado.trim().replace(/[\r\n]+/gm, '<br>')}` }} /></Text>
+                <Text style={styles.enunciado}><RenderHtml contentWidth={width} source={{ html: `<ol type="A"> ${questoes[0].alternativas.includes('<math>') ? questoes[0].alternativas.trim().replace(/[\r\n]+/gm, ' ') : questoes[0].alternativas.trim().replace(/[\r\n]+/gm, '<br>')}</ol>` }} /></Text>
+              </View>
+              <View style={styles.grupo}>
+                <RadioButton.Group onValueChange={novaresposta => setQ0(novaresposta)} value={q0} >
+                  <View style={styles.opcoes}>
+                    <RadioButton value='A' />
+                    <Text>A</Text>
+                  </View>
+                  <View style={styles.opcoes}>
+                    <RadioButton value='B' />
+                    <Text>B</Text>
+                  </View>
+                  <View style={styles.opcoes}>
+                    <RadioButton value='C' />
+                    <Text>C</Text>
+                  </View>
+                  <View style={styles.opcoes}>
+                    <RadioButton value='D' />
+                    <Text>D</Text>
+                  </View>
+                  <View style={styles.opcoes}>
+                    <RadioButton value='E' />
+                    <Text>E</Text>
+                  </View>
 
-              </RadioButton.Group>
-            </View>
-          </View>
-          <View style={styles.questao}>
-            <View style={styles.caixaEnunciado}>
-              <Text style={styles.enunciado}><RenderHtml contentWidth={width} source={{ html: `${questoes[1].enunciado.trim().replace(/[\r\n]+/gm, '<br>')}` }} /></Text>
-              <Text style={styles.enunciado}><RenderHtml contentWidth={width} source={{ html: `<ol type="A"> ${questoes[1].alternativas.includes('<math>') ? questoes[1].alternativas.trim().replace(/[\r\n]+/gm, ' ') : questoes[1].alternativas.trim().replace(/[\r\n]+/gm, '<br>')}</ol>` }} /></Text>
-            </View>
-            <View style={styles.grupo}>
-              <RadioButton.Group onValueChange={novaresposta => setQ1(novaresposta)} value={q1} >
-                <View style={styles.opcoes}>
-                  <RadioButton value='A' />
-                  <Text>A</Text>
-                </View>
-                <View style={styles.opcoes}>
-                  <RadioButton value='B' />
-                  <Text>B</Text>
-                </View>
-                <View style={styles.opcoes}>
-                  <RadioButton value='C' />
-                  <Text>C</Text>
-                </View>
-                <View style={styles.opcoes}>
-                  <RadioButton value='D' />
-                  <Text>D</Text>
-                </View>
-                <View style={styles.opcoes}>
-                  <RadioButton value='E' />
-                  <Text>E</Text>
-                </View>
+                </RadioButton.Group>
+              </View>
+            </View>) : (null)
+          }
+          {questoes[1] != null ? (
+            <View style={styles.questao}>
+              <View style={styles.caixaEnunciado}>
+                <Text style={styles.enunciado}><RenderHtml contentWidth={width} source={{ html: `${questoes[1].enunciado.trim().replace(/[\r\n]+/gm, '<br>')}` }} /></Text>
+                <Text style={styles.enunciado}><RenderHtml contentWidth={width} source={{ html: `<ol type="A"> ${questoes[1].alternativas.includes('<math>') ? questoes[1].alternativas.trim().replace(/[\r\n]+/gm, ' ') : questoes[1].alternativas.trim().replace(/[\r\n]+/gm, '<br>')}</ol>` }} /></Text>
+              </View>
+              <View style={styles.grupo}>
+                <RadioButton.Group onValueChange={novaresposta => setQ1(novaresposta)} value={q1} >
+                  <View style={styles.opcoes}>
+                    <RadioButton value='A' />
+                    <Text>A</Text>
+                  </View>
+                  <View style={styles.opcoes}>
+                    <RadioButton value='B' />
+                    <Text>B</Text>
+                  </View>
+                  <View style={styles.opcoes}>
+                    <RadioButton value='C' />
+                    <Text>C</Text>
+                  </View>
+                  <View style={styles.opcoes}>
+                    <RadioButton value='D' />
+                    <Text>D</Text>
+                  </View>
+                  <View style={styles.opcoes}>
+                    <RadioButton value='E' />
+                    <Text>E</Text>
+                  </View>
 
-              </RadioButton.Group>
-            </View>
-          </View>
-          <View style={styles.questao}>
-            <View style={styles.caixaEnunciado}>
-              <Text style={styles.enunciado}><RenderHtml contentWidth={width} source={{ html: `${questoes[2].enunciado.trim().replace(/[\r\n]+/gm, '<br>')}` }} /></Text>
-              <Text style={styles.enunciado}><RenderHtml contentWidth={width} source={{ html: `<ol type="A"> ${questoes[2].alternativas.includes('<math>') ? questoes[2].alternativas.trim().replace(/[\r\n]+/gm, ' ') : questoes[2].alternativas.trim().replace(/[\r\n]+/gm, '<br>')}</ol>` }} /></Text>
-            </View>
-            <View style={styles.grupo}>
-              <RadioButton.Group onValueChange={novaresposta => setQ2(novaresposta)} value={q2} >
-                <View style={styles.opcoes}>
-                  <RadioButton value='A' />
-                  <Text>A</Text>
-                </View>
-                <View style={styles.opcoes}>
-                  <RadioButton value='B' />
-                  <Text>B</Text>
-                </View>
-                <View style={styles.opcoes}>
-                  <RadioButton value='C' />
-                  <Text>C</Text>
-                </View>
-                <View style={styles.opcoes}>
-                  <RadioButton value='D' />
-                  <Text>D</Text>
-                </View>
-                <View style={styles.opcoes}>
-                  <RadioButton value='E' />
-                  <Text>E</Text>
-                </View>
+                </RadioButton.Group>
+              </View>
+            </View>) : (null)
+          }
+          {questoes[2] != null ? (
+            <View style={styles.questao}>
+              <View style={styles.caixaEnunciado}>
+                <Text style={styles.enunciado}><RenderHtml contentWidth={width} source={{ html: `${questoes[2].enunciado.trim().replace(/[\r\n]+/gm, '<br>')}` }} /></Text>
+                <Text style={styles.enunciado}><RenderHtml contentWidth={width} source={{ html: `<ol type="A"> ${questoes[2].alternativas.includes('<math>') ? questoes[2].alternativas.trim().replace(/[\r\n]+/gm, ' ') : questoes[2].alternativas.trim().replace(/[\r\n]+/gm, '<br>')}</ol>` }} /></Text>
+              </View>
+              <View style={styles.grupo}>
+                <RadioButton.Group onValueChange={novaresposta => setQ2(novaresposta)} value={q2} >
+                  <View style={styles.opcoes}>
+                    <RadioButton value='A' />
+                    <Text>A</Text>
+                  </View>
+                  <View style={styles.opcoes}>
+                    <RadioButton value='B' />
+                    <Text>B</Text>
+                  </View>
+                  <View style={styles.opcoes}>
+                    <RadioButton value='C' />
+                    <Text>C</Text>
+                  </View>
+                  <View style={styles.opcoes}>
+                    <RadioButton value='D' />
+                    <Text>D</Text>
+                  </View>
+                  <View style={styles.opcoes}>
+                    <RadioButton value='E' />
+                    <Text>E</Text>
+                  </View>
 
-              </RadioButton.Group>
-            </View>
-          </View>
-          <View style={styles.questao}>
-            <View style={styles.caixaEnunciado}>
-              <Text style={styles.enunciado}><RenderHtml contentWidth={width} source={{ html: `${questoes[3].enunciado.trim().replace(/[\r\n]+/gm, '<br>')}` }} /></Text>
-              <Text style={styles.enunciado}><RenderHtml contentWidth={width} source={{ html: `<ol type="A"> ${questoes[3].alternativas.includes('<math>') ? questoes[3].alternativas.trim().replace(/[\r\n]+/gm, ' ') : questoes[3].alternativas.trim().replace(/[\r\n]+/gm, '<br>')}</ol>` }} /></Text>
-            </View>
-            <View style={styles.grupo}>
-              <RadioButton.Group onValueChange={novaresposta => setQ3(novaresposta)} value={q3} >
-                <View style={styles.opcoes}>
-                  <RadioButton value='A' />
-                  <Text>A</Text>
-                </View>
-                <View style={styles.opcoes}>
-                  <RadioButton value='B' />
-                  <Text>B</Text>
-                </View>
-                <View style={styles.opcoes}>
-                  <RadioButton value='C' />
-                  <Text>C</Text>
-                </View>
-                <View style={styles.opcoes}>
-                  <RadioButton value='D' />
-                  <Text>D</Text>
-                </View>
-                <View style={styles.opcoes}>
-                  <RadioButton value='E' />
-                  <Text>E</Text>
-                </View>
+                </RadioButton.Group>
+              </View>
+            </View>) : (null)
+          }
+          {questoes[3] != null ? (
+            <View style={styles.questao}>
+              <View style={styles.caixaEnunciado}>
+                <Text style={styles.enunciado}><RenderHtml contentWidth={width} source={{ html: `${questoes[3].enunciado.trim().replace(/[\r\n]+/gm, '<br>')}` }} /></Text>
+                <Text style={styles.enunciado}><RenderHtml contentWidth={width} source={{ html: `<ol type="A"> ${questoes[3].alternativas.includes('<math>') ? questoes[3].alternativas.trim().replace(/[\r\n]+/gm, ' ') : questoes[3].alternativas.trim().replace(/[\r\n]+/gm, '<br>')}</ol>` }} /></Text>
+              </View>
+              <View style={styles.grupo}>
+                <RadioButton.Group onValueChange={novaresposta => setQ3(novaresposta)} value={q3} >
+                  <View style={styles.opcoes}>
+                    <RadioButton value='A' />
+                    <Text>A</Text>
+                  </View>
+                  <View style={styles.opcoes}>
+                    <RadioButton value='B' />
+                    <Text>B</Text>
+                  </View>
+                  <View style={styles.opcoes}>
+                    <RadioButton value='C' />
+                    <Text>C</Text>
+                  </View>
+                  <View style={styles.opcoes}>
+                    <RadioButton value='D' />
+                    <Text>D</Text>
+                  </View>
+                  <View style={styles.opcoes}>
+                    <RadioButton value='E' />
+                    <Text>E</Text>
+                  </View>
 
-              </RadioButton.Group>
-            </View>
-          </View>
-          <View style={styles.questao}>
-            <View style={styles.caixaEnunciado}>
-              <Text style={styles.enunciado}><RenderHtml contentWidth={width} source={{ html: `${questoes[4].enunciado.trim().replace(/[\r\n]+/gm, '<br>')}` }} /></Text>
-              <Text style={styles.enunciado}><RenderHtml contentWidth={width} source={{ html: `<ol type="A"> ${questoes[4].alternativas.includes('<math>') ? questoes[4].alternativas.trim().replace(/[\r\n]+/gm, ' ') : questoes[4].alternativas.trim().replace(/[\r\n]+/gm, '<br>')}</ol>` }} /></Text>
-            </View>
-            <View style={styles.grupo}>
-              <RadioButton.Group onValueChange={novaresposta => setQ4(novaresposta)} value={q4} >
-                <View style={styles.opcoes}>
-                  <RadioButton value='A' />
-                  <Text>A</Text>
-                </View>
-                <View style={styles.opcoes}>
-                  <RadioButton value='B' />
-                  <Text>B</Text>
-                </View>
-                <View style={styles.opcoes}>
-                  <RadioButton value='C' />
-                  <Text>C</Text>
-                </View>
-                <View style={styles.opcoes}>
-                  <RadioButton value='D' />
-                  <Text>D</Text>
-                </View>
-                <View style={styles.opcoes}>
-                  <RadioButton value='E' />
-                  <Text>E</Text>
-                </View>
+                </RadioButton.Group>
+              </View>
+            </View>) : (null)
+          }
+          {questoes[4] != null ? (
+            <View style={styles.questao}>
+              <View style={styles.caixaEnunciado}>
+                <Text style={styles.enunciado}><RenderHtml contentWidth={width} source={{ html: `${questoes[4].enunciado.trim().replace(/[\r\n]+/gm, '<br>')}` }} /></Text>
+                <Text style={styles.enunciado}><RenderHtml contentWidth={width} source={{ html: `<ol type="A"> ${questoes[4].alternativas.includes('<math>') ? questoes[4].alternativas.trim().replace(/[\r\n]+/gm, ' ') : questoes[4].alternativas.trim().replace(/[\r\n]+/gm, '<br>')}</ol>` }} /></Text>
+              </View>
+              <View style={styles.grupo}>
+                <RadioButton.Group onValueChange={novaresposta => setQ4(novaresposta)} value={q4} >
+                  <View style={styles.opcoes}>
+                    <RadioButton value='A' />
+                    <Text>A</Text>
+                  </View>
+                  <View style={styles.opcoes}>
+                    <RadioButton value='B' />
+                    <Text>B</Text>
+                  </View>
+                  <View style={styles.opcoes}>
+                    <RadioButton value='C' />
+                    <Text>C</Text>
+                  </View>
+                  <View style={styles.opcoes}>
+                    <RadioButton value='D' />
+                    <Text>D</Text>
+                  </View>
+                  <View style={styles.opcoes}>
+                    <RadioButton value='E' />
+                    <Text>E</Text>
+                  </View>
 
-              </RadioButton.Group>
-            </View>
-          </View>
-          <View style={styles.questao}>
-            <View style={styles.caixaEnunciado}>
-              <Text style={styles.enunciado}><RenderHtml contentWidth={width} source={{ html: `${questoes[5].enunciado.trim().replace(/[\r\n]+/gm, '<br>')}` }} /></Text>
-              <Text style={styles.enunciado}><RenderHtml contentWidth={width} source={{ html: `<ol type="A"> ${questoes[5].alternativas.includes('<math>') ? questoes[5].alternativas.trim().replace(/[\r\n]+/gm, ' ') : questoes[5].alternativas.trim().replace(/[\r\n]+/gm, '<br>')}</ol>` }} /></Text>
-            </View>
-            <View style={styles.grupo}>
-              <RadioButton.Group onValueChange={novaresposta => setQ5(novaresposta)} value={q5} >
-                <View style={styles.opcoes}>
-                  <RadioButton value='A' />
-                  <Text>A</Text>
-                </View>
-                <View style={styles.opcoes}>
-                  <RadioButton value='B' />
-                  <Text>B</Text>
-                </View>
-                <View style={styles.opcoes}>
-                  <RadioButton value='C' />
-                  <Text>C</Text>
-                </View>
-                <View style={styles.opcoes}>
-                  <RadioButton value='D' />
-                  <Text>D</Text>
-                </View>
-                <View style={styles.opcoes}>
-                  <RadioButton value='E' />
-                  <Text>E</Text>
-                </View>
+                </RadioButton.Group>
+              </View>
+            </View>) : (null)
+          }
+          {questoes[5] != null ? (
+            <View style={styles.questao}>
+              <View style={styles.caixaEnunciado}>
+                <Text style={styles.enunciado}><RenderHtml contentWidth={width} source={{ html: `${questoes[5].enunciado.trim().replace(/[\r\n]+/gm, '<br>')}` }} /></Text>
+                <Text style={styles.enunciado}><RenderHtml contentWidth={width} source={{ html: `<ol type="A"> ${questoes[5].alternativas.includes('<math>') ? questoes[5].alternativas.trim().replace(/[\r\n]+/gm, ' ') : questoes[5].alternativas.trim().replace(/[\r\n]+/gm, '<br>')}</ol>` }} /></Text>
+              </View>
+              <View style={styles.grupo}>
+                <RadioButton.Group onValueChange={novaresposta => setQ5(novaresposta)} value={q5} >
+                  <View style={styles.opcoes}>
+                    <RadioButton value='A' />
+                    <Text>A</Text>
+                  </View>
+                  <View style={styles.opcoes}>
+                    <RadioButton value='B' />
+                    <Text>B</Text>
+                  </View>
+                  <View style={styles.opcoes}>
+                    <RadioButton value='C' />
+                    <Text>C</Text>
+                  </View>
+                  <View style={styles.opcoes}>
+                    <RadioButton value='D' />
+                    <Text>D</Text>
+                  </View>
+                  <View style={styles.opcoes}>
+                    <RadioButton value='E' />
+                    <Text>E</Text>
+                  </View>
 
-              </RadioButton.Group>
-            </View>
-          </View>
-          <View style={styles.questao}>
-            <View style={styles.caixaEnunciado}>
-              <Text style={styles.enunciado}><RenderHtml contentWidth={width} source={{ html: `${questoes[6].enunciado.trim().replace(/[\r\n]+/gm, '<br>')}` }} /></Text>
-              <Text style={styles.enunciado}><RenderHtml contentWidth={width} source={{ html: `<ol type="A"> ${questoes[6].alternativas.includes('<math>') ? questoes[6].alternativas.trim().replace(/[\r\n]+/gm, ' ') : questoes[6].alternativas.trim().replace(/[\r\n]+/gm, '<br>')}</ol>` }} /></Text>
-            </View>
-            <View style={styles.grupo}>
-              <RadioButton.Group onValueChange={novaresposta => setQ6(novaresposta)} value={q6} >
-                <View style={styles.opcoes}>
-                  <RadioButton value='A' />
-                  <Text>A</Text>
-                </View>
-                <View style={styles.opcoes}>
-                  <RadioButton value='B' />
-                  <Text>B</Text>
-                </View>
-                <View style={styles.opcoes}>
-                  <RadioButton value='C' />
-                  <Text>C</Text>
-                </View>
-                <View style={styles.opcoes}>
-                  <RadioButton value='D' />
-                  <Text>D</Text>
-                </View>
-                <View style={styles.opcoes}>
-                  <RadioButton value='E' />
-                  <Text>E</Text>
-                </View>
+                </RadioButton.Group>
+              </View>
+            </View>) : (null)
+          }
+          {questoes[6] != null ? (
+            <View style={styles.questao}>
+              <View style={styles.caixaEnunciado}>
+                <Text style={styles.enunciado}><RenderHtml contentWidth={width} source={{ html: `${questoes[6].enunciado.trim().replace(/[\r\n]+/gm, '<br>')}` }} /></Text>
+                <Text style={styles.enunciado}><RenderHtml contentWidth={width} source={{ html: `<ol type="A"> ${questoes[6].alternativas.includes('<math>') ? questoes[6].alternativas.trim().replace(/[\r\n]+/gm, ' ') : questoes[6].alternativas.trim().replace(/[\r\n]+/gm, '<br>')}</ol>` }} /></Text>
+              </View>
+              <View style={styles.grupo}>
+                <RadioButton.Group onValueChange={novaresposta => setQ6(novaresposta)} value={q6} >
+                  <View style={styles.opcoes}>
+                    <RadioButton value='A' />
+                    <Text>A</Text>
+                  </View>
+                  <View style={styles.opcoes}>
+                    <RadioButton value='B' />
+                    <Text>B</Text>
+                  </View>
+                  <View style={styles.opcoes}>
+                    <RadioButton value='C' />
+                    <Text>C</Text>
+                  </View>
+                  <View style={styles.opcoes}>
+                    <RadioButton value='D' />
+                    <Text>D</Text>
+                  </View>
+                  <View style={styles.opcoes}>
+                    <RadioButton value='E' />
+                    <Text>E</Text>
+                  </View>
 
-              </RadioButton.Group>
-            </View>
-          </View>
-          <View style={styles.questao}>
-            <View style={styles.caixaEnunciado}>
-              <Text style={styles.enunciado}><RenderHtml contentWidth={width} source={{ html: `${questoes[7].enunciado.trim().replace(/[\r\n]+/gm, '<br>')}` }} /></Text>
-              <Text style={styles.enunciado}><RenderHtml contentWidth={width} source={{ html: `<ol type="A"> ${questoes[7].alternativas.includes('<math>') ? questoes[7].alternativas.trim().replace(/[\r\n]+/gm, ' ') : questoes[7].alternativas.trim().replace(/[\r\n]+/gm, '<br>')}</ol>` }} /></Text>
-            </View>
-            <View style={styles.grupo}>
-              <RadioButton.Group onValueChange={novaresposta => setQ7(novaresposta)} value={q7} >
-                <View style={styles.opcoes}>
-                  <RadioButton value='A' />
-                  <Text>A</Text>
-                </View>
-                <View style={styles.opcoes}>
-                  <RadioButton value='B' />
-                  <Text>B</Text>
-                </View>
-                <View style={styles.opcoes}>
-                  <RadioButton value='C' />
-                  <Text>C</Text>
-                </View>
-                <View style={styles.opcoes}>
-                  <RadioButton value='D' />
-                  <Text>D</Text>
-                </View>
-                <View style={styles.opcoes}>
-                  <RadioButton value='E' />
-                  <Text>E</Text>
-                </View>
+                </RadioButton.Group>
+              </View>
+            </View>) : (null)
+          }
+          {questoes[7] != null ? (
+            <View style={styles.questao}>
+              <View style={styles.caixaEnunciado}>
+                <Text style={styles.enunciado}><RenderHtml contentWidth={width} source={{ html: `${questoes[7].enunciado.trim().replace(/[\r\n]+/gm, '<br>')}` }} /></Text>
+                <Text style={styles.enunciado}><RenderHtml contentWidth={width} source={{ html: `<ol type="A"> ${questoes[7].alternativas.includes('<math>') ? questoes[7].alternativas.trim().replace(/[\r\n]+/gm, ' ') : questoes[7].alternativas.trim().replace(/[\r\n]+/gm, '<br>')}</ol>` }} /></Text>
+              </View>
+              <View style={styles.grupo}>
+                <RadioButton.Group onValueChange={novaresposta => setQ7(novaresposta)} value={q7} >
+                  <View style={styles.opcoes}>
+                    <RadioButton value='A' />
+                    <Text>A</Text>
+                  </View>
+                  <View style={styles.opcoes}>
+                    <RadioButton value='B' />
+                    <Text>B</Text>
+                  </View>
+                  <View style={styles.opcoes}>
+                    <RadioButton value='C' />
+                    <Text>C</Text>
+                  </View>
+                  <View style={styles.opcoes}>
+                    <RadioButton value='D' />
+                    <Text>D</Text>
+                  </View>
+                  <View style={styles.opcoes}>
+                    <RadioButton value='E' />
+                    <Text>E</Text>
+                  </View>
 
-              </RadioButton.Group>
-            </View>
-          </View>
-          <View style={styles.questao}>
-            <View style={styles.caixaEnunciado}>
-              <Text style={styles.enunciado}><RenderHtml contentWidth={width} source={{ html: `${questoes[8].enunciado.trim().replace(/[\r\n]+/gm, '<br>')}` }} /></Text>
-              <Text style={styles.enunciado}><RenderHtml contentWidth={width} source={{ html: `<ol type="A"> ${questoes[8].alternativas.includes('<math>') ? questoes[8].alternativas.trim().replace(/[\r\n]+/gm, ' ') : questoes[8].alternativas.trim().replace(/[\r\n]+/gm, '<br>')}</ol>` }} /></Text>
-            </View>
-            <View style={styles.grupo}>
-              <RadioButton.Group onValueChange={novaresposta => setQ8(novaresposta)} value={q8} >
-                <View style={styles.opcoes}>
-                  <RadioButton value='A' />
-                  <Text>A</Text>
-                </View>
-                <View style={styles.opcoes}>
-                  <RadioButton value='B' />
-                  <Text>B</Text>
-                </View>
-                <View style={styles.opcoes}>
-                  <RadioButton value='C' />
-                  <Text>C</Text>
-                </View>
-                <View style={styles.opcoes}>
-                  <RadioButton value='D' />
-                  <Text>D</Text>
-                </View>
-                <View style={styles.opcoes}>
-                  <RadioButton value='E' />
-                  <Text>E</Text>
-                </View>
+                </RadioButton.Group>
+              </View>
+            </View>) : (null)
+          }
+          {questoes[8] != null ? (
+            <View style={styles.questao}>
+              <View style={styles.caixaEnunciado}>
+                <Text style={styles.enunciado}><RenderHtml contentWidth={width} source={{ html: `${questoes[8].enunciado.trim().replace(/[\r\n]+/gm, '<br>')}` }} /></Text>
+                <Text style={styles.enunciado}><RenderHtml contentWidth={width} source={{ html: `<ol type="A"> ${questoes[8].alternativas.includes('<math>') ? questoes[8].alternativas.trim().replace(/[\r\n]+/gm, ' ') : questoes[8].alternativas.trim().replace(/[\r\n]+/gm, '<br>')}</ol>` }} /></Text>
+              </View>
+              <View style={styles.grupo}>
+                <RadioButton.Group onValueChange={novaresposta => setQ8(novaresposta)} value={q8} >
+                  <View style={styles.opcoes}>
+                    <RadioButton value='A' />
+                    <Text>A</Text>
+                  </View>
+                  <View style={styles.opcoes}>
+                    <RadioButton value='B' />
+                    <Text>B</Text>
+                  </View>
+                  <View style={styles.opcoes}>
+                    <RadioButton value='C' />
+                    <Text>C</Text>
+                  </View>
+                  <View style={styles.opcoes}>
+                    <RadioButton value='D' />
+                    <Text>D</Text>
+                  </View>
+                  <View style={styles.opcoes}>
+                    <RadioButton value='E' />
+                    <Text>E</Text>
+                  </View>
 
-              </RadioButton.Group>
-            </View>
-          </View>
-          <View style={styles.questao}>
-            <View style={styles.caixaEnunciado}>
-              <Text style={styles.enunciado}><RenderHtml contentWidth={width} source={{ html: `${questoes[9].enunciado.trim().replace(/[\r\n]+/gm, '<br>')}` }} /></Text>
-              <Text style={styles.enunciado}><RenderHtml contentWidth={width} source={{ html: `<ol type="A"> ${questoes[9].alternativas.includes('<math>') ? questoes[9].alternativas.trim().replace(/[\r\n]+/gm, ' ') : questoes[9].alternativas.trim().replace(/[\r\n]+/gm, '<br>')}</ol>` }} /></Text>
-            </View>
-            <View style={styles.grupo}>
-              <RadioButton.Group onValueChange={novaresposta => setQ9(novaresposta)} value={q9} >
-                <View style={styles.opcoes}>
-                  <RadioButton value='A' />
-                  <Text>A</Text>
-                </View>
-                <View style={styles.opcoes}>
-                  <RadioButton value='B' />
-                  <Text>B</Text>
-                </View>
-                <View style={styles.opcoes}>
-                  <RadioButton value='C' />
-                  <Text>C</Text>
-                </View>
-                <View style={styles.opcoes}>
-                  <RadioButton value='D' />
-                  <Text>D</Text>
-                </View>
-                <View style={styles.opcoes}>
-                  <RadioButton value='E' />
-                  <Text>E</Text>
-                </View>
+                </RadioButton.Group>
+              </View>
+            </View>) : (null)
+          }
+          {questoes[9] != null ? (
+            <View style={styles.questao}>
+              <View style={styles.caixaEnunciado}>
+                <Text style={styles.enunciado}><RenderHtml contentWidth={width} source={{ html: `${questoes[9].enunciado.trim().replace(/[\r\n]+/gm, '<br>')}` }} /></Text>
+                <Text style={styles.enunciado}><RenderHtml contentWidth={width} source={{ html: `<ol type="A"> ${questoes[9].alternativas.includes('<math>') ? questoes[9].alternativas.trim().replace(/[\r\n]+/gm, ' ') : questoes[9].alternativas.trim().replace(/[\r\n]+/gm, '<br>')}</ol>` }} /></Text>
+              </View>
+              <View style={styles.grupo}>
+                <RadioButton.Group onValueChange={novaresposta => setQ9(novaresposta)} value={q9} >
+                  <View style={styles.opcoes}>
+                    <RadioButton value='A' />
+                    <Text>A</Text>
+                  </View>
+                  <View style={styles.opcoes}>
+                    <RadioButton value='B' />
+                    <Text>B</Text>
+                  </View>
+                  <View style={styles.opcoes}>
+                    <RadioButton value='C' />
+                    <Text>C</Text>
+                  </View>
+                  <View style={styles.opcoes}>
+                    <RadioButton value='D' />
+                    <Text>D</Text>
+                  </View>
+                  <View style={styles.opcoes}>
+                    <RadioButton value='E' />
+                    <Text>E</Text>
+                  </View>
 
-              </RadioButton.Group>
-            </View>
-          </View>
+                </RadioButton.Group>
+              </View>
+            </View>) : (null)
+          }
         </View>
       </ScrollView>
 
