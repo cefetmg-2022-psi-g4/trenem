@@ -13,7 +13,7 @@ const Stack = createNativeStackNavigator();
 function AppRoutes() {
 
     return (
-        <Stack.Navigator initialRouteName='Principal'>
+        <Stack.Navigator initialRouteName='Amizades'>
             <Stack.Screen
                 name="Usuario"
                 component={Usuario}

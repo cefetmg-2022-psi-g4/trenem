@@ -17,20 +17,38 @@ export default function Amizades({ navigation }) {
             <TouchableOpacity style={styles.voltar} onPress={() => navigation.goBack()}>
                 <Feather name="arrow-left" size={48} color="black" />
             </TouchableOpacity>
-            <TextInput style={styles.barraPesquisa} />
-            <Text style={styles.textoCriaPedidos}>PEDIDOS</Text>
-            <Image style={styles.imagemUsuario} source={require('../imgs/userPhoto.png')} />
+            <TouchableOpacity style={styles.adicionar}>
+                <Feather name="plus" size={30} color="black" />
+            </TouchableOpacity>
+            <TextInput placeholder="Pedir Amizade" style={styles.barraPesquisa} />
+            <Text style={styles.textoCriaPedidos}></Text>
+            <Text style={styles.pedidos}>PEDIDOS</Text>
+            <Text style={styles.nomeUser}>Nome do Usuário:</Text>
+            <Image style={styles.imagemAmizades} source={require('../imgs/userPhoto.png')} />
+            <Image style={styles.imagemGerenciarAmizades} source={require('../imgs/userPhoto.png')} />
             <Text style={styles.textoCriaAmizades}>AMIZADES</Text>
         </View>
     );
 }
 
 const styles = StyleSheet.create({
-    login: {
-        top: -100,
+    pedidos: {
         position: 'relative',
-        fontSize: 64,
+        color: 'black',
         fontFamily: 'K2D_400Regular',
+        fontSize: 35,
+        textAlign: 'center',
+        textAlignVertical: 'center',
+        top: -210,
+    },
+    nomeUser: {
+        position: 'relative',
+        color: 'white',
+        fontFamily: 'K2D_400Regular',
+        fontSize: 12,
+        textAlign: 'center',
+        textAlignVertical: 'center',
+        top: -180,
     },
     container: {
         paddingVertical: 15,
@@ -49,6 +67,7 @@ const styles = StyleSheet.create({
         margin: 0,
         width: '60%',
         height: 40,
+        fontFamily: 'K2D_400Regular',
     },
     botaoSalvar: {
         height: 45,
@@ -74,13 +93,31 @@ const styles = StyleSheet.create({
         top: 15,
         left: 15,
     },
-    imagemUsuario: {
-        top: -90,
+
+    adicionar: {
+        position: 'absolute',
+        top: 41,
+        right: 82,
+        zIndex: 2,
+    },
+
+    imagemGerenciarAmizades: {
+        top: -300,
+        position: 'relative',
+        right: 120,
+        height: 100,
+        width: '50%',
+        resizeMode: 'contain',
+    },
+
+    imagemAmizades: {
+        top: 230,
         position: 'relative',
         height: 100,
         width: '50%',
         resizeMode: 'contain',
     },
+    
     textoCriaPedidos: {
         position: 'relative',
         color: 'black',
@@ -90,6 +127,7 @@ const styles = StyleSheet.create({
         textAlignVertical: 'center',
         bottom: 200,
     },
+    
     textoCriaAmizades: {
         position: 'relative',
         color: 'black',
