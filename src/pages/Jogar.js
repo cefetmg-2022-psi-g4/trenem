@@ -33,7 +33,7 @@ export default function Jogar({ route, navigation }) {
       if(tempo == null) return;
       const response = await criarProva(0);
       console.log(response.data);
-      //navigation.navigate('Prova', {nomeModo: modo.nome, tempo: tempo.value, questoes: response.data});
+      navigation.navigate('Prova', {nomeModo: modo.nome, tempo: tempo.value, questoes: response.data});
     } else if (id == 1) {
       if(tempo == null || opcao == null || qntQuest == null) return;
       const response = await criarProva(1, {"qtd": qntQuest, "materia": opcao});

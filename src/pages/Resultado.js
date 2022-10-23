@@ -333,21 +333,35 @@ export default function Resultado({ route, navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#308B9D',
+    backgroundColor: '#FFFFFF',
     alignItems: 'center',
-    height: 'auto'
+    height: 'auto',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   cabecalho: {
     paddingBottom: 15,
+    backgroundColor: '#f2f2f2',
+    width: '100%',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   nome: {
-    color: 'white',
+    color: '#308b9d',
     fontSize: 24,
-    marginTop: 15
+    marginTop: 15,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    paddingVertical: 2,
+    paddingHorizontal: 11,
+    width: 100,
   },
   questoes: {
     flexDirection: "column",
-    backgroundColor: '#308B9D',
+    backgroundColor: '#FFFFFF',
     marginBottom: 120,
     height: 'auto',
   },
@@ -356,7 +370,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   caixaEnunciado: {
-    backgroundColor: 'white',
+    backgroundColor: '#FFFFFF',
     color: 'black',
     borderRadius: 5,
     padding: 5,
@@ -367,8 +381,12 @@ const styles = StyleSheet.create({
   enunciado: {
     color: 'black',
   },
+  linhaHorizontal: {
+    borderBottomColor: '#000',
+    borderBottomWidth: '80%',
+  },
   timer: {
-    backgroundColor: 'white',
+    backgroundColor: '#f2f2f2',
     marginTop: 5,
     borderRadius: 50,
     flexDirection: 'row',
@@ -379,7 +397,7 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   comandos: {
-    backgroundColor: '#2B4C52',
+    backgroundColor: '#f2f2f2',
     position: 'absolute',
     width: '100%',
     height: '7%',
@@ -393,14 +411,14 @@ const styles = StyleSheet.create({
     color: 'black',
     borderRadius: 20,
     padding: 3,
-    backgroundColor: '#FFFFFF',
+    backgroundColor: '#f2f2f2',
     justifyConten: 'center',
     alignItems: 'center',
     marginTop: 5,
     width: 300
   },
   grupo: {
-    maxWidth: '90%'
+    maxWidth: '90%',
   },
   opcaoCerta: {
     backgroundColor: '#2B4C52',
