@@ -7,6 +7,7 @@ import Prova from '../pages/Prova';
 import Jogar from '../pages/Jogar';
 import Resultado from '../pages/Resultado';
 import Usuario from '../pages/Usuario';
+import Notificacao from '../pages/Notificacao';
 
 const Stack = createNativeStackNavigator();
 
@@ -23,6 +24,12 @@ function AppRoutes() {
             <Stack.Screen
                 name="Amizades"
                 component={Amizades}
+                options={{ headerShown: false }}
+            />
+
+            <Stack.Screen
+                name="Notificacao"
+                component={Notificacao}
                 options={{ headerShown: false }}
             />
 

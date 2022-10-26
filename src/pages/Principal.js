@@ -21,6 +21,12 @@ export default function Principal({ navigation }) {
       <TouchableOpacity style={styles.botao} >
         <Text style={styles.textoBotao} >Versus</Text>
       </TouchableOpacity>
+      <TouchableOpacity style={styles.botao} onPress={() => navigation.navigate('Amizades')}>
+        <Text style={styles.textoBotao} >Amizades</Text>
+      </TouchableOpacity>
+      <TouchableOpacity style={styles.botao} onPress={() => navigation.navigate('Notificacao')}>
+        <Text style={styles.textoBotao} >Notificacao</Text>
+      </TouchableOpacity>
     </View>
   );
   }
