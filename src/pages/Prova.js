@@ -65,417 +65,490 @@ export default function Prova({ route, navigation }) {
             <ScrollView>
                 <View style={styles.questoes}>
                     {questoes[0] != null ? (
+                        <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 20 }}>
+                            <View style={{ flex: 1, height: 1, backgroundColor: '#308B9D', marginLeft: '15%' }} />
+                            <View>
+                                <Text style={{ width: 20, textAlign: 'center', color: '#308B9D', fontSize: 24 }}>1</Text>
+                            </View>
+                            <View style={{ flex: 1, height: 1, backgroundColor: '#308B9D', marginRight: '15%' }} />
+                        </View>) : (null)
+                    }
+                    {questoes[0] != null ? (
                         <View style={styles.questao}>
                             <View style={styles.caixaEnunciado}>
-                                <Text style={styles.enunciado}><RenderHtml contentWidth={width} source={{ html: `${questoes[0].enunciado.includes('<img') ? questoes[0].enunciado.trim().replaceAll(/[\r\n]+/gm, '<br>').replaceAll('data-src=','src=') :  questoes[0].enunciado.trim().replaceAll(/[\r\n]+/gm, '<br>')}` }} /></Text>
+                                <Text style={styles.enunciado}><RenderHtml contentWidth={width} source={{ html: `${questoes[0].enunciado.includes('<img') ? questoes[0].enunciado.trim().replaceAll(/[\r\n]+/gm, '<br>').replaceAll('data-src=', 'src=').replaceAll('src=', 'style="max-width: 90%" src=') : questoes[0].enunciado.trim().replaceAll(/[\r\n]+/gm, '<br>')}` }} /></Text>
                             </View>
                             <View style={styles.grupo}>
                                 <RadioButton.Group onValueChange={novaresposta => setQ0(novaresposta)} value={q0} >
                                     <View style={styles.opcoes}>
                                         <RadioButton value='A' />
-                                        <Text><RenderHtml contentWidth={width} source={{ html: `A) ${questoes[0].alternativas.includes('<img') ? questoes[0].alternativas.trim().replaceAll('data-src=','src=').split('><')[0] + '>' : questoes[0].alternativas.trim().replaceAll(/[\r\n]+/gm, '<br>').replaceAll('</li>', '<li>').split('<li>')[1]}` }} /></Text>
+                                        <Text><RenderHtml contentWidth={width} source={{ html: `A) ${questoes[0].alternativas.includes('<img') ? questoes[0].alternativas.trim().replaceAll('data-src=', 'src=').replaceAll('src=', 'style="max-width: 90%" src=').split('><')[0] + '>' : questoes[0].alternativas.trim().replaceAll(/[\r\n]+/gm, '<br>').replaceAll('</li>', '<li>').split('<li>')[1]}` }} /></Text>
                                     </View>
                                     <View style={styles.opcoes}>
                                         <RadioButton value='B' />
-                                        <Text><RenderHtml contentWidth={width} source={{ html: `B) ${questoes[0].alternativas.includes('<img') ? '<' + questoes[0].alternativas.trim().replaceAll('data-src=','src=').split('><')[1] + '>' : questoes[0].alternativas.trim().replaceAll(/[\r\n]+/gm, '<br>').replaceAll('</li>', '<li>').split('<li>')[3]}` }} /></Text>
+                                        <Text><RenderHtml contentWidth={width} source={{ html: `B) ${questoes[0].alternativas.includes('<img') ? '<' + questoes[0].alternativas.trim().replaceAll('data-src=', 'src=').replaceAll('src=', 'style="max-width: 90%" src=').split('><')[1] + '>' : questoes[0].alternativas.trim().replaceAll(/[\r\n]+/gm, '<br>').replaceAll('</li>', '<li>').split('<li>')[3]}` }} /></Text>
                                     </View>
                                     <View style={styles.opcoes}>
                                         <RadioButton value='C' />
-                                        <Text><RenderHtml contentWidth={width} source={{ html: `C) ${questoes[0].alternativas.includes('<img') ? '<' + questoes[0].alternativas.trim().replaceAll('data-src=','src=').split('><')[2] + '>' : questoes[0].alternativas.trim().replaceAll(/[\r\n]+/gm, '<br>').replaceAll('</li>', '<li>').split('<li>')[5]}` }} /></Text>
+                                        <Text><RenderHtml contentWidth={width} source={{ html: `C) ${questoes[0].alternativas.includes('<img') ? '<' + questoes[0].alternativas.trim().replaceAll('data-src=', 'src=').replaceAll('src=', 'style="max-width: 90%" src=').split('><')[2] + '>' : questoes[0].alternativas.trim().replaceAll(/[\r\n]+/gm, '<br>').replaceAll('</li>', '<li>').split('<li>')[5]}` }} /></Text>
                                     </View>
                                     <View style={styles.opcoes}>
                                         <RadioButton value='D' />
                                         <Text>
                                             {questoes[0].alternativas.trim().split('><')[4] != undefined ? (
-                                                <RenderHtml contentWidth={width} source={{ html: `D) ${questoes[0].alternativas.includes('<img') ? '<' + questoes[0].alternativas.trim().replaceAll('data-src=','src=').split('><')[3] + '>' : questoes[0].alternativas.trim().replaceAll(/[\r\n]+/gm, '<br>').replaceAll('</li>', '<li>').split('<li>')[7]}` }} />)
+                                                <RenderHtml contentWidth={width} source={{ html: `D) ${questoes[0].alternativas.includes('<img') ? '<' + questoes[0].alternativas.trim().replaceAll('data-src=', 'src=').replaceAll('src=', 'style="max-width: 90%" src=').split('><')[3] + '>' : questoes[0].alternativas.trim().replaceAll(/[\r\n]+/gm, '<br>').replaceAll('</li>', '<li>').split('<li>')[7]}` }} />)
                                                 : (
-                                                    <RenderHtml contentWidth={width} source={{ html: `D) ${questoes[0].alternativas.includes('<img') ? '<' + questoes[0].alternativas.trim().replaceAll('data-src=','src=').split('><')[3] : questoes[0].alternativas.trim().replaceAll(/[\r\n]+/gm, '<br>').replaceAll('</li>', '<li>').split('<li>')[7]}` }} />)
+                                                    <RenderHtml contentWidth={width} source={{ html: `D) ${questoes[0].alternativas.includes('<img') ? '<' + questoes[0].alternativas.trim().replaceAll('data-src=', 'src=').replaceAll('src=', 'style="max-width: 90%" src=').split('><')[3] : questoes[0].alternativas.trim().replaceAll(/[\r\n]+/gm, '<br>').replaceAll('</li>', '<li>').split('<li>')[7]}` }} />)
                                             }
                                         </Text>
                                     </View>
                                     {questoes[0].alternativas.trim().replaceAll(/[\r\n]+/gm, '<br>').replaceAll('</li>', '<li>').split('<li>')[9] != undefined || questoes[0].alternativas.trim().split('><')[4] != undefined ? (
                                         <View style={styles.opcoes}>
                                             <RadioButton value='E' />
-                                            <Text><RenderHtml contentWidth={width} source={{ html: `E) ${questoes[0].alternativas.includes('<img') ? '<' + questoes[0].alternativas.trim().replaceAll('data-src=','src=').split('><')[4] : questoes[0].alternativas.trim().replaceAll(/[\r\n]+/gm, '<br>').replaceAll('</li>', '<li>').split('<li>')[9]}` }} /></Text>
+                                            <Text><RenderHtml contentWidth={width} source={{ html: `E) ${questoes[0].alternativas.includes('<img') ? '<' + questoes[0].alternativas.trim().replaceAll('data-src=', 'src=').replaceAll('src=', 'style="max-width: 90%" src=').split('><')[4] : questoes[0].alternativas.trim().replaceAll(/[\r\n]+/gm, '<br>').replaceAll('</li>', '<li>').split('<li>')[9]}` }} /></Text>
                                         </View>
                                     ) : (null)}
                                 </RadioButton.Group>
                             </View>
-                            {questoes[1] != null ? (
-                                <View style={styles.linhaHorizontal} />) : (null)
-                            }
                         </View>
                     ) : (null)
                     }
+
+                    {questoes[1] != null ? (
+                        <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 20 }}>
+                            <View style={{ flex: 1, height: 1, backgroundColor: '#308B9D', marginLeft: '15%' }} />
+                            <View>
+                                <Text style={{ width: 20, textAlign: 'center', color: '#308B9D', fontSize: 24 }}>2</Text>
+                            </View>
+                            <View style={{ flex: 1, height: 1, backgroundColor: '#308B9D', marginRight: '15%' }} />
+                        </View>) : (null)
+                    }
+
                     {questoes[1] != null ? (
                         <View style={styles.questao}>
                             <View style={styles.caixaEnunciado}>
-                                <Text style={styles.enunciado}><RenderHtml contentWidth={width} source={{ html: `${questoes[1].enunciado.includes('<img') ? questoes[1].enunciado.trim().replaceAll(/[\r\n]+/gm, '<br>').replaceAll('data-src=','src=') :  questoes[1].enunciado.trim().replaceAll(/[\r\n]+/gm, '<br>')}` }} /></Text>
+                                <Text style={styles.enunciado}><RenderHtml contentWidth={width} source={{ html: `${questoes[1].enunciado.includes('<img') ? questoes[1].enunciado.trim().replaceAll(/[\r\n]+/gm, '<br>').replaceAll('data-src=', 'src=').replaceAll('src=', 'style="max-width: 90%" src=') : questoes[1].enunciado.trim().replaceAll(/[\r\n]+/gm, '<br>')}` }} /></Text>
                             </View>
                             <View style={styles.grupo}>
                                 <RadioButton.Group onValueChange={novaresposta => setQ1(novaresposta)} value={q1} >
                                     <View style={styles.opcoes}>
                                         <RadioButton value='A' />
-                                        <Text><RenderHtml contentWidth={width} source={{ html: `A) ${questoes[1].alternativas.includes('<img') ? questoes[1].alternativas.trim().replaceAll('data-src=','src=').split('><')[0] + '>' : questoes[1].alternativas.trim().replaceAll(/[\r\n]+/gm, '<br>').replaceAll('</li>', '<li>').split('<li>')[1]}` }} /></Text>
+                                        <Text><RenderHtml contentWidth={width} source={{ html: `A) ${questoes[1].alternativas.includes('<img') ? questoes[1].alternativas.trim().replaceAll('data-src=', 'src=').replaceAll('src=', 'style="max-width: 90%" src=').split('><')[0] + '>' : questoes[1].alternativas.trim().replaceAll(/[\r\n]+/gm, '<br>').replaceAll('</li>', '<li>').split('<li>')[1]}` }} /></Text>
                                     </View>
                                     <View style={styles.opcoes}>
                                         <RadioButton value='B' />
-                                        <Text><RenderHtml contentWidth={width} source={{ html: `B) ${questoes[1].alternativas.includes('<img') ? '<' + questoes[1].alternativas.trim().replaceAll('data-src=','src=').split('><')[1] + '>' : questoes[1].alternativas.trim().replaceAll(/[\r\n]+/gm, '<br>').replaceAll('</li>', '<li>').split('<li>')[3]}` }} /></Text>
+                                        <Text><RenderHtml contentWidth={width} source={{ html: `B) ${questoes[1].alternativas.includes('<img') ? '<' + questoes[1].alternativas.trim().replaceAll('data-src=', 'src=').replaceAll('src=', 'style="max-width: 90%" src=').split('><')[1] + '>' : questoes[1].alternativas.trim().replaceAll(/[\r\n]+/gm, '<br>').replaceAll('</li>', '<li>').split('<li>')[3]}` }} /></Text>
                                     </View>
                                     <View style={styles.opcoes}>
                                         <RadioButton value='C' />
-                                        <Text><RenderHtml contentWidth={width} source={{ html: `C) ${questoes[1].alternativas.includes('<img') ? '<' + questoes[1].alternativas.trim().replaceAll('data-src=','src=').split('><')[2] + '>' : questoes[1].alternativas.trim().replaceAll(/[\r\n]+/gm, '<br>').replaceAll('</li>', '<li>').split('<li>')[5]}` }} /></Text>
+                                        <Text><RenderHtml contentWidth={width} source={{ html: `C) ${questoes[1].alternativas.includes('<img') ? '<' + questoes[1].alternativas.trim().replaceAll('data-src=', 'src=').replaceAll('src=', 'style="max-width: 90%" src=').split('><')[2] + '>' : questoes[1].alternativas.trim().replaceAll(/[\r\n]+/gm, '<br>').replaceAll('</li>', '<li>').split('<li>')[5]}` }} /></Text>
                                     </View>
                                     <View style={styles.opcoes}>
                                         <RadioButton value='D' />
                                         <Text>
                                             {questoes[1].alternativas.trim().split('><')[4] != undefined ? (
-                                                <RenderHtml contentWidth={width} source={{ html: `D) ${questoes[1].alternativas.includes('<img') ? '<' + questoes[1].alternativas.trim().replaceAll('data-src=','src=').split('><')[3] + '>' : questoes[1].alternativas.trim().replaceAll(/[\r\n]+/gm, '<br>').replaceAll('</li>', '<li>').split('<li>')[7]}` }} />)
+                                                <RenderHtml contentWidth={width} source={{ html: `D) ${questoes[1].alternativas.includes('<img') ? '<' + questoes[1].alternativas.trim().replaceAll('data-src=', 'src=').replaceAll('src=', 'style="max-width: 90%" src=').split('><')[3] + '>' : questoes[1].alternativas.trim().replaceAll(/[\r\n]+/gm, '<br>').replaceAll('</li>', '<li>').split('<li>')[7]}` }} />)
                                                 : (
-                                                    <RenderHtml contentWidth={width} source={{ html: `D) ${questoes[1].alternativas.includes('<img') ? '<' + questoes[1].alternativas.trim().replaceAll('data-src=','src=').split('><')[3] : questoes[1].alternativas.trim().replaceAll(/[\r\n]+/gm, '<br>').replaceAll('</li>', '<li>').split('<li>')[7]}` }} />)
+                                                    <RenderHtml contentWidth={width} source={{ html: `D) ${questoes[1].alternativas.includes('<img') ? '<' + questoes[1].alternativas.trim().replaceAll('data-src=', 'src=').replaceAll('src=', 'style="max-width: 90%" src=').split('><')[3] : questoes[1].alternativas.trim().replaceAll(/[\r\n]+/gm, '<br>').replaceAll('</li>', '<li>').split('<li>')[7]}` }} />)
                                             }
                                         </Text>
                                     </View>
                                     {questoes[1].alternativas.trim().replaceAll(/[\r\n]+/gm, '<br>').replaceAll('</li>', '<li>').split('<li>')[9] != undefined || questoes[1].alternativas.trim().split('><')[4] != undefined ? (
                                         <View style={styles.opcoes}>
                                             <RadioButton value='E' />
-                                            <Text><RenderHtml contentWidth={width} source={{ html: `${questoes[1].alternativas.includes('<img') ? '<' + questoes[1].alternativas.trim().replaceAll('data-src=','src=').split('><')[4] : questoes[1].alternativas.trim().replaceAll(/[\r\n]+/gm, '<br>').replaceAll('</li>', '<li>').split('<li>')[9]}` }} /></Text>
+                                            <Text><RenderHtml contentWidth={width} source={{ html: `${questoes[1].alternativas.includes('<img') ? '<' + questoes[1].alternativas.trim().replaceAll('data-src=', 'src=').replaceAll('src=', 'style="max-width: 90%" src=').split('><')[4] : questoes[1].alternativas.trim().replaceAll(/[\r\n]+/gm, '<br>').replaceAll('</li>', '<li>').split('<li>')[9]}` }} /></Text>
                                         </View>
                                     ) : (null)}
                                 </RadioButton.Group>
                             </View>
-                            {questoes[2] != null ? (
-                                <View style={styles.linhaHorizontal} />) : (null)
-                            }
+
+                        </View>) : (null)
+                    }
+                    {questoes[2] != null ? (
+                        <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 20 }}>
+                            <View style={{ flex: 1, height: 1, backgroundColor: '#308B9D', marginLeft: '15%' }} />
+                            <View>
+                                <Text style={{ width: 20, textAlign: 'center', color: '#308B9D', fontSize: 24 }}>3</Text>
+                            </View>
+                            <View style={{ flex: 1, height: 1, backgroundColor: '#308B9D', marginRight: '15%' }} />
                         </View>) : (null)
                     }
                     {questoes[2] != null ? (
                         <View style={styles.questao}>
                             <View style={styles.caixaEnunciado}>
-                                <Text style={styles.enunciado}><RenderHtml contentWidth={width} source={{ html: `${questoes[2].enunciado.includes('<img') ? questoes[2].enunciado.trim().replaceAll(/[\r\n]+/gm, '<br>').replaceAll('data-src=','src=') :  questoes[2].enunciado.trim().replaceAll(/[\r\n]+/gm, '<br>')}` }} /></Text>
+                                <Text style={styles.enunciado}><RenderHtml contentWidth={width} source={{ html: `${questoes[2].enunciado.includes('<img') ? questoes[2].enunciado.trim().replaceAll(/[\r\n]+/gm, '<br>').replaceAll('data-src=', 'src=').replaceAll('src=', 'style="max-width: 90%" src=') : questoes[2].enunciado.trim().replaceAll(/[\r\n]+/gm, '<br>')}` }} /></Text>
                             </View>
                             <View style={styles.grupo}>
                                 <RadioButton.Group onValueChange={novaresposta => setQ2(novaresposta)} value={q2} >
                                     <View style={styles.opcoes}>
                                         <RadioButton value='A' />
-                                        <Text><RenderHtml contentWidth={width} source={{ html: `A) ${questoes[2].alternativas.includes('<img') ? questoes[2].alternativas.trim().replaceAll('data-src=','src=').split('><')[0] + '>' : questoes[2].alternativas.trim().replaceAll(/[\r\n]+/gm, '<br>').replaceAll('</li>', '<li>').split('<li>')[1]}` }} /></Text>
+                                        <Text><RenderHtml contentWidth={width} source={{ html: `A) ${questoes[2].alternativas.includes('<img') ? questoes[2].alternativas.trim().replaceAll('data-src=', 'src=').replaceAll('src=', 'style="max-width: 90%" src=').split('><')[0] + '>' : questoes[2].alternativas.trim().replaceAll(/[\r\n]+/gm, '<br>').replaceAll('</li>', '<li>').split('<li>')[1]}` }} /></Text>
                                     </View>
                                     <View style={styles.opcoes}>
                                         <RadioButton value='B' />
-                                        <Text><RenderHtml contentWidth={width} source={{ html: `B) ${questoes[2].alternativas.includes('<img') ? '<' + questoes[2].alternativas.trim().replaceAll('data-src=','src=').split('><')[1] + '>' : questoes[2].alternativas.trim().replaceAll(/[\r\n]+/gm, '<br>').replaceAll('</li>', '<li>').split('<li>')[3]}` }} /></Text>
+                                        <Text><RenderHtml contentWidth={width} source={{ html: `B) ${questoes[2].alternativas.includes('<img') ? '<' + questoes[2].alternativas.trim().replaceAll('data-src=', 'src=').replaceAll('src=', 'style="max-width: 90%" src=').split('><')[1] + '>' : questoes[2].alternativas.trim().replaceAll(/[\r\n]+/gm, '<br>').replaceAll('</li>', '<li>').split('<li>')[3]}` }} /></Text>
                                     </View>
                                     <View style={styles.opcoes}>
                                         <RadioButton value='C' />
-                                        <Text><RenderHtml contentWidth={width} source={{ html: `C) ${questoes[2].alternativas.includes('<img') ? '<' + questoes[2].alternativas.trim().replaceAll('data-src=','src=').split('><')[2] + '>' : questoes[2].alternativas.trim().replaceAll(/[\r\n]+/gm, '<br>').replaceAll('</li>', '<li>').split('<li>')[5]}` }} /></Text>
+                                        <Text><RenderHtml contentWidth={width} source={{ html: `C) ${questoes[2].alternativas.includes('<img') ? '<' + questoes[2].alternativas.trim().replaceAll('data-src=', 'src=').replaceAll('src=', 'style="max-width: 90%" src=').split('><')[2] + '>' : questoes[2].alternativas.trim().replaceAll(/[\r\n]+/gm, '<br>').replaceAll('</li>', '<li>').split('<li>')[5]}` }} /></Text>
                                     </View>
                                     <View style={styles.opcoes}>
                                         <RadioButton value='D' />
                                         <Text>
                                             {questoes[2].alternativas.trim().split('><')[4] != undefined ? (
-                                                <RenderHtml contentWidth={width} source={{ html: `D) ${questoes[2].alternativas.includes('<img') ? '<' + questoes[2].alternativas.trim().replaceAll('data-src=','src=').split('><')[3] + '>' : questoes[2].alternativas.trim().replaceAll(/[\r\n]+/gm, '<br>').replaceAll('</li>', '<li>').split('<li>')[7]}` }} />)
+                                                <RenderHtml contentWidth={width} source={{ html: `D) ${questoes[2].alternativas.includes('<img') ? '<' + questoes[2].alternativas.trim().replaceAll('data-src=', 'src=').replaceAll('src=', 'style="max-width: 90%" src=').split('><')[3] + '>' : questoes[2].alternativas.trim().replaceAll(/[\r\n]+/gm, '<br>').replaceAll('</li>', '<li>').split('<li>')[7]}` }} />)
                                                 : (
-                                                    <RenderHtml contentWidth={width} source={{ html: `D) ${questoes[2].alternativas.includes('<img') ? '<' + questoes[2].alternativas.trim().replaceAll('data-src=','src=').split('><')[3] : questoes[2].alternativas.trim().replaceAll(/[\r\n]+/gm, '<br>').replaceAll('</li>', '<li>').split('<li>')[7]}` }} />)
+                                                    <RenderHtml contentWidth={width} source={{ html: `D) ${questoes[2].alternativas.includes('<img') ? '<' + questoes[2].alternativas.trim().replaceAll('data-src=', 'src=').replaceAll('src=', 'style="max-width: 90%" src=').split('><')[3] : questoes[2].alternativas.trim().replaceAll(/[\r\n]+/gm, '<br>').replaceAll('</li>', '<li>').split('<li>')[7]}` }} />)
                                             }
                                         </Text>
                                     </View>
                                     {questoes[2].alternativas.trim().replaceAll(/[\r\n]+/gm, '<br>').replaceAll('</li>', '<li>').split('<li>')[9] != undefined || questoes[2].alternativas.trim().split('><')[4] != undefined ? (
                                         <View style={styles.opcoes}>
                                             <RadioButton value='E' />
-                                            <Text><RenderHtml contentWidth={width} source={{ html: `E) ${questoes[2].alternativas.includes('<img') ? '<' + questoes[2].alternativas.trim().replaceAll('data-src=','src=').split('><')[4] : questoes[2].alternativas.trim().replaceAll(/[\r\n]+/gm, '<br>').replaceAll('</li>', '<li>').split('<li>')[9]}` }} /></Text>
+                                            <Text><RenderHtml contentWidth={width} source={{ html: `E) ${questoes[2].alternativas.includes('<img') ? '<' + questoes[2].alternativas.trim().replaceAll('data-src=', 'src=').replaceAll('src=', 'style="max-width: 90%" src=').split('><')[4] : questoes[2].alternativas.trim().replaceAll(/[\r\n]+/gm, '<br>').replaceAll('</li>', '<li>').split('<li>')[9]}` }} /></Text>
                                         </View>
                                     ) : (null)}
                                 </RadioButton.Group>
                             </View>
-                            {questoes[3] != null ? (
-                                <View style={styles.linhaHorizontal} />) : (null)
-                            }
+
+                        </View>) : (null)
+                    }
+                    {questoes[3] != null ? (
+                        <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 20 }}>
+                            <View style={{ flex: 1, height: 1, backgroundColor: '#308B9D', marginLeft: '15%' }} />
+                            <View>
+                                <Text style={{ width: 20, textAlign: 'center', color: '#308B9D', fontSize: 24 }}>4</Text>
+                            </View>
+                            <View style={{ flex: 1, height: 1, backgroundColor: '#308B9D', marginRight: '15%' }} />
                         </View>) : (null)
                     }
                     {questoes[3] != null ? (
                         <View style={styles.questao}>
                             <View style={styles.caixaEnunciado}>
-                                <Text style={styles.enunciado}><RenderHtml contentWidth={width} source={{ html: `${questoes[3].enunciado.includes('<img') ? questoes[3].enunciado.trim().replaceAll(/[\r\n]+/gm, '<br>').replaceAll('data-src=','src=') :  questoes[3].enunciado.trim().replaceAll(/[\r\n]+/gm, '<br>')}` }} /></Text>
+                                <Text style={styles.enunciado}><RenderHtml contentWidth={width} source={{ html: `${questoes[3].enunciado.includes('<img') ? questoes[3].enunciado.trim().replaceAll(/[\r\n]+/gm, '<br>').replaceAll('data-src=', 'src=').replaceAll('src=', 'style="max-width: 90%" src=') : questoes[3].enunciado.trim().replaceAll(/[\r\n]+/gm, '<br>')}` }} /></Text>
                             </View>
                             <View style={styles.grupo}>
                                 <RadioButton.Group onValueChange={novaresposta => setQ3(novaresposta)} value={q3} >
                                     <View style={styles.opcoes}>
                                         <RadioButton value='A' />
-                                        <Text><RenderHtml contentWidth={width} source={{ html: `A) ${questoes[3].alternativas.includes('<img') ? questoes[3].alternativas.trim().replaceAll('data-src=','src=').split('><')[0] + '>' : questoes[3].alternativas.trim().replaceAll(/[\r\n]+/gm, '<br>').replaceAll('</li>', '<li>').split('<li>')[1]}` }} /></Text>
+                                        <Text><RenderHtml contentWidth={width} source={{ html: `A) ${questoes[3].alternativas.includes('<img') ? questoes[3].alternativas.trim().replaceAll('data-src=', 'src=').replaceAll('src=', 'style="max-width: 90%" src=').split('><')[0] + '>' : questoes[3].alternativas.trim().replaceAll(/[\r\n]+/gm, '<br>').replaceAll('</li>', '<li>').split('<li>')[1]}` }} /></Text>
                                     </View>
                                     <View style={styles.opcoes}>
                                         <RadioButton value='B' />
-                                        <Text><RenderHtml contentWidth={width} source={{ html: `B) ${questoes[3].alternativas.includes('<img') ? '<' + questoes[3].alternativas.trim().replaceAll('data-src=','src=').split('><')[1] + '>' : questoes[3].alternativas.trim().replaceAll(/[\r\n]+/gm, '<br>').replaceAll('</li>', '<li>').split('<li>')[3]}` }} /></Text>
+                                        <Text><RenderHtml contentWidth={width} source={{ html: `B) ${questoes[3].alternativas.includes('<img') ? '<' + questoes[3].alternativas.trim().replaceAll('data-src=', 'src=').replaceAll('src=', 'style="max-width: 90%" src=').split('><')[1] + '>' : questoes[3].alternativas.trim().replaceAll(/[\r\n]+/gm, '<br>').replaceAll('</li>', '<li>').split('<li>')[3]}` }} /></Text>
                                     </View>
                                     <View style={styles.opcoes}>
                                         <RadioButton value='C' />
-                                        <Text><RenderHtml contentWidth={width} source={{ html: `C) ${questoes[3].alternativas.includes('<img') ? '<' + questoes[3].alternativas.trim().replaceAll('data-src=','src=').split('><')[2] + '>' : questoes[3].alternativas.trim().replaceAll(/[\r\n]+/gm, '<br>').replaceAll('</li>', '<li>').split('<li>')[5]}` }} /></Text>
+                                        <Text><RenderHtml contentWidth={width} source={{ html: `C) ${questoes[3].alternativas.includes('<img') ? '<' + questoes[3].alternativas.trim().replaceAll('data-src=', 'src=').replaceAll('src=', 'style="max-width: 90%" src=').split('><')[2] + '>' : questoes[3].alternativas.trim().replaceAll(/[\r\n]+/gm, '<br>').replaceAll('</li>', '<li>').split('<li>')[5]}` }} /></Text>
                                     </View>
                                     <View style={styles.opcoes}>
                                         <RadioButton value='D' />
                                         <Text>
                                             {questoes[3].alternativas.trim().split('><')[4] != undefined ? (
-                                                <RenderHtml contentWidth={width} source={{ html: `D) ${questoes[3].alternativas.includes('<img') ? '<' + questoes[3].alternativas.trim().replaceAll('data-src=','src=').split('><')[3] + '>' : questoes[3].alternativas.trim().replaceAll(/[\r\n]+/gm, '<br>').replaceAll('</li>', '<li>').split('<li>')[7]}` }} />)
+                                                <RenderHtml contentWidth={width} source={{ html: `D) ${questoes[3].alternativas.includes('<img') ? '<' + questoes[3].alternativas.trim().replaceAll('data-src=', 'src=').replaceAll('src=', 'style="max-width: 90%" src=').split('><')[3] + '>' : questoes[3].alternativas.trim().replaceAll(/[\r\n]+/gm, '<br>').replaceAll('</li>', '<li>').split('<li>')[7]}` }} />)
                                                 : (
-                                                    <RenderHtml contentWidth={width} source={{ html: `D) ${questoes[3].alternativas.includes('<img') ? '<' + questoes[3].alternativas.trim().replaceAll('data-src=','src=').split('><')[3] : questoes[3].alternativas.trim().replaceAll(/[\r\n]+/gm, '<br>').replaceAll('</li>', '<li>').split('<li>')[7]}` }} />)
+                                                    <RenderHtml contentWidth={width} source={{ html: `D) ${questoes[3].alternativas.includes('<img') ? '<' + questoes[3].alternativas.trim().replaceAll('data-src=', 'src=').replaceAll('src=', 'style="max-width: 90%" src=').split('><')[3] : questoes[3].alternativas.trim().replaceAll(/[\r\n]+/gm, '<br>').replaceAll('</li>', '<li>').split('<li>')[7]}` }} />)
                                             }
                                         </Text>
                                     </View>
                                     {questoes[3].alternativas.trim().replaceAll(/[\r\n]+/gm, '<br>').replaceAll('</li>', '<li>').split('<li>')[9] != undefined || questoes[3].alternativas.trim().split('><')[4] != undefined ? (
                                         <View style={styles.opcoes}>
                                             <RadioButton value='E' />
-                                            <Text><RenderHtml contentWidth={width} source={{ html: `E) ${questoes[3].alternativas.includes('<img') ? '<' + questoes[3].alternativas.trim().replaceAll('data-src=','src=').split('><')[4] : questoes[3].alternativas.trim().replaceAll(/[\r\n]+/gm, '<br>').replaceAll('</li>', '<li>').split('<li>')[9]}` }} /></Text>
+                                            <Text><RenderHtml contentWidth={width} source={{ html: `E) ${questoes[3].alternativas.includes('<img') ? '<' + questoes[3].alternativas.trim().replaceAll('data-src=', 'src=').replaceAll('src=', 'style="max-width: 90%" src=').split('><')[4] : questoes[3].alternativas.trim().replaceAll(/[\r\n]+/gm, '<br>').replaceAll('</li>', '<li>').split('<li>')[9]}` }} /></Text>
                                         </View>
                                     ) : (null)}
                                 </RadioButton.Group>
                             </View>
-                            {questoes[4] != null ? (
-                                <View style={styles.linhaHorizontal} />) : (null)
-                            }
+
+                        </View>) : (null)
+                    }
+                    {questoes[4] != null ? (
+                        <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 20 }}>
+                            <View style={{ flex: 1, height: 1, backgroundColor: '#308B9D', marginLeft: '15%' }} />
+                            <View>
+                                <Text style={{ width: 20, textAlign: 'center', color: '#308B9D', fontSize: 24 }}>5</Text>
+                            </View>
+                            <View style={{ flex: 1, height: 1, backgroundColor: '#308B9D', marginRight: '15%' }} />
                         </View>) : (null)
                     }
                     {questoes[4] != null ? (
                         <View style={styles.questao}>
                             <View style={styles.caixaEnunciado}>
-                                <Text style={styles.enunciado}><RenderHtml contentWidth={width} source={{ html: `${questoes[4].enunciado.includes('<img') ? questoes[4].enunciado.trim().replaceAll(/[\r\n]+/gm, '<br>').replaceAll('data-src=','src=') :  questoes[4].enunciado.trim().replaceAll(/[\r\n]+/gm, '<br>')}` }} /></Text>
+                                <Text style={styles.enunciado}><RenderHtml contentWidth={width} source={{ html: `${questoes[4].enunciado.includes('<img') ? questoes[4].enunciado.trim().replaceAll(/[\r\n]+/gm, '<br>').replaceAll('data-src=', 'src=').replaceAll('src=', 'style="max-width: 90%" src=') : questoes[4].enunciado.trim().replaceAll(/[\r\n]+/gm, '<br>')}` }} /></Text>
                             </View>
                             <View style={styles.grupo}>
                                 <RadioButton.Group onValueChange={novaresposta => setQ4(novaresposta)} value={q4} >
                                     <View style={styles.opcoes}>
                                         <RadioButton value='A' />
-                                        <Text><RenderHtml contentWidth={width} source={{ html: `A) ${questoes[4].alternativas.includes('<img') ? questoes[4].alternativas.trim().replaceAll('data-src=','src=').split('><')[0] + '>' : questoes[4].alternativas.trim().replaceAll(/[\r\n]+/gm, '<br>').replaceAll('</li>', '<li>').split('<li>')[1]}` }} /></Text>
+                                        <Text><RenderHtml contentWidth={width} source={{ html: `A) ${questoes[4].alternativas.includes('<img') ? questoes[4].alternativas.trim().replaceAll('data-src=', 'src=').replaceAll('src=', 'style="max-width: 90%" src=').split('><')[0] + '>' : questoes[4].alternativas.trim().replaceAll(/[\r\n]+/gm, '<br>').replaceAll('</li>', '<li>').split('<li>')[1]}` }} /></Text>
                                     </View>
                                     <View style={styles.opcoes}>
                                         <RadioButton value='B' />
-                                        <Text><RenderHtml contentWidth={width} source={{ html: `B) ${questoes[4].alternativas.includes('<img') ? '<' + questoes[4].alternativas.trim().replaceAll('data-src=','src=').split('><')[1] + '>' : questoes[4].alternativas.trim().replaceAll(/[\r\n]+/gm, '<br>').replaceAll('</li>', '<li>').split('<li>')[3]}` }} /></Text>
+                                        <Text><RenderHtml contentWidth={width} source={{ html: `B) ${questoes[4].alternativas.includes('<img') ? '<' + questoes[4].alternativas.trim().replaceAll('data-src=', 'src=').replaceAll('src=', 'style="max-width: 90%" src=').split('><')[1] + '>' : questoes[4].alternativas.trim().replaceAll(/[\r\n]+/gm, '<br>').replaceAll('</li>', '<li>').split('<li>')[3]}` }} /></Text>
                                     </View>
                                     <View style={styles.opcoes}>
                                         <RadioButton value='C' />
-                                        <Text><RenderHtml contentWidth={width} source={{ html: `C) ${questoes[4].alternativas.includes('<img') ? '<' + questoes[4].alternativas.trim().replaceAll('data-src=','src=').split('><')[2] + '>' : questoes[4].alternativas.trim().replaceAll(/[\r\n]+/gm, '<br>').replaceAll('</li>', '<li>').split('<li>')[5]}` }} /></Text>
+                                        <Text><RenderHtml contentWidth={width} source={{ html: `C) ${questoes[4].alternativas.includes('<img') ? '<' + questoes[4].alternativas.trim().replaceAll('data-src=', 'src=').replaceAll('src=', 'style="max-width: 90%" src=').split('><')[2] + '>' : questoes[4].alternativas.trim().replaceAll(/[\r\n]+/gm, '<br>').replaceAll('</li>', '<li>').split('<li>')[5]}` }} /></Text>
                                     </View>
                                     <View style={styles.opcoes}>
                                         <RadioButton value='D' />
                                         <Text>
                                             {questoes[4].alternativas.trim().split('><')[4] != undefined ? (
-                                                <RenderHtml contentWidth={width} source={{ html: `D) ${questoes[4].alternativas.includes('<img') ? '<' + questoes[4].alternativas.trim().replaceAll('data-src=','src=').split('><')[3] + '>' : questoes[4].alternativas.trim().replaceAll(/[\r\n]+/gm, '<br>').replaceAll('</li>', '<li>').split('<li>')[7]}` }} />)
+                                                <RenderHtml contentWidth={width} source={{ html: `D) ${questoes[4].alternativas.includes('<img') ? '<' + questoes[4].alternativas.trim().replaceAll('data-src=', 'src=').replaceAll('src=', 'style="max-width: 90%" src=').split('><')[3] + '>' : questoes[4].alternativas.trim().replaceAll(/[\r\n]+/gm, '<br>').replaceAll('</li>', '<li>').split('<li>')[7]}` }} />)
                                                 : (
-                                                    <RenderHtml contentWidth={width} source={{ html: `D) ${questoes[4].alternativas.includes('<img') ? '<' + questoes[4].alternativas.trim().replaceAll('data-src=','src=').split('><')[3] : questoes[4].alternativas.trim().replaceAll(/[\r\n]+/gm, '<br>').replaceAll('</li>', '<li>').split('<li>')[7]}` }} />)
+                                                    <RenderHtml contentWidth={width} source={{ html: `D) ${questoes[4].alternativas.includes('<img') ? '<' + questoes[4].alternativas.trim().replaceAll('data-src=', 'src=').replaceAll('src=', 'style="max-width: 90%" src=').split('><')[3] : questoes[4].alternativas.trim().replaceAll(/[\r\n]+/gm, '<br>').replaceAll('</li>', '<li>').split('<li>')[7]}` }} />)
                                             }
                                         </Text>
                                     </View>
                                     {questoes[4].alternativas.trim().replaceAll(/[\r\n]+/gm, '<br>').replaceAll('</li>', '<li>').split('<li>')[9] != undefined || questoes[4].alternativas.trim().split('><')[4] != undefined ? (
                                         <View style={styles.opcoes}>
                                             <RadioButton value='E' />
-                                            <Text><RenderHtml contentWidth={width} source={{ html: `E) ${questoes[4].alternativas.includes('<img') ? '<' + questoes[4].alternativas.trim().replaceAll('data-src=','src=').split('><')[4] : questoes[4].alternativas.trim().replaceAll(/[\r\n]+/gm, '<br>').replaceAll('</li>', '<li>').split('<li>')[9]}` }} /></Text>
+                                            <Text><RenderHtml contentWidth={width} source={{ html: `E) ${questoes[4].alternativas.includes('<img') ? '<' + questoes[4].alternativas.trim().replaceAll('data-src=', 'src=').replaceAll('src=', 'style="max-width: 90%" src=').split('><')[4] : questoes[4].alternativas.trim().replaceAll(/[\r\n]+/gm, '<br>').replaceAll('</li>', '<li>').split('<li>')[9]}` }} /></Text>
                                         </View>
                                     ) : (null)}
                                 </RadioButton.Group>
                             </View>
-                            {questoes[5] != null ? (
-                                <View style={styles.linhaHorizontal} />) : (null)
-                            }
+
+                        </View>) : (null)
+                    }
+                    {questoes[5] != null ? (
+                        <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 20 }}>
+                            <View style={{ flex: 1, height: 1, backgroundColor: '#308B9D', marginLeft: '15%' }} />
+                            <View>
+                                <Text style={{ width: 20, textAlign: 'center', color: '#308B9D', fontSize: 24 }}>6</Text>
+                            </View>
+                            <View style={{ flex: 1, height: 1, backgroundColor: '#308B9D', marginRight: '15%' }} />
                         </View>) : (null)
                     }
                     {questoes[5] != null ? (
                         <View style={styles.questao}>
                             <View style={styles.caixaEnunciado}>
-                                <Text style={styles.enunciado}><RenderHtml contentWidth={width} source={{ html: `${questoes[5].enunciado.includes('<img') ? questoes[5].enunciado.trim().replaceAll(/[\r\n]+/gm, '<br>').replaceAll('data-src=','src=') :  questoes[5].enunciado.trim().replaceAll(/[\r\n]+/gm, '<br>')}` }} /></Text>
+                                <Text style={styles.enunciado}><RenderHtml contentWidth={width} source={{ html: `${questoes[5].enunciado.includes('<img') ? questoes[5].enunciado.trim().replaceAll(/[\r\n]+/gm, '<br>').replaceAll('data-src=', 'src=').replaceAll('src=', 'style="max-width: 90%" src=') : questoes[5].enunciado.trim().replaceAll(/[\r\n]+/gm, '<br>')}` }} /></Text>
                             </View>
                             <View style={styles.grupo}>
                                 <RadioButton.Group onValueChange={novaresposta => setQ5(novaresposta)} value={q5} >
                                     <View style={styles.opcoes}>
                                         <RadioButton value='A' />
-                                        <Text><RenderHtml contentWidth={width} source={{ html: `A) ${questoes[5].alternativas.includes('<img') ? questoes[5].alternativas.trim().replaceAll('data-src=','src=').split('><')[0] + '>' : questoes[5].alternativas.trim().replaceAll(/[\r\n]+/gm, '<br>').replaceAll('</li>', '<li>').split('<li>')[1]}` }} /></Text>
+                                        <Text><RenderHtml contentWidth={width} source={{ html: `A) ${questoes[5].alternativas.includes('<img') ? questoes[5].alternativas.trim().replaceAll('data-src=', 'src=').replaceAll('src=', 'style="max-width: 90%" src=').split('><')[0] + '>' : questoes[5].alternativas.trim().replaceAll(/[\r\n]+/gm, '<br>').replaceAll('</li>', '<li>').split('<li>')[1]}` }} /></Text>
                                     </View>
                                     <View style={styles.opcoes}>
                                         <RadioButton value='B' />
-                                        <Text><RenderHtml contentWidth={width} source={{ html: `B) ${questoes[5].alternativas.includes('<img') ? '<' + questoes[5].alternativas.trim().replaceAll('data-src=','src=').split('><')[1] + '>' : questoes[5].alternativas.trim().replaceAll(/[\r\n]+/gm, '<br>').replaceAll('</li>', '<li>').split('<li>')[3]}` }} /></Text>
+                                        <Text><RenderHtml contentWidth={width} source={{ html: `B) ${questoes[5].alternativas.includes('<img') ? '<' + questoes[5].alternativas.trim().replaceAll('data-src=', 'src=').replaceAll('src=', 'style="max-width: 90%" src=').split('><')[1] + '>' : questoes[5].alternativas.trim().replaceAll(/[\r\n]+/gm, '<br>').replaceAll('</li>', '<li>').split('<li>')[3]}` }} /></Text>
                                     </View>
                                     <View style={styles.opcoes}>
                                         <RadioButton value='C' />
-                                        <Text><RenderHtml contentWidth={width} source={{ html: `C) ${questoes[5].alternativas.includes('<img') ? '<' + questoes[5].alternativas.trim().replaceAll('data-src=','src=').split('><')[2] + '>' : questoes[5].alternativas.trim().replaceAll(/[\r\n]+/gm, '<br>').replaceAll('</li>', '<li>').split('<li>')[5]}` }} /></Text>
+                                        <Text><RenderHtml contentWidth={width} source={{ html: `C) ${questoes[5].alternativas.includes('<img') ? '<' + questoes[5].alternativas.trim().replaceAll('data-src=', 'src=').replaceAll('src=', 'style="max-width: 90%" src=').split('><')[2] + '>' : questoes[5].alternativas.trim().replaceAll(/[\r\n]+/gm, '<br>').replaceAll('</li>', '<li>').split('<li>')[5]}` }} /></Text>
                                     </View>
                                     <View style={styles.opcoes}>
                                         <RadioButton value='D' />
                                         <Text>
                                             {questoes[5].alternativas.trim().split('><')[4] != undefined ? (
-                                                <RenderHtml contentWidth={width} source={{ html: `D) ${questoes[5].alternativas.includes('<img') ? '<' + questoes[5].alternativas.trim().replaceAll('data-src=','src=').split('><')[3] + '>' : questoes[5].alternativas.trim().replaceAll(/[\r\n]+/gm, '<br>').replaceAll('</li>', '<li>').split('<li>')[7]}` }} />)
+                                                <RenderHtml contentWidth={width} source={{ html: `D) ${questoes[5].alternativas.includes('<img') ? '<' + questoes[5].alternativas.trim().replaceAll('data-src=', 'src=').replaceAll('src=', 'style="max-width: 90%" src=').split('><')[3] + '>' : questoes[5].alternativas.trim().replaceAll(/[\r\n]+/gm, '<br>').replaceAll('</li>', '<li>').split('<li>')[7]}` }} />)
                                                 : (
-                                                    <RenderHtml contentWidth={width} source={{ html: `D) ${questoes[5].alternativas.includes('<img') ? '<' + questoes[5].alternativas.trim().replaceAll('data-src=','src=').split('><')[3] : questoes[5].alternativas.trim().replaceAll(/[\r\n]+/gm, '<br>').replaceAll('</li>', '<li>').split('<li>')[7]}` }} />)
+                                                    <RenderHtml contentWidth={width} source={{ html: `D) ${questoes[5].alternativas.includes('<img') ? '<' + questoes[5].alternativas.trim().replaceAll('data-src=', 'src=').replaceAll('src=', 'style="max-width: 90%" src=').split('><')[3] : questoes[5].alternativas.trim().replaceAll(/[\r\n]+/gm, '<br>').replaceAll('</li>', '<li>').split('<li>')[7]}` }} />)
                                             }
                                         </Text>
                                     </View>
                                     {questoes[5].alternativas.trim().replaceAll(/[\r\n]+/gm, '<br>').replaceAll('</li>', '<li>').split('<li>')[9] != undefined || questoes[5].alternativas.trim().split('><')[4] != undefined ? (
                                         <View style={styles.opcoes}>
                                             <RadioButton value='E' />
-                                            <Text><RenderHtml contentWidth={width} source={{ html: `E) ${questoes[5].alternativas.includes('<img') ? '<' + questoes[5].alternativas.trim().replaceAll('data-src=','src=').split('><')[4] : questoes[5].alternativas.trim().replaceAll(/[\r\n]+/gm, '<br>').replaceAll('</li>', '<li>').split('<li>')[9]}` }} /></Text>
+                                            <Text><RenderHtml contentWidth={width} source={{ html: `E) ${questoes[5].alternativas.includes('<img') ? '<' + questoes[5].alternativas.trim().replaceAll('data-src=', 'src=').replaceAll('src=', 'style="max-width: 90%" src=').split('><')[4] : questoes[5].alternativas.trim().replaceAll(/[\r\n]+/gm, '<br>').replaceAll('</li>', '<li>').split('<li>')[9]}` }} /></Text>
                                         </View>
                                     ) : (null)}
                                 </RadioButton.Group>
                             </View>
-                            {questoes[6] != null ? (
-                                <View style={styles.linhaHorizontal} />) : (null)
-                            }
+
+                        </View>) : (null)
+                    }
+                    {questoes[6] != null ? (
+                        <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 20 }}>
+                            <View style={{ flex: 1, height: 1, backgroundColor: '#308B9D', marginLeft: '15%' }} />
+                            <View>
+                                <Text style={{ width: 20, textAlign: 'center', color: '#308B9D', fontSize: 24 }}>7</Text>
+                            </View>
+                            <View style={{ flex: 1, height: 1, backgroundColor: '#308B9D', marginRight: '15%' }} />
                         </View>) : (null)
                     }
                     {questoes[6] != null ? (
                         <View style={styles.questao}>
                             <View style={styles.caixaEnunciado}>
-                                <Text style={styles.enunciado}><RenderHtml contentWidth={width} source={{ html: `${questoes[6].enunciado.includes('<img') ? questoes[6].enunciado.trim().replaceAll(/[\r\n]+/gm, '<br>').replaceAll('data-src=','src=') :  questoes[6].enunciado.trim().replaceAll(/[\r\n]+/gm, '<br>')}` }} /></Text>
+                                <Text style={styles.enunciado}><RenderHtml contentWidth={width} source={{ html: `${questoes[6].enunciado.includes('<img') ? questoes[6].enunciado.trim().replaceAll(/[\r\n]+/gm, '<br>').replaceAll('data-src=', 'src=').replaceAll('src=', 'style="max-width: 90%" src=') : questoes[6].enunciado.trim().replaceAll(/[\r\n]+/gm, '<br>')}` }} /></Text>
                             </View>
                             <View style={styles.grupo}>
                                 <RadioButton.Group onValueChange={novaresposta => setQ6(novaresposta)} value={q6} >
                                     <View style={styles.opcoes}>
                                         <RadioButton value='A' />
-                                        <Text><RenderHtml contentWidth={width} source={{ html: `A) ${questoes[6].alternativas.includes('<img') ? questoes[6].alternativas.trim().replaceAll('data-src=','src=').split('><')[0] + '>' : questoes[6].alternativas.trim().replaceAll(/[\r\n]+/gm, '<br>').replaceAll('</li>', '<li>').split('<li>')[1]}` }} /></Text>
+                                        <Text><RenderHtml contentWidth={width} source={{ html: `A) ${questoes[6].alternativas.includes('<img') ? questoes[6].alternativas.trim().replaceAll('data-src=', 'src=').replaceAll('src=', 'style="max-width: 90%" src=').split('><')[0] + '>' : questoes[6].alternativas.trim().replaceAll(/[\r\n]+/gm, '<br>').replaceAll('</li>', '<li>').split('<li>')[1]}` }} /></Text>
                                     </View>
                                     <View style={styles.opcoes}>
                                         <RadioButton value='B' />
-                                        <Text><RenderHtml contentWidth={width} source={{ html: `B) ${questoes[6].alternativas.includes('<img') ? '<' + questoes[6].alternativas.trim().replaceAll('data-src=','src=').split('><')[1] + '>' : questoes[6].alternativas.trim().replaceAll(/[\r\n]+/gm, '<br>').replaceAll('</li>', '<li>').split('<li>')[3]}` }} /></Text>
+                                        <Text><RenderHtml contentWidth={width} source={{ html: `B) ${questoes[6].alternativas.includes('<img') ? '<' + questoes[6].alternativas.trim().replaceAll('data-src=', 'src=').replaceAll('src=', 'style="max-width: 90%" src=').split('><')[1] + '>' : questoes[6].alternativas.trim().replaceAll(/[\r\n]+/gm, '<br>').replaceAll('</li>', '<li>').split('<li>')[3]}` }} /></Text>
                                     </View>
                                     <View style={styles.opcoes}>
                                         <RadioButton value='C' />
-                                        <Text><RenderHtml contentWidth={width} source={{ html: `C) ${questoes[6].alternativas.includes('<img') ? '<' + questoes[6].alternativas.trim().replaceAll('data-src=','src=').split('><')[2] + '>' : questoes[6].alternativas.trim().replaceAll(/[\r\n]+/gm, '<br>').replaceAll('</li>', '<li>').split('<li>')[5]}` }} /></Text>
+                                        <Text><RenderHtml contentWidth={width} source={{ html: `C) ${questoes[6].alternativas.includes('<img') ? '<' + questoes[6].alternativas.trim().replaceAll('data-src=', 'src=').replaceAll('src=', 'style="max-width: 90%" src=').split('><')[2] + '>' : questoes[6].alternativas.trim().replaceAll(/[\r\n]+/gm, '<br>').replaceAll('</li>', '<li>').split('<li>')[5]}` }} /></Text>
                                     </View>
                                     <View style={styles.opcoes}>
                                         <RadioButton value='D' />
                                         <Text>
                                             {questoes[6].alternativas.trim().split('><')[4] != undefined ? (
-                                                <RenderHtml contentWidth={width} source={{ html: `D) ${questoes[6].alternativas.includes('<img') ? '<' + questoes[6].alternativas.trim().replaceAll('data-src=','src=').split('><')[3] + '>' : questoes[6].alternativas.trim().replaceAll(/[\r\n]+/gm, '<br>').replaceAll('</li>', '<li>').split('<li>')[7]}` }} />)
+                                                <RenderHtml contentWidth={width} source={{ html: `D) ${questoes[6].alternativas.includes('<img') ? '<' + questoes[6].alternativas.trim().replaceAll('data-src=', 'src=').replaceAll('src=', 'style="max-width: 90%" src=').split('><')[3] + '>' : questoes[6].alternativas.trim().replaceAll(/[\r\n]+/gm, '<br>').replaceAll('</li>', '<li>').split('<li>')[7]}` }} />)
                                                 : (
-                                                    <RenderHtml contentWidth={width} source={{ html: `D) ${questoes[6].alternativas.includes('<img') ? '<' + questoes[6].alternativas.trim().replaceAll('data-src=','src=').split('><')[3] : questoes[6].alternativas.trim().replaceAll(/[\r\n]+/gm, '<br>').replaceAll('</li>', '<li>').split('<li>')[7]}` }} />)
+                                                    <RenderHtml contentWidth={width} source={{ html: `D) ${questoes[6].alternativas.includes('<img') ? '<' + questoes[6].alternativas.trim().replaceAll('data-src=', 'src=').replaceAll('src=', 'style="max-width: 90%" src=').split('><')[3] : questoes[6].alternativas.trim().replaceAll(/[\r\n]+/gm, '<br>').replaceAll('</li>', '<li>').split('<li>')[7]}` }} />)
                                             }
                                         </Text>
                                     </View>
                                     {questoes[6].alternativas.trim().replaceAll(/[\r\n]+/gm, '<br>').replaceAll('</li>', '<li>').split('<li>')[9] != undefined || questoes[6].alternativas.trim().split('><')[4] != undefined ? (
                                         <View style={styles.opcoes}>
                                             <RadioButton value='E' />
-                                            <Text><RenderHtml contentWidth={width} source={{ html: `E) ${questoes[6].alternativas.includes('<img') ? '<' + questoes[6].alternativas.trim().replaceAll('data-src=','src=').split('><')[4] : questoes[6].alternativas.trim().replaceAll(/[\r\n]+/gm, '<br>').replaceAll('</li>', '<li>').split('<li>')[9]}` }} /></Text>
+                                            <Text><RenderHtml contentWidth={width} source={{ html: `E) ${questoes[6].alternativas.includes('<img') ? '<' + questoes[6].alternativas.trim().replaceAll('data-src=', 'src=').replaceAll('src=', 'style="max-width: 90%" src=').split('><')[4] : questoes[6].alternativas.trim().replaceAll(/[\r\n]+/gm, '<br>').replaceAll('</li>', '<li>').split('<li>')[9]}` }} /></Text>
                                         </View>
                                     ) : (null)}
                                 </RadioButton.Group>
                             </View>
-                            {questoes[7] != null ? (
-                                <View style={styles.linhaHorizontal} />) : (null)
-                            }
+
+                        </View>) : (null)
+                    }
+                    {questoes[7] != null ? (
+                        <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 20 }}>
+                            <View style={{ flex: 1, height: 1, backgroundColor: '#308B9D', marginLeft: '15%' }} />
+                            <View>
+                                <Text style={{ width: 20, textAlign: 'center', color: '#308B9D', fontSize: 24 }}>8</Text>
+                            </View>
+                            <View style={{ flex: 1, height: 1, backgroundColor: '#308B9D', marginRight: '15%' }} />
                         </View>) : (null)
                     }
                     {questoes[7] != null ? (
                         <View style={styles.questao}>
                             <View style={styles.caixaEnunciado}>
-                                <Text style={styles.enunciado}><RenderHtml contentWidth={width} source={{ html: `${questoes[7].enunciado.includes('<img') ? questoes[7].enunciado.trim().replaceAll(/[\r\n]+/gm, '<br>').replaceAll('data-src=','src=') :  questoes[7].enunciado.trim().replaceAll(/[\r\n]+/gm, '<br>')}` }} /></Text>
+                                <Text style={styles.enunciado}><RenderHtml contentWidth={width} source={{ html: `${questoes[7].enunciado.includes('<img') ? questoes[7].enunciado.trim().replaceAll(/[\r\n]+/gm, '<br>').replaceAll('data-src=', 'src=').replaceAll('src=', 'style="max-width: 90%" src=') : questoes[7].enunciado.trim().replaceAll(/[\r\n]+/gm, '<br>')}` }} /></Text>
                             </View>
                             <View style={styles.grupo}>
                                 <RadioButton.Group onValueChange={novaresposta => setQ7(novaresposta)} value={q7} >
                                     <View style={styles.opcoes}>
                                         <RadioButton value='A' />
-                                        <Text><RenderHtml contentWidth={width} source={{ html: `A) ${questoes[7].alternativas.includes('<img') ? questoes[7].alternativas.trim().replaceAll('data-src=','src=').split('><')[0] + '>' : questoes[7].alternativas.trim().replaceAll(/[\r\n]+/gm, '<br>').replaceAll('</li>', '<li>').split('<li>')[1]}` }} /></Text>
+                                        <Text><RenderHtml contentWidth={width} source={{ html: `A) ${questoes[7].alternativas.includes('<img') ? questoes[7].alternativas.trim().replaceAll('data-src=', 'src=').replaceAll('src=', 'style="max-width: 90%" src=').split('><')[0] + '>' : questoes[7].alternativas.trim().replaceAll(/[\r\n]+/gm, '<br>').replaceAll('</li>', '<li>').split('<li>')[1]}` }} /></Text>
                                     </View>
                                     <View style={styles.opcoes}>
                                         <RadioButton value='B' />
-                                        <Text><RenderHtml contentWidth={width} source={{ html: `B) ${questoes[7].alternativas.includes('<img') ? '<' + questoes[7].alternativas.trim().replaceAll('data-src=','src=').split('><')[1] + '>' : questoes[7].alternativas.trim().replaceAll(/[\r\n]+/gm, '<br>').replaceAll('</li>', '<li>').split('<li>')[3]}` }} /></Text>
+                                        <Text><RenderHtml contentWidth={width} source={{ html: `B) ${questoes[7].alternativas.includes('<img') ? '<' + questoes[7].alternativas.trim().replaceAll('data-src=', 'src=').replaceAll('src=', 'style="max-width: 90%" src=').split('><')[1] + '>' : questoes[7].alternativas.trim().replaceAll(/[\r\n]+/gm, '<br>').replaceAll('</li>', '<li>').split('<li>')[3]}` }} /></Text>
                                     </View>
                                     <View style={styles.opcoes}>
                                         <RadioButton value='C' />
-                                        <Text><RenderHtml contentWidth={width} source={{ html: `C) ${questoes[7].alternativas.includes('<img') ? '<' + questoes[7].alternativas.trim().replaceAll('data-src=','src=').split('><')[2] + '>' : questoes[7].alternativas.trim().replaceAll(/[\r\n]+/gm, '<br>').replaceAll('</li>', '<li>').split('<li>')[5]}` }} /></Text>
+                                        <Text><RenderHtml contentWidth={width} source={{ html: `C) ${questoes[7].alternativas.includes('<img') ? '<' + questoes[7].alternativas.trim().replaceAll('data-src=', 'src=').replaceAll('src=', 'style="max-width: 90%" src=').split('><')[2] + '>' : questoes[7].alternativas.trim().replaceAll(/[\r\n]+/gm, '<br>').replaceAll('</li>', '<li>').split('<li>')[5]}` }} /></Text>
                                     </View>
                                     <View style={styles.opcoes}>
                                         <RadioButton value='D' />
                                         <Text>
                                             {questoes[7].alternativas.trim().split('><')[4] != undefined ? (
-                                                <RenderHtml contentWidth={width} source={{ html: `D) ${questoes[7].alternativas.includes('<img') ? '<' + questoes[7].alternativas.trim().replaceAll('data-src=','src=').split('><')[3] + '>' : questoes[7].alternativas.trim().replaceAll(/[\r\n]+/gm, '<br>').replaceAll('</li>', '<li>').split('<li>')[7]}` }} />)
+                                                <RenderHtml contentWidth={width} source={{ html: `D) ${questoes[7].alternativas.includes('<img') ? '<' + questoes[7].alternativas.trim().replaceAll('data-src=', 'src=').replaceAll('src=', 'style="max-width: 90%" src=').split('><')[3] + '>' : questoes[7].alternativas.trim().replaceAll(/[\r\n]+/gm, '<br>').replaceAll('</li>', '<li>').split('<li>')[7]}` }} />)
                                                 : (
-                                                    <RenderHtml contentWidth={width} source={{ html: `D) ${questoes[7].alternativas.includes('<img') ? '<' + questoes[7].alternativas.trim().replaceAll('data-src=','src=').split('><')[3] : questoes[7].alternativas.trim().replaceAll(/[\r\n]+/gm, '<br>').replaceAll('</li>', '<li>').split('<li>')[7]}` }} />)
+                                                    <RenderHtml contentWidth={width} source={{ html: `D) ${questoes[7].alternativas.includes('<img') ? '<' + questoes[7].alternativas.trim().replaceAll('data-src=', 'src=').replaceAll('src=', 'style="max-width: 90%" src=').split('><')[3] : questoes[7].alternativas.trim().replaceAll(/[\r\n]+/gm, '<br>').replaceAll('</li>', '<li>').split('<li>')[7]}` }} />)
                                             }
                                         </Text>
                                     </View>
                                     {questoes[7].alternativas.trim().replaceAll(/[\r\n]+/gm, '<br>').replaceAll('</li>', '<li>').split('<li>')[9] != undefined || questoes[7].alternativas.trim().split('><')[4] != undefined ? (
                                         <View style={styles.opcoes}>
                                             <RadioButton value='E' />
-                                            <Text><RenderHtml contentWidth={width} source={{ html: `E) ${questoes[7].alternativas.includes('<img') ? '<' + questoes[7].alternativas.trim().replaceAll('data-src=','src=').split('><')[4] : questoes[7].alternativas.trim().replaceAll(/[\r\n]+/gm, '<br>').replaceAll('</li>', '<li>').split('<li>')[9]}` }} /></Text>
+                                            <Text><RenderHtml contentWidth={width} source={{ html: `E) ${questoes[7].alternativas.includes('<img') ? '<' + questoes[7].alternativas.trim().replaceAll('data-src=', 'src=').replaceAll('src=', 'style="max-width: 90%" src=').split('><')[4] : questoes[7].alternativas.trim().replaceAll(/[\r\n]+/gm, '<br>').replaceAll('</li>', '<li>').split('<li>')[9]}` }} /></Text>
                                         </View>
                                     ) : (null)}
                                 </RadioButton.Group>
                             </View>
-                            {questoes[8] != null ? (
-                                <View style={styles.linhaHorizontal} />) : (null)
-                            }
+
+                        </View>) : (null)
+                    }
+                    {questoes[8] != null ? (
+                        <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 20 }}>
+                            <View style={{ flex: 1, height: 1, backgroundColor: '#308B9D', marginLeft: '15%' }} />
+                            <View>
+                                <Text style={{ width: 20, textAlign: 'center', color: '#308B9D', fontSize: 24 }}>9</Text>
+                            </View>
+                            <View style={{ flex: 1, height: 1, backgroundColor: '#308B9D', marginRight: '15%' }} />
                         </View>) : (null)
                     }
                     {questoes[8] != null ? (
                         <View style={styles.questao}>
-                           <View style={styles.caixaEnunciado}>
-                                <Text style={styles.enunciado}><RenderHtml contentWidth={width} source={{ html: `${questoes[8].enunciado.includes('<img') ? questoes[8].enunciado.trim().replaceAll(/[\r\n]+/gm, '<br>').replaceAll('data-src=','src=') :  questoes[8].enunciado.trim().replaceAll(/[\r\n]+/gm, '<br>')}` }} /></Text>
+                            <View style={styles.caixaEnunciado}>
+                                <Text style={styles.enunciado}><RenderHtml contentWidth={width} source={{ html: `${questoes[8].enunciado.includes('<img') ? questoes[8].enunciado.trim().replaceAll(/[\r\n]+/gm, '<br>').replaceAll('data-src=', 'src=').replaceAll('src=', 'style="max-width: 90%" src=') : questoes[8].enunciado.trim().replaceAll(/[\r\n]+/gm, '<br>')}` }} /></Text>
                             </View>
                             <View style={styles.grupo}>
                                 <RadioButton.Group onValueChange={novaresposta => setQ8(novaresposta)} value={q8} >
                                     <View style={styles.opcoes}>
                                         <RadioButton value='A' />
-                                        <Text><RenderHtml contentWidth={width} source={{ html: `A) ${questoes[8].alternativas.includes('<img') ? questoes[8].alternativas.trim().replaceAll('data-src=','src=').split('><')[0] + '>' : questoes[8].alternativas.trim().replaceAll(/[\r\n]+/gm, '<br>').replaceAll('</li>', '<li>').split('<li>')[1]}` }} /></Text>
+                                        <Text><RenderHtml contentWidth={width} source={{ html: `A) ${questoes[8].alternativas.includes('<img') ? questoes[8].alternativas.trim().replaceAll('data-src=', 'src=').replaceAll('src=', 'style="max-width: 90%" src=').split('><')[0] + '>' : questoes[8].alternativas.trim().replaceAll(/[\r\n]+/gm, '<br>').replaceAll('</li>', '<li>').split('<li>')[1]}` }} /></Text>
                                     </View>
                                     <View style={styles.opcoes}>
                                         <RadioButton value='B' />
-                                        <Text><RenderHtml contentWidth={width} source={{ html: `B) ${questoes[8].alternativas.includes('<img') ? '<' + questoes[8].alternativas.trim().replaceAll('data-src=','src=').split('><')[1] + '>' : questoes[8].alternativas.trim().replaceAll(/[\r\n]+/gm, '<br>').replaceAll('</li>', '<li>').split('<li>')[3]}` }} /></Text>
+                                        <Text><RenderHtml contentWidth={width} source={{ html: `B) ${questoes[8].alternativas.includes('<img') ? '<' + questoes[8].alternativas.trim().replaceAll('data-src=', 'src=').replaceAll('src=', 'style="max-width: 90%" src=').split('><')[1] + '>' : questoes[8].alternativas.trim().replaceAll(/[\r\n]+/gm, '<br>').replaceAll('</li>', '<li>').split('<li>')[3]}` }} /></Text>
                                     </View>
                                     <View style={styles.opcoes}>
                                         <RadioButton value='C' />
-                                        <Text><RenderHtml contentWidth={width} source={{ html: `C) ${questoes[8].alternativas.includes('<img') ? '<' + questoes[8].alternativas.trim().replaceAll('data-src=','src=').split('><')[2] + '>' : questoes[8].alternativas.trim().replaceAll(/[\r\n]+/gm, '<br>').replaceAll('</li>', '<li>').split('<li>')[5]}` }} /></Text>
+                                        <Text><RenderHtml contentWidth={width} source={{ html: `C) ${questoes[8].alternativas.includes('<img') ? '<' + questoes[8].alternativas.trim().replaceAll('data-src=', 'src=').replaceAll('src=', 'style="max-width: 90%" src=').split('><')[2] + '>' : questoes[8].alternativas.trim().replaceAll(/[\r\n]+/gm, '<br>').replaceAll('</li>', '<li>').split('<li>')[5]}` }} /></Text>
                                     </View>
                                     <View style={styles.opcoes}>
                                         <RadioButton value='D' />
                                         <Text>
                                             {questoes[8].alternativas.trim().split('><')[4] != undefined ? (
-                                                <RenderHtml contentWidth={width} source={{ html: `D) ${questoes[8].alternativas.includes('<img') ? '<' + questoes[8].alternativas.trim().replaceAll('data-src=','src=').split('><')[3] + '>' : questoes[8].alternativas.trim().replaceAll(/[\r\n]+/gm, '<br>').replaceAll('</li>', '<li>').split('<li>')[7]}` }} />)
+                                                <RenderHtml contentWidth={width} source={{ html: `D) ${questoes[8].alternativas.includes('<img') ? '<' + questoes[8].alternativas.trim().replaceAll('data-src=', 'src=').replaceAll('src=', 'style="max-width: 90%" src=').split('><')[3] + '>' : questoes[8].alternativas.trim().replaceAll(/[\r\n]+/gm, '<br>').replaceAll('</li>', '<li>').split('<li>')[7]}` }} />)
                                                 : (
-                                                    <RenderHtml contentWidth={width} source={{ html: `D) ${questoes[8].alternativas.includes('<img') ? '<' + questoes[8].alternativas.trim().replaceAll('data-src=','src=').split('><')[3] : questoes[8].alternativas.trim().replaceAll(/[\r\n]+/gm, '<br>').replaceAll('</li>', '<li>').split('<li>')[7]}` }} />)
+                                                    <RenderHtml contentWidth={width} source={{ html: `D) ${questoes[8].alternativas.includes('<img') ? '<' + questoes[8].alternativas.trim().replaceAll('data-src=', 'src=').replaceAll('src=', 'style="max-width: 90%" src=').split('><')[3] : questoes[8].alternativas.trim().replaceAll(/[\r\n]+/gm, '<br>').replaceAll('</li>', '<li>').split('<li>')[7]}` }} />)
                                             }
                                         </Text>
                                     </View>
                                     {questoes[8].alternativas.trim().replaceAll(/[\r\n]+/gm, '<br>').replaceAll('</li>', '<li>').split('<li>')[9] != undefined || questoes[8].alternativas.trim().split('><')[4] != undefined ? (
                                         <View style={styles.opcoes}>
                                             <RadioButton value='E' />
-                                            <Text><RenderHtml contentWidth={width} source={{ html: `E) ${questoes[8].alternativas.includes('<img') ? '<' + questoes[8].alternativas.trim().replaceAll('data-src=','src=').split('><')[4] : questoes[8].alternativas.trim().replaceAll(/[\r\n]+/gm, '<br>').replaceAll('</li>', '<li>').split('<li>')[9]}` }} /></Text>
+                                            <Text><RenderHtml contentWidth={width} source={{ html: `E) ${questoes[8].alternativas.includes('<img') ? '<' + questoes[8].alternativas.trim().replaceAll('data-src=', 'src=').replaceAll('src=', 'style="max-width: 90%" src=').split('><')[4] : questoes[8].alternativas.trim().replaceAll(/[\r\n]+/gm, '<br>').replaceAll('</li>', '<li>').split('<li>')[9]}` }} /></Text>
                                         </View>
                                     ) : (null)}
                                 </RadioButton.Group>
                             </View>
-                            {questoes[9] != null ? (
-                                <View style={styles.linhaHorizontal} />) : (null)
-                            }
+
+                        </View>) : (null)
+                    }
+                    {questoes[9] != null ? (
+                        <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 20 }}>
+                            <View style={{ flex: 1, height: 1, backgroundColor: '#308B9D', marginLeft: '15%' }} />
+                            <View>
+                                <Text style={{ width: 20, textAlign: 'center', color: '#308B9D', fontSize: 24 }}>10</Text>
+                            </View>
+                            <View style={{ flex: 1, height: 1, backgroundColor: '#308B9D', marginRight: '15%' }} />
                         </View>) : (null)
                     }
                     {questoes[9] != null ? (
                         <View style={styles.questao}>
                             <View style={styles.caixaEnunciado}>
-                                <Text style={styles.enunciado}><RenderHtml contentWidth={width} source={{ html: `${questoes[9].enunciado.includes('<img') ? questoes[9].enunciado.trim().replaceAll(/[\r\n]+/gm, '<br>').replaceAll('data-src=','src=') :  questoes[9].enunciado.trim().replaceAll(/[\r\n]+/gm, '<br>')}` }} /></Text>
+                                <Text style={styles.enunciado}><RenderHtml contentWidth={width} source={{ html: `${questoes[9].enunciado.includes('<img') ? questoes[9].enunciado.trim().replaceAll(/[\r\n]+/gm, '<br>').replaceAll('data-src=', 'src=').replaceAll('src=', 'style="max-width: 90%" src=') : questoes[9].enunciado.trim().replaceAll(/[\r\n]+/gm, '<br>')}` }} /></Text>
                             </View>
                             <View style={styles.grupo}>
                                 <RadioButton.Group onValueChange={novaresposta => setQ9(novaresposta)} value={q9} >
                                     <View style={styles.opcoes}>
                                         <RadioButton value='A' />
-                                        <Text><RenderHtml contentWidth={width} source={{ html: `A) ${questoes[9].alternativas.includes('<img') ? questoes[9].alternativas.trim().replaceAll('data-src=','src=').split('><')[0] + '>' : questoes[9].alternativas.trim().replaceAll(/[\r\n]+/gm, '<br>').replaceAll('</li>', '<li>').split('<li>')[1]}` }} /></Text>
+                                        <Text><RenderHtml contentWidth={width} source={{ html: `A) ${questoes[9].alternativas.includes('<img') ? questoes[9].alternativas.trim().replaceAll('data-src=', 'src=').replaceAll('src=', 'style="max-width: 90%" src=').split('><')[0] + '>' : questoes[9].alternativas.trim().replaceAll(/[\r\n]+/gm, '<br>').replaceAll('</li>', '<li>').split('<li>')[1]}` }} /></Text>
                                     </View>
                                     <View style={styles.opcoes}>
                                         <RadioButton value='B' />
-                                        <Text><RenderHtml contentWidth={width} source={{ html: `B) ${questoes[9].alternativas.includes('<img') ? '<' + questoes[9].alternativas.trim().replaceAll('data-src=','src=').split('><')[1] + '>' : questoes[9].alternativas.trim().replaceAll(/[\r\n]+/gm, '<br>').replaceAll('</li>', '<li>').split('<li>')[3]}` }} /></Text>
+                                        <Text><RenderHtml contentWidth={width} source={{ html: `B) ${questoes[9].alternativas.includes('<img') ? '<' + questoes[9].alternativas.trim().replaceAll('data-src=', 'src=').replaceAll('src=', 'style="max-width: 90%" src=').split('><')[1] + '>' : questoes[9].alternativas.trim().replaceAll(/[\r\n]+/gm, '<br>').replaceAll('</li>', '<li>').split('<li>')[3]}` }} /></Text>
                                     </View>
                                     <View style={styles.opcoes}>
                                         <RadioButton value='C' />
-                                        <Text><RenderHtml contentWidth={width} source={{ html: `C) ${questoes[9].alternativas.includes('<img') ? '<' + questoes[9].alternativas.trim().replaceAll('data-src=','src=').split('><')[2] + '>' : questoes[9].alternativas.trim().replaceAll(/[\r\n]+/gm, '<br>').replaceAll('</li>', '<li>').split('<li>')[5]}` }} /></Text>
+                                        <Text><RenderHtml contentWidth={width} source={{ html: `C) ${questoes[9].alternativas.includes('<img') ? '<' + questoes[9].alternativas.trim().replaceAll('data-src=', 'src=').replaceAll('src=', 'style="max-width: 90%" src=').split('><')[2] + '>' : questoes[9].alternativas.trim().replaceAll(/[\r\n]+/gm, '<br>').replaceAll('</li>', '<li>').split('<li>')[5]}` }} /></Text>
                                     </View>
                                     <View style={styles.opcoes}>
                                         <RadioButton value='D' />
                                         <Text>
                                             {questoes[9].alternativas.trim().split('><')[4] != undefined ? (
-                                                <RenderHtml contentWidth={width} source={{ html: `D) ${questoes[9].alternativas.includes('<img') ? '<' + questoes[9].alternativas.trim().replaceAll('data-src=','src=').split('><')[3] + '>' : questoes[9].alternativas.trim().replaceAll(/[\r\n]+/gm, '<br>').replaceAll('</li>', '<li>').split('<li>')[7]}` }} />)
+                                                <RenderHtml contentWidth={width} source={{ html: `D) ${questoes[9].alternativas.includes('<img') ? '<' + questoes[9].alternativas.trim().replaceAll('data-src=', 'src=').replaceAll('src=', 'style="max-width: 90%" src=').split('><')[3] + '>' : questoes[9].alternativas.trim().replaceAll(/[\r\n]+/gm, '<br>').replaceAll('</li>', '<li>').split('<li>')[7]}` }} />)
                                                 : (
-                                                    <RenderHtml contentWidth={width} source={{ html: `D) ${questoes[9].alternativas.includes('<img') ? '<' + questoes[9].alternativas.trim().replaceAll('data-src=','src=').split('><')[3] : questoes[9].alternativas.trim().replaceAll(/[\r\n]+/gm, '<br>').replaceAll('</li>', '<li>').split('<li>')[7]}` }} />)
+                                                    <RenderHtml contentWidth={width} source={{ html: `D) ${questoes[9].alternativas.includes('<img') ? '<' + questoes[9].alternativas.trim().replaceAll('data-src=', 'src=').replaceAll('src=', 'style="max-width: 90%" src=').split('><')[3] : questoes[9].alternativas.trim().replaceAll(/[\r\n]+/gm, '<br>').replaceAll('</li>', '<li>').split('<li>')[7]}` }} />)
                                             }
                                         </Text>
                                     </View>
                                     {questoes[9].alternativas.trim().replaceAll(/[\r\n]+/gm, '<br>').replaceAll('</li>', '<li>').split('<li>')[9] != undefined || questoes[9].alternativas.trim().split('><')[4] != undefined ? (
                                         <View style={styles.opcoes}>
                                             <RadioButton value='E' />
-                                            <Text><RenderHtml contentWidth={width} source={{ html: `E) ${questoes[9].alternativas.includes('<img') ? '<' + questoes[9].alternativas.trim().replaceAll('data-src=','src=').split('><')[4] : questoes[9].alternativas.trim().replaceAll(/[\r\n]+/gm, '<br>').replaceAll('</li>', '<li>').split('<li>')[9]}` }} /></Text>
+                                            <Text><RenderHtml contentWidth={width} source={{ html: `E) ${questoes[9].alternativas.includes('<img') ? '<' + questoes[9].alternativas.trim().replaceAll('data-src=', 'src=').replaceAll('src=', 'style="max-width: 90%" src=').split('><')[4] : questoes[9].alternativas.trim().replaceAll(/[\r\n]+/gm, '<br>').replaceAll('</li>', '<li>').split('<li>')[9]}` }} /></Text>
                                         </View>
                                     ) : (null)}
                                 </RadioButton.Group>
@@ -552,9 +625,13 @@ const styles = StyleSheet.create({
     enunciado: {
         color: 'black',
     },
-    linhaHorizontal: {
-        borderBottomColor: '#000',
-        borderBottomWidth: '80%',
+    linha: {
+        borderBottomColor: '#308b9d',
+        borderBottomWidth: 3,
+        marginLeft: 100,
+        marginRight: 100,
+        marginTop: 20,
+        borderStyle: 'dashed'
     },
     timer: {
         backgroundColor: '#f2f2f2',
