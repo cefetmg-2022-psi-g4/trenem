@@ -5,14 +5,12 @@ import { useFonts, K2D_400Regular } from '@expo-google-fonts/k2d';
 import { TextInput } from 'react-native-paper';
 //import { black } from 'react-native-paper/lib/typescript/styles/colors';
 
-export default function TelaInicial({ navigation }) {
-  
+export default function TelaInicial({ navigation }) {  
 
   useFonts({
     K2D_400Regular,
   });
 
-  
   return (
     <View style={styles.container}>
       <Image style={styles.logo} source={require('../imgs/Trenem.png')} />
@@ -23,8 +21,6 @@ export default function TelaInicial({ navigation }) {
       <TouchableOpacity style={styles.botaoLogin} onPress={() => navigation.navigate('Login', { id: '0' })}>
         <Text style={styles.textoBotaoLogin}>LOGIN</Text>
       </TouchableOpacity>
-      
- 
     </View>
   );
 }
