@@ -6,6 +6,7 @@ import { TextInput } from 'react-native-paper';
 import { criarConta } from '../controllers/AppController';
 import { getToken } from '../controllers/AuthController';
 import { apiEstudante } from '../services/api';
+import { StretchInY } from 'react-native-reanimated';
 
 
 export default function Cadastro({ navigation }) {
@@ -32,12 +33,18 @@ export default function Cadastro({ navigation }) {
             </TouchableOpacity>
             <Text style={styles.textoCriaPerfil}>CRIE SEU PERFIL</Text>
             <Image style={styles.imagemUsuario} source={require('../imgs/userPhoto.png')} />
-            <Text style={styles.textoCampos}>E-mail:</Text>
-            <TextInput style={styles.campoDeEmail} value={email} onChangeText={onChangeEmail}/>
-            <Text style={styles.textoCampos}>Nome de usuário:</Text>
-            <TextInput style={styles.campoDeUsuario} value={nome} onChangeText={onChangeNome}/>
-            <Text style={styles.textoCampos}>Senha: </Text>
-            <TextInput secureTextEntry={true} style={styles.campoDeSenha} value={senha} onChangeText={onChangeSenha}/>
+            <View style={styles.inputs} >
+                <Feather style={styles.iconEmail} name="mail" size={24} color="black" />
+                <TextInput style={styles.campoCadastro} value={email} onChangeText={onChangeEmail} placeholder={'Email'} theme={{colors: {text: 'black', primary: '#308B9D'}}} />
+            </View>
+            <View style={styles.inputs} >
+                <Feather style={styles.iconNome} name="user" size={24} color="black" />
+                <TextInput style={styles.campoCadastro} value={nome} onChangeText={onChangeNome} placeholder={'Nome'} theme={{colors: {text: 'black', primary: '#308B9D'}}} />
+            </View>
+            <View style={styles.inputs} >
+                <Feather style={styles.iconSenha} name="lock" size={24} color="black" />
+                <TextInput style={styles.campoCadastro} value={senha} onChangeText={onChangeSenha} placeholder={'Senha'} theme={{colors: {text: 'black', primary: '#308B9D'}}} secureTextEntry={true}  />
+            </View>
             <TouchableOpacity style={styles.botaoCriar} onPress={handleLogin}>
                 <Text style={styles.textoBotaoCriar}>Criar</Text>
             </TouchableOpacity>
@@ -46,18 +53,34 @@ export default function Cadastro({ navigation }) {
 }
 
 const styles = StyleSheet.create({
-    login: {
-        top: -100,
-        position: 'relative',
-        fontSize: 64,
-        fontFamily: 'K2D_400Regular',
-    },
     container: {
         paddingVertical: 15,
         flex: 1,
-        backgroundColor: '#308B9D',
+        backgroundColor: '#fff',
         justifyContent: 'center',
         alignItems: 'center',
+    },
+    inputs:{
+        position: 'relative',
+        width: '60%',
+    },
+    iconEmail: {
+        position: 'absolute',
+        zIndex:2,
+        left: 5,
+        top: -63
+    },
+    iconNome: {
+        position: 'absolute',
+        zIndex: 2,
+        left: 5,
+        top: -65
+    },
+    iconSenha: {
+        position: 'absolute',
+        zIndex: 2,
+        left: 5,
+        top: -65
     },
     textoCriaPerfil: {
         position: 'relative',
@@ -68,60 +91,31 @@ const styles = StyleSheet.create({
         textAlignVertical: 'center',
         bottom: 130,
     },
-    campoDeUsuario: {
+    campoCadastro: {
         borderRadius: 10,
         borderTopLeftRadius: 10,
         borderTopRightRadius: 10,
-        alignItems: 'center',
         top: -70,
         backgroundColor: '#FFFFFF',
         margin: 0,
-        width: '60%',
+        width: '100%',
         height: 40,
-    },
-    campoDeSenha: {
-        borderRadius: 10,
-        borderTopLeftRadius: 10,
-        borderTopRightRadius: 10,
-        alignItems: 'center',
-        top: -70,
-        backgroundColor: '#FFFFFF',
-        margin: 0,
-        width: '60%',
-        height: 40,
-    },
-    campoDeEmail: {
-        borderRadius: 10,
-        borderTopLeftRadius: 10,
-        borderTopRightRadius: 10,
-        alignItems: 'center',
-        top: -70,
-        backgroundColor: '#FFFFFF',
-        margin: 0,
-        width: '60%',
-        height: 40,
-    },
-    textoCampos: {
-        textAlign: 'left',
-        top: -70,
-        position: 'relative',
-        margin: 20,
-        width: '60%',
-        height: 10,
+        paddingLeft: 24,
+        marginBottom: 25,
     },
     botaoCriar: {
         height: 45,
         flex: 1,
         position: 'absolute',
         bottom: 180,
-        backgroundColor: 'black',
+        backgroundColor: '#308B9D',
         justifyContent: 'center',
         borderRadius: 5,
         alignContent: 'center',
         width: '35%',
     },
     textoBotaoCriar: {
-        color: 'white',
+        color: 'black',
         fontFamily: 'K2D_400Regular',
         fontSize: 28,
         justifyContent: 'center',

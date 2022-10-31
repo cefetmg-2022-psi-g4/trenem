@@ -32,10 +32,14 @@ export default function Login({ navigation }) {
         <Feather name="arrow-left" size={48} color="black" />
       </TouchableOpacity>
         <Text style={styles.login}>LOGIN</Text>
-        <Text style={styles.textoCampos}>E-mail:</Text>
-        <TextInput style={styles.camposDeLogin} value={email} onChangeText={onChangeEmail}/>
-        <Text style={styles.textoCampos}>Senha: </Text>
-        <TextInput secureTextEntry={true} style={styles.camposDeLogin} value={senha} onChangeText={onChangeSenha}/>
+        <View style={styles.inputs}>
+          <Feather style={styles.iconEmail} name="mail" size={24} color="black" />
+          <TextInput style={styles.camposDeLogin} value={email} onChangeText={onChangeEmail} placeholder={'Email'} theme={{colors: {text: 'black', primary: '#308B9D'}}} />
+        </View>
+        <View style={styles.inputs}>
+          <Feather style={styles.iconSenha} name="lock" size={24} color="black" />
+          <TextInput style={styles.camposDeLogin} value={senha} onChangeText={onChangeSenha} placeholder={'Senha'} theme={{colors: {text: 'black', primary: '#308B9D'}}} secureTextEntry={true} />
+        </View>
       <TouchableOpacity style={styles.botaoEntrar} onPress={handleLogin}>
         <Text style={styles.textoBotaoEntrar}>ENTRAR</Text>
       </TouchableOpacity>
@@ -54,20 +58,37 @@ const styles = StyleSheet.create({
   container: {
     paddingVertical: 15,
     flex: 1,
-    backgroundColor: '#308B9D',
+    backgroundColor: '#fff',
     justifyContent: 'center',
     alignItems: 'center',
   },
+  inputs:{
+    position: 'relative',
+    width: '60%',
+},
+iconEmail: {
+    position: 'absolute',
+    zIndex:2,
+    left: 5,
+    top: -45
+},
+iconSenha: {
+    position: 'absolute',
+    zIndex: 2,
+    left: 5,
+    top: -45
+},
   camposDeLogin: {
     borderRadius: 10,
     borderTopLeftRadius: 10,
     borderTopRightRadius: 10,
-    alignItems: 'center',
     top: -50,
     backgroundColor: '#FFFFFF',
     margin: 0,
-    width: '60%',
+    width: '100%',
     height: 40,
+    paddingLeft: 24,
+    marginBottom: 25,
   },
   textoCampos: {
     textAlign: 'left',

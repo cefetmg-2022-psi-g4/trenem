@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
   container: {
     paddingVertical: 15,
     flex: 1,
-    backgroundColor: '#308B9D',
+    backgroundColor: '#ffffff',
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -56,7 +56,7 @@ const styles = StyleSheet.create({
     flex: 1,
     position: 'absolute',
     bottom: 220,
-    backgroundColor: 'white',
+    backgroundColor: '#308B9D',
     justifyContent: 'center',
     borderRadius: 4,
     alignContent: 'center',
@@ -90,6 +90,7 @@ const styles = StyleSheet.create({
     bottom: 500,
     position: 'absolute',
     fontSize: 15,
+    color: '#2B4C52',
   }
   /*
   CORES:
