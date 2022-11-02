@@ -68,6 +68,7 @@ export async function criarProva(tipo, opts){
                 console.error(error);
             });
         } else if(tipo == 1){
+            console.log(1);
             await apiQuestoes.post('questoes/materias', {
                 cod: response.data,
                 qtd: opts['qtd'],
@@ -78,6 +79,28 @@ export async function criarProva(tipo, opts){
                 console.error(error);
             });
         }
+    })
+    .catch(function (error) {
+        console.error(error);
+    });
+
+    return res;
+}
+
+
+export async function finalizarProva(questoes, alternativas){
+    const token = await getToken();
+
+    let res = null;
+    await apiEstudante.post('processarProva', { 
+        questoes: questoes,
+        alternativas: alternativas,
+    }, {
+        headers: {
+          'Authorization' : `Bearer ${token}`
+        }
+    }).then(async function (response) {
+        console.log(response);
     })
     .catch(function (error) {
         console.error(error);

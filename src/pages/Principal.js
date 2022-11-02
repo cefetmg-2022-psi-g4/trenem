@@ -3,7 +3,6 @@ import { StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 import { useFonts, K2D_400Regular } from '@expo-google-fonts/k2d';
 import { getToken } from '../controllers/AuthController';
-import { App, socket } from '../controllers/SocketController';
   
 export default function Principal({ navigation }) {
   
@@ -17,11 +16,8 @@ export default function Principal({ navigation }) {
       <TouchableOpacity style={styles.botao} onPress={() => navigation.navigate('Jogar', { id: '0' })}>
         <Text style={styles.textoBotao}>Provão</Text>
       </TouchableOpacity>
-      <TouchableOpacity style={styles.botao} >
+      <TouchableOpacity style={styles.botao} onPress={() => navigation.navigate('Jogar', { id: '1' })}>
         <Text style={styles.textoBotao}>Matérias</Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.botao} >
-        <Text style={styles.textoBotao} >Versus</Text>
       </TouchableOpacity>
       <TouchableOpacity style={styles.botao} onPress={() => navigation.navigate('Amizades')}>
         <Text style={styles.textoBotao} >Amizades</Text>
@@ -37,12 +33,12 @@ export default function Principal({ navigation }) {
       </TouchableOpacity>
     </View>
   );
-  }
+}
 const styles = StyleSheet.create({
   container: {
     paddingVertical: 15,
     flex: 1,
-    backgroundColor: '#308B9D',
+    backgroundColor: '#fcfeff',
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -56,9 +52,10 @@ const styles = StyleSheet.create({
   botao: {
     borderRadius: 20,
     padding: 10,
-    backgroundColor: '#FFFFFF',
+    borderColor: '#308B9D',
+    borderWidth: 2,
     margin: 20,
-    width: '70%',
+    width: 300,
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -68,7 +65,8 @@ const styles = StyleSheet.create({
   },
   textoBotao: {
     fontFamily: 'K2D_400Regular',
-    fontSize: 20,
+    color: '#2B4C52',
+    fontSize: 24,
   },
   
 

@@ -6,14 +6,14 @@ import { useEffect, useState } from 'react';
 import { loadModoJogo } from '../controllers/AppController';
 import Dropdown from '../components/Dropdown';
 import { criarProva } from '../controllers/AppController';
-import NumericInput from 'react-native-numeric-input';
+import InputSpinner from "react-native-input-spinner";
 
 export default function Jogar({ route, navigation }) {
   const [modo, setModo] = useState({});
   const [loading, setLoading] = useState(true);
   const [tempo, setTempo] = useState(null);
   const [opcao, setOpcao] = useState(null);
-  const [qntQuest, setQntQuest] = useState(null);
+  const [qntQuest, setQntQuest] = useState(3);
 
   useFonts({
     K2D_400Regular,
@@ -31,12 +31,14 @@ export default function Jogar({ route, navigation }) {
   async function handleJogar(){
     if(id == 0){
       if(tempo == null) return;
+      setLoading(true);
       const response = await criarProva(0);
       console.log(response.data);
       navigation.navigate('Prova', {nomeModo: modo.nome, tempo: tempo.value, questoes: response.data});
     } else if (id == 1) {
       if(tempo == null || opcao == null || qntQuest == null) return;
-      const response = await criarProva(1, {"qtd": qntQuest, "materia": opcao});
+      setLoading(true);
+      const response = await criarProva(1, {"qtd": qntQuest, "materia": opcao.value});
       console.log(response.data);
       navigation.navigate('Prova', {nomeModo: modo.nome, tempo: tempo.value, questoes: response.data});
     } else if (id == 2) {
@@ -50,12 +52,12 @@ export default function Jogar({ route, navigation }) {
       <View 
         style={{ 
           flex:1, 
-          backgroundColor: '#308B9D', 
+          backgroundColor: '#fcfeff', 
           justifyContent: 'center', 
           alignItems:'center' 
         }}
       >
-        <ActivityIndicator size={60} color="#FFF" />
+        <ActivityIndicator size={60} color="#308B9D" />
       </View>
     )
   }
@@ -70,24 +72,42 @@ export default function Jogar({ route, navigation }) {
         <Text style={styles.descricaoTitulo}>Descrição</Text>
         <Text style={styles.descricao}>{modo.descricao}</Text>
       </View>
-      {modo.tempo != null ? (
-        <Text style={styles.descricaoTitulo}>Tempo</Text> ) : (null)
-      }
-      {modo.tempo != null ? (
-        <Dropdown label="Select Item" data={modo.tempo} onSelect={setTempo} /> ) : (null)
-      }
-      {modo.opcoes != null ? (
-        <Text style={styles.descricaoTitulo}>Opção</Text> ) : (null)
-      }
-      {modo.opcoes != null ? (
-        <Dropdown label="Select Item" data={modo.opcoes} onSelect={setOpcao} /> ) : (null)
-      }
-      {modo.nome != "Provão" ? (
-        <Text style={styles.descricaoTitulo}>Quantidade de Questões</Text> ) : (null)
-      }
-      {modo.nome != "Provão" ? (
-        <NumericInput onChange={setQntQuest} /> ) : (null)
-      }
+      <View style={styles.opcoes}>
+        {modo.tempo != null ? (
+          <Text style={styles.descricaoTitulo}>Tempo</Text> ) : (null)
+        }
+        {modo.tempo != null ? (
+          <Dropdown label="Select Item" data={modo.tempo} onSelect={setTempo} /> ) : (null)
+        }
+        {modo.opcoes != null ? (
+          <Text style={styles.descricaoTitulo}>Opção</Text> ) : (null)
+        }
+        {modo.opcoes != null ? (
+          <Dropdown label="Select Item" data={modo.opcoes} onSelect={setOpcao} /> ) : (null)
+        }
+        {modo.nome != "Provão" ? (
+          <Text style={styles.descricaoTitulo}>Quantidade de Questões</Text> ) : (null)
+        }
+        {modo.nome != "Provão" ? (
+          <InputSpinner
+            max={10}
+            min={3}
+            step={1}
+            value={qntQuest}
+            color={"#fdfdfd"}
+            colorRight={"#fdfdfd"}
+            colorLeft={"#fdfdfd"}
+            colorPress={"#308B9D"}
+            height={75}
+            width={250}
+            fontSize={24}
+            shadow={false}
+            onChange={(num) => {
+              setQntQuest(num);
+            }}
+          /> ) : (null)
+        }
+      </View>
       <TouchableOpacity style={styles.botaoJogar} onPress={handleJogar}>
         <Text style={styles.textoBotaoJogar}>JOGAR</Text>
       </TouchableOpacity>
@@ -99,7 +119,7 @@ const styles = StyleSheet.create({
   container: {
     paddingVertical: 15,
     flex: 1,
-    backgroundColor: '#308B9D',
+    backgroundColor: '#fcfeff',
     justifyContent: 'center',
     alignItems: 'center',
   },
@@ -108,7 +128,7 @@ const styles = StyleSheet.create({
     color: 'black',
     position: 'absolute',
     bottom: 20,
-    backgroundColor: 'white',
+    backgroundColor: '#308B9D',
     alignItems: 'center',
     justifyContent: 'center',
     borderRadius: 5,
@@ -126,12 +146,12 @@ const styles = StyleSheet.create({
   nome: {
     position: 'absolute',
     top: 75,
-    fontSize: 40,
+    fontSize: 52,
     fontFamily: 'K2D_400Regular'
   },
   descricaoCaixa: {
-    backgroundColor: 'white',
-    width: '65%',
+    backgroundColor: '#fcfeff',
+    width: '100%',
     padding: 5,
     position: 'absolute',
     top: 150,
@@ -146,7 +166,15 @@ const styles = StyleSheet.create({
   },
   descricao: {
     fontSize: 20,
+    maxWidth: '65%',
     textAlign: 'justify',
+  },
+  opcoes:{
+    width: '100%',
+    position: 'absolute',
+    top: 350,
+    alignItems: 'center',
+    backgroundColor: '#fcfeff',
   }
 
 

@@ -4,12 +4,27 @@ import { Feather } from '@expo/vector-icons';
 import { useFonts, K2D_400Regular } from '@expo-google-fonts/k2d';
 import RenderHtml from 'react-native-render-html';
 import { ScrollView } from 'react-native-gesture-handler';
+import { finalizarProva } from '../controllers/AppController';
 
 
 export default function Resultado({ route, navigation }) {
   const { nomeModo, q0, q1, q2, q3, q4, q5, q6, q7, q8, q9, questoes } = route.params;
   const [percentual, setPercentual] = useState("");
   const { width } = useWindowDimensions();
+
+  async function handleResultado(){
+    let alternativasTodas = [q0, q1, q2, q3, q4, q5, q6, q7, q8, q9];
+
+    let alternativas = [];
+
+    for (let i = 0; i < questoes.length; i++) {
+      alternativas.push(alternativasTodas);
+    }
+
+    console.log(alternativas);
+    const response = await finalizarProva(questoes, alternativas);
+  }
+
 
   useFonts({
     K2D_400Regular,
@@ -62,7 +77,7 @@ export default function Resultado({ route, navigation }) {
                   </View>
                 ) : (null)}
 
-                {"X" == q0 ?
+                {null == q0 ?
                   <View style={[styles.opcoes, styles.errou]}>
                     <Text style={styles.branco}> Não respondeu</Text>
                   </View> : null
@@ -108,7 +123,7 @@ export default function Resultado({ route, navigation }) {
                     <Text style={("E" == questoes[1].gabarito.trim()) || ("E" == q1) ? styles.branco : null}><RenderHtml contentWidth={width} source={{ html: `E) ${questoes[1].alternativas.includes('<img') ? '<' + questoes[1].alternativas.trim().replaceAll('data-src=', 'src=').replaceAll('src=', 'style="max-width: 90%" src=').split('><')[4] : questoes[1].alternativas.trim().replaceAll(/[\r\n]+/gm, '<br>').replaceAll('</li>', '<li>').split('<li>')[9]}` }} /></Text>
                   </View>
                 ) : (null)}
-                {"X" == q1 ?
+                {null == q1 ?
                   <View style={[styles.opcoes, styles.errou]}>
                     <Text style={styles.branco}> Não respondeu</Text>
                   </View> : null
@@ -154,7 +169,7 @@ export default function Resultado({ route, navigation }) {
                     <Text style={("E" == questoes[2].gabarito.trim()) || ("E" == q2) ? styles.branco : null}><RenderHtml contentWidth={width} source={{ html: `E) ${questoes[2].alternativas.includes('<img') ? '<' + questoes[2].alternativas.trim().replaceAll('data-src=', 'src=').replaceAll('src=', 'style="max-width: 90%" src=').split('><')[4] : questoes[2].alternativas.trim().replaceAll(/[\r\n]+/gm, '<br>').replaceAll('</li>', '<li>').split('<li>')[9]}` }} /></Text>
                   </View>
                 ) : (null)}
-                {"X" == q2 ?
+                {null == q2 ?
                   <View style={[styles.opcoes, styles.errou]}>
                     <Text style={styles.branco}> Não respondeu</Text>
                   </View> : null
@@ -200,7 +215,7 @@ export default function Resultado({ route, navigation }) {
                     <Text style={("E" == questoes[3].gabarito.trim()) || ("E" == q3) ? styles.branco : null}><RenderHtml contentWidth={width} source={{ html: `E) ${questoes[3].alternativas.includes('<img') ? '<' + questoes[3].alternativas.trim().replaceAll('data-src=', 'src=').replaceAll('src=', 'style="max-width: 90%" src=').split('><')[4] : questoes[3].alternativas.trim().replaceAll(/[\r\n]+/gm, '<br>').replaceAll('</li>', '<li>').split('<li>')[9]}` }} /></Text>
                   </View>
                 ) : (null)}
-                {"X" == q3 ?
+                {null == q3 ?
                   <View style={[styles.opcoes, styles.errou]}>
                     <Text style={styles.branco}> Não respondeu</Text>
                   </View> : null
@@ -246,7 +261,7 @@ export default function Resultado({ route, navigation }) {
                     <Text style={("E" == questoes[4].gabarito.trim()) || ("E" == q4) ? styles.branco : null}><RenderHtml contentWidth={width} source={{ html: `E) ${questoes[4].alternativas.includes('<img') ? '<' + questoes[4].alternativas.trim().replaceAll('data-src=', 'src=').replaceAll('src=', 'style="max-width: 90%" src=').split('><')[4] : questoes[4].alternativas.trim().replaceAll(/[\r\n]+/gm, '<br>').replaceAll('</li>', '<li>').split('<li>')[9]}` }} /></Text>
                   </View>
                 ) : (null)}
-                {"X" == q4 ?
+                {null == q4 ?
                   <View style={[styles.opcoes, styles.errou]}>
                     <Text style={styles.branco}> Não respondeu</Text>
                   </View> : null
@@ -292,7 +307,7 @@ export default function Resultado({ route, navigation }) {
                     <Text style={("E" == questoes[5].gabarito.trim()) || ("E" == q5) ? styles.branco : null}><RenderHtml contentWidth={width} source={{ html: `E) ${questoes[5].alternativas.includes('<img') ? '<' + questoes[5].alternativas.trim().replaceAll('data-src=', 'src=').replaceAll('src=', 'style="max-width: 90%" src=').split('><')[4] : questoes[5].alternativas.trim().replaceAll(/[\r\n]+/gm, '<br>').replaceAll('</li>', '<li>').split('<li>')[9]}` }} /></Text>
                   </View>
                 ) : (null)}
-                {"X" == q5 ?
+                {null == q5 ?
                   <View style={[styles.opcoes, styles.errou]}>
                     <Text style={styles.branco}> Não respondeu</Text>
                   </View> : null
@@ -338,7 +353,7 @@ export default function Resultado({ route, navigation }) {
                     <Text style={("E" == questoes[6].gabarito.trim()) || ("E" == q6) ? styles.branco : null}><RenderHtml contentWidth={width} source={{ html: `E) ${questoes[6].alternativas.includes('<img') ? '<' + questoes[6].alternativas.trim().replaceAll('data-src=', 'src=').replaceAll('src=', 'style="max-width: 90%" src=').split('><')[4] : questoes[6].alternativas.trim().replaceAll(/[\r\n]+/gm, '<br>').replaceAll('</li>', '<li>').split('<li>')[9]}` }} /></Text>
                   </View>
                 ) : (null)}
-                {"X" == q6 ?
+                {null == q6 ?
                   <View style={[styles.opcoes, styles.errou]}>
                     <Text style={styles.branco}> Não respondeu</Text>
                   </View> : null
@@ -384,7 +399,7 @@ export default function Resultado({ route, navigation }) {
                     <Text style={("E" == questoes[7].gabarito.trim()) || ("E" == q7) ? styles.branco : null}><RenderHtml contentWidth={width} source={{ html: `E) ${questoes[7].alternativas.includes('<img') ? '<' + questoes[7].alternativas.trim().replaceAll('data-src=', 'src=').replaceAll('src=', 'style="max-width: 90%" src=').split('><')[4] : questoes[7].alternativas.trim().replaceAll(/[\r\n]+/gm, '<br>').replaceAll('</li>', '<li>').split('<li>')[9]}` }} /></Text>
                   </View>
                 ) : (null)}
-                {"X" == q7 ?
+                {null == q7 ?
                   <View style={[styles.opcoes, styles.errou]}>
                     <Text style={styles.branco}> Não respondeu</Text>
                   </View> : null
@@ -430,7 +445,7 @@ export default function Resultado({ route, navigation }) {
                     <Text style={("E" == questoes[8].gabarito.trim()) || ("E" == q8) ? styles.branco : null}><RenderHtml contentWidth={width} source={{ html: `E) ${questoes[8].alternativas.includes('<img') ? '<' + questoes[8].alternativas.trim().replaceAll('data-src=', 'src=').replaceAll('src=', 'style="max-width: 90%" src=').split('><')[4] : questoes[8].alternativas.trim().replaceAll(/[\r\n]+/gm, '<br>').replaceAll('</li>', '<li>').split('<li>')[9]}` }} /></Text>
                   </View>
                 ) : (null)}
-                {"X" == q9 ?
+                {null == q9 ?
                   <View style={[styles.opcoes, styles.errou]}>
                     <Text style={styles.branco}> Não respondeu</Text>
                   </View> : null
@@ -476,7 +491,7 @@ export default function Resultado({ route, navigation }) {
                     <Text style={("E" == questoes[9].gabarito.trim()) || ("E" == q9) ? styles.branco : null}><RenderHtml contentWidth={width} source={{ html: `E) ${questoes[9].alternativas.includes('<img') ? '<' + questoes[9].alternativas.trim().replaceAll('data-src=', 'src=').replaceAll('src=', 'style="max-width: 90%" src=').split('><')[4] : questoes[9].alternativas.trim().replaceAll(/[\r\n]+/gm, '<br>').replaceAll('</li>', '<li>').split('<li>')[9]}` }} /></Text>
                   </View>
                 ) : (null)}
-                {"X" == q9 ?
+                {null == q9 ?
                   <View style={[styles.opcoes, styles.errou]}>
                     <Text style={styles.branco}> Não respondeu</Text>
                   </View> : null
@@ -492,7 +507,7 @@ export default function Resultado({ route, navigation }) {
       <View style={styles.comandos}>
         <TouchableOpacity>
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => navigation.navigate('Principal')}>
+        <TouchableOpacity onPress={handleResultado}>
           <Feather name="check-circle" size={24} color="#308b9d" />
         </TouchableOpacity>
         <TouchableOpacity>

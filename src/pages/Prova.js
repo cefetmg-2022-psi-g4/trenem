@@ -11,16 +11,16 @@ export default function Prova({ route, navigation }) {
     const { width } = useWindowDimensions();
     const [loading, setLoading] = useState(true);
     const [respostasCorretas, setRespostasCorretas] = useState([]);
-    const [q0, setQ0] = useState('X');
-    const [q1, setQ1] = useState('X');
-    const [q2, setQ2] = useState('X');
-    const [q3, setQ3] = useState('X');
-    const [q4, setQ4] = useState('X');
-    const [q5, setQ5] = useState('X');
-    const [q6, setQ6] = useState('X');
-    const [q7, setQ7] = useState('X');
-    const [q8, setQ8] = useState('X');
-    const [q9, setQ9] = useState('X');
+    const [q0, setQ0] = useState(null);
+    const [q1, setQ1] = useState(null);
+    const [q2, setQ2] = useState(null);
+    const [q3, setQ3] = useState(null);
+    const [q4, setQ4] = useState(null);
+    const [q5, setQ5] = useState(null);
+    const [q6, setQ6] = useState(null);
+    const [q7, setQ7] = useState(null);
+    const [q8, setQ8] = useState(null);
+    const [q9, setQ9] = useState(null);
 
     if (loading) {
         setLoading(false);

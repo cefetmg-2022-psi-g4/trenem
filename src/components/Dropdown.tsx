@@ -82,7 +82,7 @@ const styles = StyleSheet.create({
   button: {
     flexDirection: 'row',
     alignItems: 'center',
-    backgroundColor: '#efefef',
+    backgroundColor: '#fcfeff',
     height: 50,
     zIndex: 1,
     width: '55%'
@@ -96,7 +96,7 @@ const styles = StyleSheet.create({
   },
   dropdown: {
     position: 'absolute',
-    backgroundColor: '#fff',
+    backgroundColor: '#fcfeff',
     width: '65%',
     shadowColor: '#000000',
     shadowRadius: 4,
