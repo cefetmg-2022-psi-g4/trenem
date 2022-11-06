@@ -1,8 +1,6 @@
 import * as React from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native';
-import { Feather } from '@expo/vector-icons';
 import { useFonts, K2D_400Regular } from '@expo-google-fonts/k2d';
-import { getToken } from '../controllers/AuthController';
   
 export default function Principal({ navigation }) {
   
@@ -24,12 +22,6 @@ export default function Principal({ navigation }) {
       </TouchableOpacity>
       <TouchableOpacity style={styles.botao} onPress={() => navigation.navigate('Notificacao')}>
         <Text style={styles.textoBotao} >Notificacao</Text>
-      </TouchableOpacity>
-      <TouchableOpacity style={styles.botao} onPress={async () => {
-        App();
-      }
-    }>
-        <Text style={styles.textoBotao}>Conectar ao WebSocket</Text>
       </TouchableOpacity>
     </View>
   );

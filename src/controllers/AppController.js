@@ -1,5 +1,3 @@
-import * as React from 'react';
-import Estudante from '../models/Estudante';
 import {apiEstudante, apiQuestoes} from '../services/api';
 import { setToken, getToken } from './AuthController';
 

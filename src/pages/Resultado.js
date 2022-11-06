@@ -18,11 +18,12 @@ export default function Resultado({ route, navigation }) {
     let alternativas = [];
 
     for (let i = 0; i < questoes.length; i++) {
-      alternativas.push(alternativasTodas);
+      alternativas.push(alternativasTodas[i]);
     }
 
     console.log(alternativas);
     const response = await finalizarProva(questoes, alternativas);
+    navigation.navigate('Principal');
   }
 
 
