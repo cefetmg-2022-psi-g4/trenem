@@ -1,4 +1,4 @@
-import * as React from 'react';
+ import * as React from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 import { useFonts, K2D_400Regular } from '@expo-google-fonts/k2d';
@@ -90,7 +90,7 @@ const styles = StyleSheet.create({
     container: {
         paddingVertical: 15,
         flex: 1,
-        backgroundColor: '#308B9D',
+        backgroundColor: '#fcfeff',
         justifyContent: 'center',
         alignItems: 'center',
     },
@@ -101,7 +101,7 @@ const styles = StyleSheet.create({
         borderTopLeftRadius: 10,
         borderTopRightRadius: 10,
         alignItems: 'left',
-        backgroundColor: '#FFFFFF',
+        backgroundColor: '#fcfeff',
         margin: 0,
         width: '60%',
         height: 40,

@@ -1,4 +1,4 @@
-import {apiEstudante, apiQuestoes} from '../services/api';
+import {apiAmizades, apiEstudante, apiQuestoes} from '../services/api';
 import { setToken, getToken } from './AuthController';
 
 export async function criarConta(nome, email, senha){
@@ -105,4 +105,61 @@ export async function finalizarProva(questoes, alternativas){
     });
 
     return res;
+}
+
+export async function listarAmigos(){
+    const token = await getToken();
+
+    let res = null;
+    await apiEstudante.post('getCod', { }, {
+        headers: {
+          'Authorization' : `Bearer ${token}`
+        }
+    }).then(async function (response) {
+        await apiAmizades.post('listarAmigos', {
+            cod: response.data,
+        }).then(function(response){
+            res = response;
+        }).catch(function(error){
+            console.error(error);
+        });
+    })
+    .catch(function (error) {
+        console.error(error);
+    });
+
+    return res;
+}
+
+export async function pedirAmizade(email){
+    const token = await getToken();
+
+    let res = null;
+    await apiEstudante.post('getCod', { }, {
+        headers: {
+          'Authorization' : `Bearer ${token}`
+        }
+    }).then(async function (response) {
+        await apiAmizades.post('pedidoDeAmizade', {
+            cod: response.data,
+            email: email,
+        }).then(function(response){
+            res = response;
+        }).catch(function(error){
+            console.error(error);
+        });
+    })
+    .catch(function (error) {
+        console.error(error);
+    });
+
+    return res;
+}
+
+export async function aceitarAmizade(){
+    
+}
+
+export async function recusarAmizade(){
+    
 }

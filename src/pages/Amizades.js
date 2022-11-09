@@ -3,44 +3,57 @@ import { StyleSheet, Text, View, TouchableOpacity, Image } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 import { useFonts, K2D_400Regular } from '@expo-google-fonts/k2d';
 import { TextInput } from 'react-native-paper';
-import Icon from 'react-native-vector-icons/Entypo'
+import { ScrollView } from 'react-native-gesture-handler';
+import { pedirAmizade } from '../controllers/AppController';
 
-export default function Amizades({ navigation }) {
+export default function Amizades({ route, navigation }) {
+    const { amigos } = route.params;
+    const [email, onChangeEmail] = React.useState('');
 
     useFonts({
         K2D_400Regular,
     });
+
+    async function handleAmizades(){
+        const response = await pedirAmizade(email);
+        onChangeEmail('');
+    }
 
     return(
         <View style={styles.container}>
             <TouchableOpacity style={styles.voltar} onPress={() => navigation.goBack()}>
                 <Feather name="arrow-left" size={48} color="black" />
             </TouchableOpacity>
-             {/*div para barra de pesquisa */}
-                <TextInput placeholder="Pedir Amizade" style={styles.textoBarraPesquisa} />
-                <TouchableOpacity style={styles.adicionar}>
-                    <Feather name="plus" size={30} color="black" />
-                </TouchableOpacity>
-            <Text style={styles.textoCriaPedidos}></Text>
+            <TextInput style={styles.textoBarraPesquisa} value={email} onChangeText={onChangeEmail} placeholder="Insira o email do sua amigo" theme={{colors: {text: 'black', primary: '#308B9D'}}} />
+            <TouchableOpacity style={styles.adicionar} onPress={handleAmizades}>
+                <Feather name="plus" size={30} color="black" />
+            </TouchableOpacity>
             <Text style={styles.textoAmizades}>AMIZADES</Text>
-            <Text style={styles.nomeUser}>Nome do Usuário</Text>
-            <Image style={styles.imagemAmizades} source={require('../imgs/userPhoto.png')} />
-            <Image style={styles.imagemGerenciarAmizades} source={require('../imgs/userPhoto.png')} />
+
+            {amigos[0] != null ? (
+                <ScrollView>
+                    {amigos.map((amigo, index) => (  
+                        <View index={index}>
+                            <Text style={styles.nomeUser}>{amigo.nome}</Text>
+                        <Image style={styles.imagemAmizades} source={require('../imgs/userPhoto.png')} /> 
+                        </View>
+                    ))}  
+                </ScrollView>
+            ) : (
+                <Text style={styles.textoNenhumAmigo}>Você não tem amigos. ;-;</Text>
+            )}
         </View>
     );
 }
 
     const styles = StyleSheet.create({
-        textoAceitar : {
-            position: 'relative',
-            color: 'black',
-            fontFamily: 'K2D_400Regular',
-            fontSize: 15,
-            textAlign: 'center',
-            textAlignVertical: 'center',     
-            fontWeight: 'bold',
-        },
         
+        textoNenhumAmigo: {
+            color: '#FF0000',
+            position: 'fixed',
+            top: 150,
+            fontSize: 24,
+        },
         textoAmizades: {
             position: 'fixed',
             color: 'black',
@@ -48,94 +61,39 @@ export default function Amizades({ navigation }) {
             fontSize: 35,
             textAlign: 'center',
             textAlignVertical: 'center',
-            top: 70,
+            top: 100,
             fontWeight: 'bold',
         },
-        nomeUser: {
-            position: 'fixed',
-            color: 'white',
-            fontFamily: 'K2D_400Regular',
-            fontSize: 20,
-            textAlign: 'center',
-            textAlignVertical: 'center',
-            top: 150,
-            right: 100,
-        },
-
-        container: {
-            paddingVertical: 15,
-            flex: 1,
-            backgroundColor: '#308B9D',
-            justifyContent: 'center',
-            alignItems: 'center',
-        },
-
         textoBarraPesquisa: {
             top: 20,
-            position: 'fixed',
+            position: 'absolute',
             borderRadius: 10,
             borderTopLeftRadius: 10,
             borderTopRightRadius: 10,
-            alignItems: 'left',
-            backgroundColor: '#FFFFFF',
+            backgroundColor: '#fcfeff',
             margin: 0,
+            paddingRight: 25,
             width: '60%',
             height: 40,
             fontFamily: 'K2D_400Regular',
         },
-
-        botaoSalvar: {
-            height: 45,
-            flex: 1,
+        adicionar: {
             position: 'absolute',
-            bottom: 180,
-            backgroundColor: 'white',
-            justifyContent: 'center',
-            borderRadius: 5,
-            alignContent: 'center',
-            width: '35%',
+            top: 25,
+            right: 140,
+            zIndex: 2,
         },
-
+        container: {
+            paddingVertical: 15,
+            flex: 1,
+            backgroundColor: '#fcfeff',
+            justifyContent: 'center',
+            alignItems: 'center',
+        },
         voltar: {
             position: 'absolute',
             top: 15,
             left: 15,
-        },
-    
-        adicionar: {
-            position: 'fixed',
-            top: 25,
-            right: 85,
-            zIndex: 2,
-        },
-    
-        imagemGerenciarAmizades: {
-            top: 120,
-            position: 'fixed',
-            left: 50,
-            height: 100,
-            width: '20%',
-            resizeMode: 'contain',
-        },
-    
-        textoCriaPedidos: {
-            position: 'relative',
-            color: 'black',
-            fontFamily: 'K2D_400Regular',
-            fontSize: 35,
-            textAlign: 'center',
-            textAlignVertical: 'center',
-            bottom: 200,
-        },
-        
-        textoCriaAmizades: {
-            position: 'relative',
-            color: 'black',
-            fontFamily: 'K2D_400Regular',
-            fontSize: 35,
-            textAlign: 'center',
-            textAlignVertical: 'center',
-            bottom: 70,
         },
     
         /*

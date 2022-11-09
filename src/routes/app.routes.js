@@ -8,6 +8,7 @@ import Jogar from '../pages/Jogar';
 import Resultado from '../pages/Resultado';
 import Usuario from '../pages/Usuario';
 import Notificacao from '../pages/Notificacao';
+import Ranking from '../pages/Ranking';
 
 const Stack = createNativeStackNavigator();
 
@@ -36,6 +37,11 @@ function AppRoutes() {
             <Stack.Screen
                 name="Principal"
                 component={Principal}
+                options={{ headerShown: false }}
+            />  
+            <Stack.Screen
+                name="Ranking"
+                component={Ranking}
                 options={{ headerShown: false }}
             />
 
