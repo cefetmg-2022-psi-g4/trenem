@@ -1,4 +1,4 @@
-import {apiAmizades, apiEstudante, apiQuestoes} from '../services/api';
+import {apiAmizades, apiEstudante, apiQuestoes, apiRanking} from '../services/api';
 import { setToken, getToken } from './AuthController';
 
 export async function criarConta(nome, email, senha){
@@ -131,6 +131,30 @@ export async function listarAmigos(){
     return res;
 }
 
+export async function listarPedidosAmizade(){
+    const token = await getToken();
+
+    let res = null;
+    await apiEstudante.post('getCod', { }, {
+        headers: {
+          'Authorization' : `Bearer ${token}`
+        }
+    }).then(async function (response) {
+        await apiAmizades.post('listarPedidos', {
+            cod: response.data,
+        }).then(function(response){
+            res = response;
+        }).catch(function(error){
+            console.error(error);
+        });
+    })
+    .catch(function (error) {
+        console.error(error);
+    });
+
+    return res;
+}
+
 export async function pedirAmizade(email){
     const token = await getToken();
 
@@ -156,10 +180,115 @@ export async function pedirAmizade(email){
     return res;
 }
 
-export async function aceitarAmizade(){
-    
+export async function aceitarAmizade(email){
+    const token = await getToken();
+
+    let res = null;
+    await apiEstudante.post('getCod', { }, {
+        headers: {
+          'Authorization' : `Bearer ${token}`
+        }
+    }).then(async function (response) {
+        await apiAmizades.post('aceitarPedido', {
+            cod: response.data,
+            email: email,
+        }).then(function(response){
+            res = response;
+        }).catch(function(error){
+            console.error(error);
+        });
+    })
+    .catch(function (error) {
+        console.error(error);
+    });
+
+    return res;
 }
 
-export async function recusarAmizade(){
-    
+export async function recusarAmizade(email){
+    const token = await getToken();
+
+    let res = null;
+    await apiEstudante.post('getCod', { }, {
+        headers: {
+          'Authorization' : `Bearer ${token}`
+        }
+    }).then(async function (response) {
+        await apiAmizades.post('recusarPedido', {
+            cod: response.data,
+            email: email,
+        }).then(function(response){
+            res = response;
+        }).catch(function(error){
+            console.error(error);
+        });
+    })
+    .catch(function (error) {
+        console.error(error);
+    });
+
+    return res;
+}
+
+export async function excluirAmizade(email){
+    const token = await getToken();
+
+    let res = null;
+    await apiEstudante.post('getCod', { }, {
+        headers: {
+          'Authorization' : `Bearer ${token}`
+        }
+    }).then(async function (response) {
+        await apiAmizades.post('removerAmigo', {
+            cod: response.data,
+            email: email,
+        }).then(function(response){
+            res = response;
+        }).catch(function(error){
+            console.error(error);
+        });
+    })
+    .catch(function (error) {
+        console.error(error);
+    });
+
+    return res;
+}
+
+export async function getRanking(){
+    let res = null;
+
+    await apiRanking.get('ranking')
+    .then(function(response){
+        res = response;
+    }).catch(function(error){
+        console.error(error);
+    });
+
+    return res;
+}
+
+export async function getRankingDeAmigos(){
+    const token = await getToken();
+
+    let res = null;
+
+    await apiEstudante.post('getCod', { }, {
+        headers: {
+          'Authorization' : `Bearer ${token}`
+        }
+    }).then(async function (response) {
+        await apiAmizades.post('rankingDeAmigos', {
+            cod: response.data,
+        }).then(function(response){
+            res = response;
+        }).catch(function(error){
+            console.error(error);
+        });
+    })
+    .catch(function (error) {
+        console.error(error);
+    });
+
+    return res;
 }

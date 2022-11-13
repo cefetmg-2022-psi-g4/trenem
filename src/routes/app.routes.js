@@ -9,6 +9,7 @@ import Resultado from '../pages/Resultado';
 import Usuario from '../pages/Usuario';
 import Notificacao from '../pages/Notificacao';
 import Ranking from '../pages/Ranking';
+import RecarregarTela from '../pages/RecarregarTela';
 
 const Stack = createNativeStackNavigator();
 
@@ -19,6 +20,12 @@ function AppRoutes() {
             <Stack.Screen
                 name="Usuario"
                 component={Usuario}
+                options={{ headerShown: false }}
+            />
+
+            <Stack.Screen
+                name="RecarregarTela"
+                component={RecarregarTela}
                 options={{ headerShown: false }}
             />
 

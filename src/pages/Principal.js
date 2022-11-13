@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, Image, ActivityIndicator } from 'react-native';
 import { useFonts, K2D_400Regular } from '@expo-google-fonts/k2d';
-import { listarAmigos } from '../controllers/AppController';
+import { getRanking, getRankingDeAmigos, listarAmigos, listarPedidosAmizade } from '../controllers/AppController';
   
 export default function Principal({ navigation }) {
   const [loading, setLoading] = useState(true);
@@ -10,7 +10,25 @@ export default function Principal({ navigation }) {
     setLoading(false);
     const response = await listarAmigos();
     navigation.navigate('Amizades', {amigos: response.data});
+    setLoading(true);
   }
+
+  async function gotoNotificacao(){
+    setLoading(false);
+    const response = await listarPedidosAmizade();
+    console.log(response.data);
+    navigation.navigate('Notificacao', {pedidos: response.data});
+    setLoading(true);
+  }
+
+  async function gotoRanking(){
+    setLoading(false);
+    const response1 = await getRanking();
+    const response2 = await getRankingDeAmigos();
+    navigation.navigate('Ranking', {rankGeral: response1.data, rankAmizade: response2.data});
+    setLoading(true);
+  }
+
 
   useFonts({
     K2D_400Regular,
@@ -29,10 +47,10 @@ export default function Principal({ navigation }) {
         <TouchableOpacity style={styles.botao} onPress={gotoAmizades}>
           <Text style={styles.textoBotao} >Amizades</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.botao} onPress={() => navigation.navigate('Notificacao')}>
+        <TouchableOpacity style={styles.botao} onPress={gotoNotificacao}>
           <Text style={styles.textoBotao} >Notificacao</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.botao} onPress={() => navigation.navigate('Ranking')}>
+        <TouchableOpacity style={styles.botao} onPress={gotoRanking}>
           <Text style={styles.textoBotao} >Ranking</Text>
         </TouchableOpacity>
       </View>
