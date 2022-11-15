@@ -75,11 +75,20 @@ export default function Ranking({ route, navigation }) {
           </ScrollView>)
           : (
             <ScrollView style={styles.rank}>
-              {rankAmizade.map((rank, index) => (
-                <View key={index} style={styles.colocacao}>
-                  <Text style={styles.colocacaoTexto}>{index+1} - {rank.nome}</Text>
+              {rankAmizade[0] != null ? ( 
+                <>
+                  {rankAmizade.map((rank, index) => (
+                    <View key={index} style={styles.colocacao}>
+                      <Text style={styles.colocacaoTexto}>{index+1} - {rank.nome}</Text>
+                    </View>
+                  ))}
+                </>
+              ) : (
+                <View style={styles.colocacao}>
+                  <Text style={styles.colocacaoTextoSemAmigo}>Você não tem amigos. ;-;</Text>
                 </View>
-              ))}
+              )}
+              
             </ScrollView>)
         }
   
@@ -185,6 +194,11 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   colocacaoTexto: {
+    fontFamily: 'K2D_400Regular',
+    fontSize: 24,
+  },
+  colocacaoTextoSemAmigo:{
+    color: '#FF0000',
     fontFamily: 'K2D_400Regular',
     fontSize: 24,
   },
