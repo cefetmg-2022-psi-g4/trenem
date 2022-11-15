@@ -1,24 +1,13 @@
- import * as React from 'react';
+import * as React from 'react';
 import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 import { useFonts, K2D_400Regular } from '@expo-google-fonts/k2d';
 import { ScrollView } from 'react-native-gesture-handler';
-import { aceitarAmizade, getRanking, getRankingDeAmigos, listarAmigos, listarPedidosAmizade, recusarAmizade } from '../controllers/AppController';
+import { getRanking, getRankingDeAmigos, listarAmigos, listarPedidosAmizade } from '../controllers/AppController';
 import { ActivityIndicator } from 'react-native-paper';
 
-export default function Notificacao({ route, navigation }) {
-    const { pedidos } = route.params;
+export default function Creditos({ navigation }) {
     const [loading, setLoading] = React.useState(true);
-
-    async function aceitarAmigo(email){
-        const response = await aceitarAmizade(email);
-        navigation.navigate('RecarregarTela', {tela: "Notificacao"});
-    }
-
-    async function recusarAmigo(email){
-        const response = await recusarAmizade(email);
-        navigation.navigate('RecarregarTela', {tela: "Notificacao"});
-    }
 
     async function gotoAmizades(){
         setLoading(false);
@@ -49,27 +38,28 @@ export default function Notificacao({ route, navigation }) {
     if(loading){
         return (
             <View style={styles.container}>
-                <Text style={styles.textoNotificacao}>NOTIFICAÇÕES</Text>
-    
-                {pedidos[0] != null ? (
-                    <ScrollView style={styles.notificacoes}>
-                        {pedidos.map((pedido, index) => (
-                            <View key={index} style={styles.notificacao}>
-                                <Text style={styles.nomeUser}>{pedido.nome} deseja ser seu amigo.</Text>
-                                <View style={styles.comandos}>
-                                    <TouchableOpacity style={styles.botaoAceitar} onPress={() => aceitarAmigo(`${pedido.email}`)}>
-                                        <Text style={styles.textoAceitar}>Aceitar</Text>
-                                    </TouchableOpacity>
-                                    <TouchableOpacity style={styles.botaoNegar} onPress={() => recusarAmigo(`${pedido.email}`)}>
-                                        <Text style={styles.textoAceitar}>Negar</Text>
-                                    </TouchableOpacity>
-                                </View>
-                            </View>
-                        ))}  
-                    </ScrollView>
-                ) : (
-                    <Text style={styles.textoNenhumaNotificacao}>Sem notificação no momento.</Text>
-                )}
+                <Text style={styles.textoCredito}>CRÉDITOS</Text>
+
+                <ScrollView style={styles.criadores}>
+                    <View style={styles.criador}>
+                        <Text style={styles.nomeCriador}>Enzo de Souza Braz</Text>
+                    </View>
+                    <View style={styles.criador}>
+                        <Text style={styles.nomeCriador}>Gabriel Guimarães dos Santos Ricardo</Text>
+                    </View>
+                    <View style={styles.criador}>
+                        <Text style={styles.nomeCriador}>Gabriel Lucas Costa Martins</Text>
+                    </View> 
+                    <View style={styles.criador}>
+                        <Text style={styles.nomeCriador}>Helio André Mendes Moreira Antunes</Text>
+                    </View>
+                    <View style={styles.criador}>
+                        <Text style={styles.nomeCriador}>João Vitor Lopes Fagundes</Text>
+                    </View>
+                    <View style={styles.criador}>
+                        <Text style={styles.nomeCriador}>Matheus Gaston Viana Silveira</Text>
+                    </View>
+                </ScrollView>
     
                 <View style={styles.barraTarefas}>
                     <TouchableOpacity onPress={() => navigation.navigate('Principal')}>
@@ -79,13 +69,13 @@ export default function Notificacao({ route, navigation }) {
                         <Feather name="users" size={72} color="white" />
                     </TouchableOpacity>
                     <TouchableOpacity onPress={gotoNotificacao}>
-                        <Feather name="bell" size={72} color="#2B4C52" />
+                        <Feather name="bell" size={72} color="white" />
                     </TouchableOpacity>
                     <TouchableOpacity onPress={gotoRanking}>
                         <Feather name="bar-chart-2" size={72} color="white" />
                     </TouchableOpacity>
                     <TouchableOpacity onPress={() => navigation.navigate('Creditos')}>
-                        <Feather name="award" size={72} color="white" />
+                        <Feather name="award" size={72} color="#2B4C52" />
                     </TouchableOpacity>
                 </View>
             </View>
@@ -107,13 +97,7 @@ export default function Notificacao({ route, navigation }) {
 }
 
 const styles = StyleSheet.create({
-    textoNenhumaNotificacao: {
-        color: '#FF0000',
-        position: 'fixed',
-        top: 150,
-        fontSize: 24,
-    },
-    textoNotificacao: {
+    textoCredito: {
         position: 'fixed',
         color: 'black',
         fontFamily: 'K2D_400Regular',
@@ -123,47 +107,20 @@ const styles = StyleSheet.create({
         top: 18,
         fontWeight: 'bold',
     },
-    notificacoes:{
+    criadores:{
         marginTop: 75,
         width: '100%',  
     },
-    notificacao:{
+    criador:{
         alignItems: 'center',
     },
-    comandos:{
-        flexWrap: 'wrap',
-        flexDirection: 'row',
-    },
-    textoAceitar : {
+    nomeCriador: {
         color: 'black',
         fontFamily: 'K2D_400Regular',
-        fontSize: 18,
-        textAlign: 'center',
-        textAlignVertical: 'center',     
-        fontWeight: 'bold',
-    },
-    botaoAceitar: {
-        height: 25,
-        backgroundColor: '#53E220', 
-        justifyContent: 'center',
-        borderRadius: 5,
-        alignContent: 'center',
-        marginRight: 25
-    },
-    botaoNegar: {
-        height: 25,
-        backgroundColor: '#FF0000',
-        justifyContent: 'center',
-        borderRadius: 5,
-        alignContent: 'center',
-        marginLeft: 25
-    },
-    nomeUser: {
-        color: 'black',
-        fontFamily: 'K2D_400Regular',
-        fontSize: 20,
+        fontSize: 32,
         textAlign: 'center',
         textAlignVertical: 'center',
+        marginBottom: 64
     },
     container: {
         paddingVertical: 15,

@@ -93,16 +93,19 @@ export default function Ranking({ route, navigation }) {
         }
   
         <View style={styles.barraTarefas}>
-          <TouchableOpacity style={styles.icons} onPress={() => navigation.navigate('Principal')}>
+          <TouchableOpacity onPress={() => navigation.navigate('Principal')}>
             <Feather name="home" size={72} color="white" />
           </TouchableOpacity>
-          <TouchableOpacity style={styles.icons} onPress={gotoAmizades}>
+          <TouchableOpacity onPress={gotoAmizades}>
             <Feather name="users" size={72} color="white" />
           </TouchableOpacity>
-          <TouchableOpacity style={styles.icons}  onPress={gotoNotificacao}>
+          <TouchableOpacity onPress={gotoNotificacao}>
             <Feather name="bell" size={72} color="white" />
           </TouchableOpacity>
-          <TouchableOpacity style={styles.icons}  onPress={gotoRanking}>
+          <TouchableOpacity onPress={gotoRanking}>
+            <Feather name="bar-chart-2" size={72} color="#2B4C52" />
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => navigation.navigate('Creditos')}>
             <Feather name="award" size={72} color="white" />
           </TouchableOpacity>
         </View>

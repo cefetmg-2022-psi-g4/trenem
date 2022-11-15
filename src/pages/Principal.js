@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, TouchableOpacity, Image, ActivityIndicator } from 'react-native';
+import { StyleSheet, Text, View, TouchableOpacity, Image, ActivityIndicator, Modal } from 'react-native';
 import { useFonts, K2D_400Regular } from '@expo-google-fonts/k2d';
 import { Feather } from '@expo/vector-icons';
 import { getRanking, getRankingDeAmigos, listarAmigos, listarPedidosAmizade } from '../controllers/AppController';
   
 export default function Principal({ navigation }) {
   const [loading, setLoading] = useState(true);
+  const [modalVisible, setModalVisible] = useState(false);
 
   async function gotoAmizades(){
     setLoading(false);
@@ -37,6 +38,33 @@ export default function Principal({ navigation }) {
   if(loading){
     return (
       <View style={styles.container}>
+        <TouchableOpacity style={styles.comoJogar} onPress={() => setModalVisible(!modalVisible)}>
+          <Feather name="sun" size={48} color="black" />
+        </TouchableOpacity>
+        <Modal
+          animationType="slide"
+          transparent={true}
+          visible={modalVisible}
+          onRequestClose={() => {
+            setModalVisible(!modalVisible);
+          }}
+        >
+          <View style={styles.centeredView}>
+            <View style={styles.modal}>
+              <TouchableOpacity style={styles.fechar} onPress={() => setModalVisible(!modalVisible)}>
+                <Feather name="x" size={32} color="black" />
+              </TouchableOpacity>
+              <Text style={styles.textoComoJogar}>COMO JOGAR?</Text>
+              <Text style={styles.descricaoComoJogar}>
+                Trenem é um aplicativo gameficado que testa os conhecimentos necessários para o ENEM. 
+                O jogo tem dois modos atualmente, Provão e Matérias, acessados pela página Principal.
+                Abaixo é possível ver um barra de tarefas para navegar entre as páginas: Principal, Amizade,
+                Notificação, Ranking e Crétidos. 
+              </Text>
+            </View>
+          </View>
+        </Modal>
+
         <Image style={styles.logo} source={require('../imgs/Trenem.png')} />
         <View style={styles.jogos}>
           <TouchableOpacity style={styles.botao} onPress={() => navigation.navigate('Jogar', { id: '0' })}>
@@ -51,16 +79,19 @@ export default function Principal({ navigation }) {
         </View>
 
         <View style={styles.barraTarefas}>
-          <TouchableOpacity style={styles.icons} onPress={() => navigation.navigate('Principal')}>
-            <Feather name="home" size={72} color="white" />
+          <TouchableOpacity onPress={() => navigation.navigate('Principal')}>
+            <Feather name="home" size={72} color="#2B4C52" />
           </TouchableOpacity>
-          <TouchableOpacity style={styles.icons} onPress={gotoAmizades}>
+          <TouchableOpacity onPress={gotoAmizades}>
             <Feather name="users" size={72} color="white" />
           </TouchableOpacity>
-          <TouchableOpacity style={styles.icons}  onPress={gotoNotificacao}>
+          <TouchableOpacity onPress={gotoNotificacao}>
             <Feather name="bell" size={72} color="white" />
           </TouchableOpacity>
-          <TouchableOpacity style={styles.icons}  onPress={gotoRanking}>
+          <TouchableOpacity onPress={gotoRanking}>
+            <Feather name="bar-chart-2" size={72} color="white" />
+          </TouchableOpacity>
+          <TouchableOpacity onPress={() => navigation.navigate('Creditos')}>
             <Feather name="award" size={72} color="white" />
           </TouchableOpacity>
         </View>
@@ -89,6 +120,47 @@ const styles = StyleSheet.create({
     backgroundColor: '#fcfeff',
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  comoJogar: {
+    position: 'absolute',
+    top: 15,
+    right: 15,
+  },
+  centeredView: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 22
+  },
+  modal:{
+    margin: 20,
+    backgroundColor: "white",
+    borderRadius: 20,
+    padding: 64,
+    alignItems: "center",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 5
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+    position: 'relative',
+  },
+  fechar:{
+    position: 'absolute',
+    top: 15,
+    right: 15,
+  },
+  textoComoJogar:{
+    fontFamily: 'K2D_400Regular',
+    fontSize: 28,
+  },
+  descricaoComoJogar:{
+    fontFamily: 'K2D_400Regular',
+    fontSize: 18,
+    marginTop: 24,
   },
   logo: {
     width: 238,
