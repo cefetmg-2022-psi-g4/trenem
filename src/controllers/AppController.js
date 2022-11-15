@@ -278,7 +278,7 @@ export async function getRankingDeAmigos(){
           'Authorization' : `Bearer ${token}`
         }
     }).then(async function (response) {
-        await apiAmizades.post('rankingDeAmigos', {
+        await apiRanking.post('rankingDeAmigos', {
             cod: response.data,
         }).then(function(response){
             res = response;

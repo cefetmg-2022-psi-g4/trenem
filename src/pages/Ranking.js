@@ -3,107 +3,171 @@ import { StyleSheet, Text, View, TouchableOpacity } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 import { useFonts, K2D_400Regular } from '@expo-google-fonts/k2d';
 import { ScrollView } from 'react-native-gesture-handler';
+import { getRanking, getRankingDeAmigos, listarAmigos, listarPedidosAmizade } from '../controllers/AppController';
+import { ActivityIndicator } from 'react-native-paper';
 
 
 export default function Ranking({ route, navigation }) {
   const { rankGeral, rankAmizade } = route.params;
-  const [tipo, onChangeTipo] = React.useState('geral');
+  const [tipo, onChangeTipo] = React.useState('amizade');
+  const [loading, setLoading] = React.useState(true);
+
+  async function gotoAmizades(){
+    setLoading(false);
+    const response = await listarAmigos();
+    navigation.navigate('Amizades', {amigos: response.data});
+    setLoading(true);
+  }
+
+  async function gotoNotificacao(){
+    setLoading(false);
+    const response = await listarPedidosAmizade();
+    navigation.navigate('Notificacao', {pedidos: response.data});
+    setLoading(true);
+  }
+
+  async function gotoRanking(){
+    setLoading(false);
+    const response1 = await getRanking();
+    const response2 = await getRankingDeAmigos();
+    navigation.navigate('Ranking', {rankGeral: response1.data, rankAmizade: response2.data});
+    setLoading(true);
+  }
 
   useFonts({
     K2D_400Regular,
   });
 
-  return (
-    <View style={styles.container}>
-      <TouchableOpacity style={styles.voltar} onPress={() => navigation.goBack()}>
-        <Feather name="arrow-left" size={48} color="black" />
-      </TouchableOpacity>
-
-      {tipo == 'amizade' ? (
-        <TouchableOpacity style={styles.botaoAmigos} onPress={() => onChangeTipo('amizade')} >
-          <Text style={styles.textoBotaoAmigos}>Amigos</Text>
-        </TouchableOpacity>)
-        : (
-          <TouchableOpacity style={styles.botaoAmigos} onPress={() => onChangeTipo('amizade')} >
-            <Text style={styles.textoBotaoAmigos}>Amigos</Text>
-          </TouchableOpacity>)
-      }
-
-      {tipo == 'geral' ? (
-        <TouchableOpacity style={styles.botaoGlobal} onPress={() => onChangeTipo('geral')} >
-          <Text style={styles.textoBotaoGlobal}>Global</Text>
-        </TouchableOpacity>)
-        : (
-          <TouchableOpacity style={styles.botaoGlobal} onPress={() => onChangeTipo('geral')} >
-            <Text style={styles.textoBotaoGlobal}>Global</Text>
-          </TouchableOpacity>)
-      }
-
-      {tipo == 'geral' ? (
-        <ScrollView>
-          {rankGeral.map((rank, index) => (
-            <View index={index} style={styles.view} >
-              <Text style={styles.rankingTexto}>{index}</Text>
-              <Text style={styles.rankingTexto}>{rank.nome}</Text>
-            </View>
-          ))}
-        </ScrollView>)
-        : (
-          <ScrollView>
-            {rankAmizade.map((rank, index) => (
-              <View index={index} style={styles.view} >
-                <Text style={styles.rankingTexto}>{index}</Text>
-                <Text style={styles.rankingTexto}>{rank.nome}</Text>
+  if(loading){
+    return (
+      <View style={styles.container}>
+        <Text style={styles.textoRanking}>RANKING</Text>
+  
+        <View style={styles.comandos}>
+          {tipo == 'amizade' ? (
+            <TouchableOpacity style={styles.botaoAmigosSelecionado} onPress={() => onChangeTipo('amizade')} >
+              <Text style={styles.textoBotaoAmigos}>Amigos</Text>
+            </TouchableOpacity>)
+            : (
+              <TouchableOpacity style={styles.botaoAmigos} onPress={() => onChangeTipo('amizade')} >
+                <Text style={styles.textoBotaoAmigos}>Amigos</Text>
+              </TouchableOpacity>)
+          }
+  
+          {tipo == 'geral' ? (
+            <TouchableOpacity style={styles.botaoGlobalSelecionado} onPress={() => onChangeTipo('geral')} >
+              <Text style={styles.textoBotaoGlobal}>Global</Text>
+            </TouchableOpacity>)
+            : (
+              <TouchableOpacity style={styles.botaoGlobal} onPress={() => onChangeTipo('geral')} >
+                <Text style={styles.textoBotaoGlobal}>Global</Text>
+              </TouchableOpacity>)
+          }
+        </View>
+  
+        {tipo == 'geral' ? (
+          <ScrollView style={styles.rank}>
+            {rankGeral.map((rank, index) => (
+              <View key={index} style={styles.colocacao}>
+                <Text style={styles.colocacaoTexto}>{index+1} - {rank.nome}</Text>
               </View>
             ))}
           </ScrollView>)
-      }
+          : (
+            <ScrollView style={styles.rank}>
+              {rankAmizade.map((rank, index) => (
+                <View key={index} style={styles.colocacao}>
+                  <Text style={styles.colocacaoTexto}>{index+1} - {rank.nome}</Text>
+                </View>
+              ))}
+            </ScrollView>)
+        }
+  
+        <View style={styles.barraTarefas}>
+          <TouchableOpacity style={styles.icons} onPress={() => navigation.navigate('Principal')}>
+            <Feather name="home" size={72} color="white" />
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.icons} onPress={gotoAmizades}>
+            <Feather name="users" size={72} color="white" />
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.icons}  onPress={gotoNotificacao}>
+            <Feather name="bell" size={72} color="white" />
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.icons}  onPress={gotoRanking}>
+            <Feather name="award" size={72} color="white" />
+          </TouchableOpacity>
+        </View>
+      </View>
+    );
+  }
 
+  return(
+    <View 
+      style={{ 
+        flex:1, 
+        backgroundColor: '#fcfeff', 
+        justifyContent: 'center', 
+        alignItems:'center' 
+      }}
+    >
+      <ActivityIndicator size={60} color="#308B9D" />
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  view: {
-    backgroundColor: 'green',
+  textoRanking: {
+    position: 'fixed',
+    color: 'black',
+    fontFamily: 'K2D_400Regular',
+    fontSize: 35,
+    textAlign: 'center',
+    textAlignVertical: 'center',
+    top: 18,
+    fontWeight: 'bold',
   },
-  rankingTexto: {
-    justifyContent: 'center',
-    alignItems: 'center',
-  },
-  container: {
-    paddingVertical: 15,
-    flex: 1,
+  comandos:{
+    flexWrap: 'wrap',
     flexDirection: 'row',
-    backgroundColor: '#fcfeff',
-    justifyContent: 'center',
-    alignItems: 'center',
+    marginTop: 75
   },
   botaoAmigos: {
-    flex: 1,
     color: 'black',
-    position: 'absolute',
-    bottom: 700,
-    left: 480,
-    backgroundColor: '#308B9D',
-    alignItems: 'center',
+    borderBottomWidth: 2,
+    height: 40,
     justifyContent: 'center',
-    borderRadius: 20,
-    width: '20%',
-    height: '4%'
+    alignContent: 'center',
+    marginRight: 25,
+    padding: 5,
   },
   botaoGlobal: {
-    flex: 1,
     color: 'black',
-    position: 'absolute',
-    bottom: 700,
-    right: 480,
-    backgroundColor: '#308B9D',
-    alignItems: 'center',
+    borderBottomWidth: 2,
+    height: 40,
     justifyContent: 'center',
-    borderRadius: 20,
-    width: '20%',
-    height: '4%'
+    alignContent: 'center',
+    marginLeft: 25,
+    padding: 5,
+  },
+  botaoAmigosSelecionado: {
+    color: 'black',
+    borderBottomColor: '#308B9D',
+    borderBottomWidth: 2,
+    height: 40,
+    justifyContent: 'center',
+    alignContent: 'center',
+    marginRight: 25,
+    padding: 5,
+  },
+  botaoGlobalSelecionado: {
+    color: 'black',
+    borderBottomColor: '#308B9D',
+    borderBottomWidth: 2,
+    height: 40,
+    justifyContent: 'center',
+    alignContent: 'center',
+    marginLeft: 25,
+    padding: 5,
   },
   textoBotaoAmigos: {
     fontFamily: 'K2D_400Regular',
@@ -113,10 +177,37 @@ const styles = StyleSheet.create({
     fontFamily: 'K2D_400Regular',
     fontSize: 28,
   },
-  voltar: {
+  rank:{
+    marginTop: 25,
+  },
+  colocacao:{
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  colocacaoTexto: {
+    fontFamily: 'K2D_400Regular',
+    fontSize: 24,
+  },
+  container: {
+    paddingVertical: 15,
+    flex: 1,
+    position: 'relative',
+    backgroundColor: '#fcfeff',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  barraTarefas:{
     position: 'absolute',
-    top: 15,
-    left: 15,
+    bottom: 0,
+    height: 100,
+    backgroundColor: '#308B9D',
+    width: '100%',
+    borderColor: '#308B9D',
+    borderWidth: 1,
+    flexWrap: 'wrap',
+    flexDirection: 'row',
+    justifyContent: 'space-evenly',
+    alignItems: 'center',
   },
 
 

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { StyleSheet, Text, View, TouchableOpacity, Image, ActivityIndicator } from 'react-native';
 import { useFonts, K2D_400Regular } from '@expo-google-fonts/k2d';
+import { Feather } from '@expo/vector-icons';
 import { getRanking, getRankingDeAmigos, listarAmigos, listarPedidosAmizade } from '../controllers/AppController';
   
 export default function Principal({ navigation }) {
@@ -16,7 +17,6 @@ export default function Principal({ navigation }) {
   async function gotoNotificacao(){
     setLoading(false);
     const response = await listarPedidosAmizade();
-    console.log(response.data);
     navigation.navigate('Notificacao', {pedidos: response.data});
     setLoading(true);
   }
@@ -38,21 +38,32 @@ export default function Principal({ navigation }) {
     return (
       <View style={styles.container}>
         <Image style={styles.logo} source={require('../imgs/Trenem.png')} />
-        <TouchableOpacity style={styles.botao} onPress={() => navigation.navigate('Jogar', { id: '0' })}>
-          <Text style={styles.textoBotao}>Provão</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.botao} onPress={() => navigation.navigate('Jogar', { id: '1' })}>
-          <Text style={styles.textoBotao}>Matérias</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.botao} onPress={gotoAmizades}>
-          <Text style={styles.textoBotao} >Amizades</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.botao} onPress={gotoNotificacao}>
-          <Text style={styles.textoBotao} >Notificacao</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={styles.botao} onPress={gotoRanking}>
-          <Text style={styles.textoBotao} >Ranking</Text>
-        </TouchableOpacity>
+        <View style={styles.jogos}>
+          <TouchableOpacity style={styles.botao} onPress={() => navigation.navigate('Jogar', { id: '0' })}>
+            <Text style={styles.textoBotao}>Provão</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.botao} onPress={() => navigation.navigate('Jogar', { id: '1' })}>
+            <Text style={styles.textoBotao}>Matérias</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.botao}>
+            <Text style={styles.textoBotao}>Em breve...</Text>
+          </TouchableOpacity>
+        </View>
+
+        <View style={styles.barraTarefas}>
+          <TouchableOpacity style={styles.icons} onPress={() => navigation.navigate('Principal')}>
+            <Feather name="home" size={72} color="white" />
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.icons} onPress={gotoAmizades}>
+            <Feather name="users" size={72} color="white" />
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.icons}  onPress={gotoNotificacao}>
+            <Feather name="bell" size={72} color="white" />
+          </TouchableOpacity>
+          <TouchableOpacity style={styles.icons}  onPress={gotoRanking}>
+            <Feather name="award" size={72} color="white" />
+          </TouchableOpacity>
+        </View>
       </View>
     )
   }
@@ -74,6 +85,7 @@ const styles = StyleSheet.create({
   container: {
     paddingVertical: 15,
     flex: 1,
+    position: 'relative',
     backgroundColor: '#fcfeff',
     justifyContent: 'center',
     alignItems: 'center',
@@ -85,12 +97,16 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: 100,
   },
+  jogos: {
+    position: 'absolute',
+    top: 250
+  },
   botao: {
     borderRadius: 20,
     padding: 10,
     borderColor: '#308B9D',
     borderWidth: 2,
-    margin: 20,
+    marginBottom: 40,
     width: 300,
     justifyContent: 'center',
     alignItems: 'center',
@@ -103,6 +119,19 @@ const styles = StyleSheet.create({
     fontFamily: 'K2D_400Regular',
     color: '#2B4C52',
     fontSize: 24,
+  },
+  barraTarefas:{
+    position: 'absolute',
+    bottom: 0,
+    height: 100,
+    backgroundColor: '#308B9D',
+    width: '100%',
+    borderColor: '#308B9D',
+    borderWidth: 1,
+    flexWrap: 'wrap',
+    flexDirection: 'row',
+    justifyContent: 'space-evenly',
+    alignItems: 'center',
   },
   
 
