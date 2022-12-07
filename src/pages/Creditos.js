@@ -63,19 +63,19 @@ export default function Creditos({ navigation }) {
     
                 <View style={styles.barraTarefas}>
                     <TouchableOpacity onPress={() => navigation.navigate('Principal')}>
-                        <Feather name="home" size={72} color="white" />
+                        <Feather name="home" size={64} color="white" />
                     </TouchableOpacity>
                     <TouchableOpacity onPress={gotoAmizades}>
-                        <Feather name="users" size={72} color="white" />
+                        <Feather name="users" size={64} color="white" />
                     </TouchableOpacity>
                     <TouchableOpacity onPress={gotoNotificacao}>
-                        <Feather name="bell" size={72} color="white" />
+                        <Feather name="bell" size={64} color="white" />
                     </TouchableOpacity>
                     <TouchableOpacity onPress={gotoRanking}>
-                        <Feather name="bar-chart-2" size={72} color="white" />
+                        <Feather name="bar-chart-2" size={64} color="white" />
                     </TouchableOpacity>
                     <TouchableOpacity onPress={() => navigation.navigate('Creditos')}>
-                        <Feather name="award" size={72} color="#2B4C52" />
+                        <Feather name="award" size={64} color="#2B4C52" />
                     </TouchableOpacity>
                 </View>
             </View>
@@ -109,7 +109,8 @@ const styles = StyleSheet.create({
     },
     criadores:{
         marginTop: 75,
-        width: '100%',  
+        width: '100%', 
+        paddingBottom: 200, 
     },
     criador:{
         alignItems: 'center',

@@ -545,7 +545,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     paddingVertical: 2,
     paddingHorizontal: 11,
-    width: 100,
+    width: 120,
   },
   questoes: {
     flexDirection: "column",

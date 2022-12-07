@@ -39,7 +39,7 @@ export default function Principal({ navigation }) {
     return (
       <View style={styles.container}>
         <TouchableOpacity style={styles.comoJogar} onPress={() => setModalVisible(!modalVisible)}>
-          <Feather name="sun" size={48} color="black" />
+          <Text style={{fontSize: 64, textAlign: 'center'}}>?</Text>
         </TouchableOpacity>
         <Modal
           animationType="slide"
@@ -80,19 +80,19 @@ export default function Principal({ navigation }) {
 
         <View style={styles.barraTarefas}>
           <TouchableOpacity onPress={() => navigation.navigate('Principal')}>
-            <Feather name="home" size={72} color="#2B4C52" />
+            <Feather name="home" size={64} color="#2B4C52" />
           </TouchableOpacity>
           <TouchableOpacity onPress={gotoAmizades}>
-            <Feather name="users" size={72} color="white" />
+            <Feather name="users" size={64} color="white" />
           </TouchableOpacity>
           <TouchableOpacity onPress={gotoNotificacao}>
-            <Feather name="bell" size={72} color="white" />
+            <Feather name="bell" size={64} color="white" />
           </TouchableOpacity>
           <TouchableOpacity onPress={gotoRanking}>
-            <Feather name="bar-chart-2" size={72} color="white" />
+            <Feather name="bar-chart-2" size={64} color="white" />
           </TouchableOpacity>
           <TouchableOpacity onPress={() => navigation.navigate('Creditos')}>
-            <Feather name="award" size={72} color="white" />
+            <Feather name="award" size={64} color="white" />
           </TouchableOpacity>
         </View>
       </View>
@@ -123,8 +123,8 @@ const styles = StyleSheet.create({
   },
   comoJogar: {
     position: 'absolute',
-    top: 15,
-    right: 15,
+    top: 5,
+    right: 25,
   },
   centeredView: {
     flex: 1,

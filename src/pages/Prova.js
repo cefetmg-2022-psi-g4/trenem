@@ -7,7 +7,7 @@ import RenderHtml from 'react-native-render-html';
 import { ScrollView } from 'react-native-gesture-handler';
 
 export default function Prova({ route, navigation }) {
-    const { nomeModo, tempo, questoes } = route.params;
+    const { nomeModo, tempo, questoes, qnt } = route.params;
     const { width } = useWindowDimensions();
     const [loading, setLoading] = useState(true);
     const [respostasCorretas, setRespostasCorretas] = useState([]);
@@ -45,11 +45,11 @@ export default function Prova({ route, navigation }) {
                 <View style={styles.timer}>
                     <CountdownCircleTimer
                         isPlaying={true}
-                        duration={tempo == 1 ? 3000 : 1800}
+                        duration={tempo == 1 ? 3000 / 10 * qnt : 1800 / 10 * qnt}
                         size={35}
                         strokeWidth={0}
                         colors={["#308b9d", "#309c9c", "#309c81", "#309c66", "#309c4b", "#309c30", "#4b9c30", "#669c30", "#819c30", "#9c9c30", "#9c8130", "#9c6630", "#9c4b30", "#9c3030"]}
-                        colorsTime={tempo == 1 ? [3000, 2769, 2538, 2308, 2080, 1846, 1615, 1385, 1154, 923, 692, 461, 231, 0] : [1800, 1661, 1523, 1385, 1246, 1108, 969, 831, 692, 554, 415, 277, 138, 0]}
+                        colorsTime={tempo == 1 ? [3000 / 10 * qnt, 2769 / 10 * qnt, 2538 / 10 * qnt, 2308 / 10 * qnt, 2080 / 10 * qnt, 1846 / 10 * qnt, 1615 / 10 * qnt, 1385 / 10 * qnt, 1154 / 10 * qnt, 923 / 10 * qnt, 692 / 10 * qnt, 461 / 10 * qnt, 231 / 10 * qnt, 0] : [1800 / 10 * qnt, 1661 / 10 * qnt, 1523 / 10 * qnt, 1385 / 10 * qnt, 1246 / 10 * qnt, 1108 / 10 * qnt, 969 / 10 * qnt, 831 / 10 * qnt, 692 / 10 * qnt, 554 / 10 * qnt, 415 / 10 * qnt, 277 / 10 * qnt, 138 / 10 * qnt, 0]}
                         children={({ remainingTime, color }) => {
                             const hours = Math.floor(remainingTime / 3600)
                             const minutes = Math.floor((remainingTime % 3600) / 60)
@@ -511,7 +511,7 @@ export default function Prova({ route, navigation }) {
                         <View style={{ flexDirection: 'row', alignItems: 'center', marginTop: 20 }}>
                             <View style={{ flex: 1, height: 1, backgroundColor: '#308B9D', marginLeft: '15%' }} />
                             <View>
-                                <Text style={{ width: 20, textAlign: 'center', color: '#308B9D', fontSize: 24 }}>10</Text>
+                                <Text style={{ width: 40, textAlign: 'center', color: '#308B9D', fontSize: 24 }}>10</Text>
                             </View>
                             <View style={{ flex: 1, height: 1, backgroundColor: '#308B9D', marginRight: '15%' }} />
                         </View>) : (null)
@@ -601,7 +601,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         paddingVertical: 2,
         paddingHorizontal: 11,
-        width: 100,
+        width: 120,
     },
     questoes: {
         flexDirection: "column",
