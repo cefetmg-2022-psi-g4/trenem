@@ -73,9 +73,6 @@ export default function Principal({ navigation }) {
           <TouchableOpacity style={styles.botao} onPress={() => navigation.navigate('Jogar', { id: '1' })}>
             <Text style={styles.textoBotao}>Matérias</Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.botao}>
-            <Text style={styles.textoBotao}>Em breve...</Text>
-          </TouchableOpacity>
         </View>
 
         <View style={styles.barraTarefas}>
